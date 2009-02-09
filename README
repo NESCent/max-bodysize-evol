@@ -17,7 +17,7 @@ Installation:
 See the list of required gems below
 
 4. Create a production database called: bodysize_production, with UTF-8 encoding
-5. Create a user with access to the database. By default bodysize uses
+5. Create a user with access to the database.
 6. Copy bodysize/config/database.yml.example to bodysize/config/database.yml and change the database connection settings accordingly. 
 7. Create database tables:
 	rake db:migrate RAILS_ENV=production
