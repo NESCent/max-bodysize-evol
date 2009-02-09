@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>javascripts (ActiveScaffold::Config::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/config/core.rb, line 180</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">javascripts</span>(<span class="ruby-identifier">frontend</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">frontend</span>)
+      <span class="ruby-identifier">javascript_dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RAILS_ROOT</span>, <span class="ruby-value str">&quot;public&quot;</span>, <span class="ruby-value str">&quot;javascripts&quot;</span>, <span class="ruby-identifier">asset_path</span>(<span class="ruby-value str">''</span>, <span class="ruby-identifier">frontend</span>))
+      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">javascript_dir</span>).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">e</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\.js/</span>) <span class="ruby-keyword kw">or</span> (<span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dhtml_history?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">match</span>(<span class="ruby-value str">'dhtml_history'</span>)) }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>render_with_active_scaffold (ActionView::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/extensions/action_view_rendering.rb, line 25</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_with_active_scaffold</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:super</span>
+        <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> {}
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locals</span>] <span class="ruby-operator">||=</span> {}
+
+        <span class="ruby-identifier">known_extensions</span> = [<span class="ruby-identifier">:erb</span>, <span class="ruby-identifier">:rhtml</span>, <span class="ruby-identifier">:rjs</span>, <span class="ruby-identifier">:haml</span>]
+        <span class="ruby-comment cmt"># search through call stack for a template file (normally matches on first caller)</span>
+        <span class="ruby-comment cmt"># note that we can't use split(':').first because windoze boxen may have an extra colon to specify the drive letter. the</span>
+        <span class="ruby-comment cmt"># solution is to count colons from the *right* of the string, not the left. see issue #299.</span>
+        <span class="ruby-identifier">template_path</span> = <span class="ruby-identifier">caller</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">known_extensions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">':'</span>)[<span class="ruby-value">-3</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">to_sym</span>) }
+        <span class="ruby-identifier">template</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">template_path</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">first</span>
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">template_search_path</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">active_scaffold_template_path</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">active_scaffold_template_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">active_scaffold_template_path</span>, <span class="ruby-value str">&quot;app/views&quot;</span>)
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_path</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">active_scaffold_template_path</span>
+
+          <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">active_scaffold_template_path</span>, <span class="ruby-identifier">template</span>)
+          <span class="ruby-identifier">extension</span> = <span class="ruby-identifier">find_template_extension_from_handler</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-value str">'rhtml'</span> <span class="ruby-comment cmt"># the rescue is a hack for rails 1.2.x compat</span>
+          <span class="ruby-identifier">template_file</span> = <span class="ruby-node">&quot;#{path}.#{extension}&quot;</span>
+
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">:file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">template_file</span>, <span class="ruby-identifier">:locals</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locals</span>], <span class="ruby-identifier">:use_full_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span> <span class="ruby-identifier">template_file</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:active_scaffold</span>]
+        <span class="ruby-identifier">require</span> <span class="ruby-value str">'digest/md5'</span>
+        <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>
+
+        <span class="ruby-identifier">remote_controller</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:active_scaffold</span>]
+        <span class="ruby-identifier">constraints</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:constraints</span>]
+        <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:conditions</span>]
+        <span class="ruby-identifier">eid</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:controller</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">remote_controller</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">constraints</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">to_s</span>)
+        <span class="ruby-identifier">session</span>[<span class="ruby-node">&quot;as:#{eid}&quot;</span>] = {<span class="ruby-identifier">:constraints</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">constraints</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conditions</span>, <span class="ruby-identifier">:list</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:label</span>]}}
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:params</span>] <span class="ruby-operator">||=</span> {}
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:params</span>].<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">:eid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">eid</span>
+
+        <span class="ruby-identifier">render_component</span> <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">remote_controller</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'table'</span>, <span class="ruby-identifier">:params</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:params</span>]
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">render_without_active_scaffold</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,44 @@
+
+<div class="center_content">
+    
+  <fieldset id="user_profile">
+    <h2>
+      
+      <% if @user == @current_logged_in_user || @current_logged_in_user.is_a?(Admin) %>
+        <%= link_to "Modify", { :action => :edit, :id => @user.id }, { :class => "button" } %>
+      <% end %>
+			<%= h(@user) %> &mdash; <%= h(@user.public_location) %>
+    </h2>
+  
+    <div id='profile_picture'>
+      <% if @user.picture_filename && !@user.picture_filename.blank? %>
+        <%= "<img src='../../#{@user.picture_path}' alt='#{h(@user)} - Profile Picture' />" %>
+	  <% else %>
+		<%= "<img src='/images/person.png' alt='Your Profile Picture' />"%>
+      <% end %>
+    </div>
+    
+    <div id="profile_description">
+      <p><%= h(@user.profile_description) %></p>
+    </div>
+    
+  </fieldset>  
+  
+  
+  <fieldset id="user_records">
+  	<h2>
+			<% if @current_logged_in_user == @user %>
+				<%= link_to("Add your own bodysize data!", { :controller => :bodysize, :action => :edit }, { :class => "button" } )%>
+	  	<% end %>
+			<%= h(@user.first_name) %>'s Bodysize Records
+		</h2>
+    <ul>
+  		<% @user.bodysizes.each do |bodysize| %>
+  			<li><%= link_to(bodysize, :controller => :bodysize, :action => :view, :id => bodysize) %></li>
+  		<% end %>
+  	</ul>
+  </fieldset>
+
+  <div class='clear_both'></div>  
+</div>
+

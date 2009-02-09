@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>successful? (ActiveScaffold::Actions::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/core.rb, line 50</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">successful?</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@successful</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-ivar">@records</span> <span class="ruby-keyword kw">or</span> (<span class="ruby-ivar">@record</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">no_errors_in_associated?</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-ivar">@successful</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

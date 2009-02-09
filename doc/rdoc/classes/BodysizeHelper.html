@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: BodysizeHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">BodysizeHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/helpers/bodysize_helper_rb.html">
+                app/helpers/bodysize_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Bodysize Helper</h1>
+<p>
+Purpose: Create helper methods which will be available to all templates in
+the bodysize section.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000012">indicate_when_missing</a>&nbsp;&nbsp;
+      <a href="#M000011">measurement_to_s</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeHelper.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeHelper.src/M000012.html');return false;">
+          <span class="method-name">indicate_when_missing</span><span class="method-args">(value = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Provide a method to indicate a value is missing, only when that
+value is missing
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>value (varies) [optional] - The value to indicate if missing
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>The value, if it exists (and is not false)
+
+</li>
+<li>An html mdash, otherwise
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeHelper.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeHelper.src/M000011.html');return false;">
+          <span class="method-name">measurement_to_s</span><span class="method-args">(measurement, units = &quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Convert bodysize measurements to a string, or use a place-holder
+to indicate that the value is missing
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>measurement (float) - The measurement value for a field
+
+</li>
+<li>units (string) [optional] - The unit of measurement for the given
+measurement
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>Returns the measurement if given
+
+</li>
+<li>Returns the value of <a
+href="BodysizeHelper.html#M000012">indicate_when_missing</a>, otherwise
+
+</li>
+</ul>
+<p>
+Note: Units is not currently used.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

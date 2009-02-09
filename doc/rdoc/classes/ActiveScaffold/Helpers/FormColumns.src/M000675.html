@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>column_renders_as (ActiveScaffold::Helpers::FormColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb, line 229</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_renders_as</span>(<span class="ruby-identifier">column</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionColumns</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:subsection</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">active_record_class</span>.<span class="ruby-identifier">locking_column</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:hidden</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">form_ui</span> <span class="ruby-keyword kw">or</span> <span class="ruby-operator">!</span><span class="ruby-identifier">active_scaffold_config_for</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>).<span class="ruby-identifier">actions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">:subform</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:field</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:subform</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

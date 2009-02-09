@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_instance_configuration (ConfigurableTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/misc/configurable_test.rb, line 17</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_instance_configuration</span>
+    <span class="ruby-constant">ConfigurableClass</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:include</span>, <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+
+    <span class="ruby-identifier">configurable_class</span> = <span class="ruby-constant">ConfigurableClass</span>.<span class="ruby-identifier">new</span>
+
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt">## sanity checks</span>
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt"># make sure the configure method is available</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-constant">ConfigurableClass</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:configure</span>)
+    <span class="ruby-comment cmt"># make sure real functions still work</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">foo</span>
+    <span class="ruby-comment cmt"># make sure other functions still don't work</span>
+    <span class="ruby-identifier">assert_raise</span> <span class="ruby-constant">NoMethodError</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">i_do_not_exist</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt">## test normal block behaviors</span>
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt"># functions</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">hello</span>, <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">configure</span> {<span class="ruby-identifier">hello</span>}
+    <span class="ruby-comment cmt"># variables</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">configurable_class</span>, <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">configure</span> {<span class="ruby-identifier">configurable_class</span>}
+    <span class="ruby-comment cmt"># constants</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-constant">HELLO</span>, <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">configure</span> {<span class="ruby-constant">HELLO</span>}
+
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt">## test extra &quot;localized&quot; block behavior</span>
+    <span class="ruby-comment cmt">##</span>
+    <span class="ruby-comment cmt"># functions</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">foo</span>, <span class="ruby-identifier">configurable_class</span>.<span class="ruby-identifier">configure</span> {<span class="ruby-identifier">foo</span>}
+    <span class="ruby-comment cmt"># constants - not working</span>
+<span class="ruby-comment cmt">#    assert_equal configurable_class.FOO, configurable_class.configure {FOO}</span>
+
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

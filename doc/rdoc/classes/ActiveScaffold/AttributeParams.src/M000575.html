@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update_record_from_params (ActiveScaffold::AttributeParams)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/attribute_params.rb, line 37</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_record_from_params</span>(<span class="ruby-identifier">parent_record</span>, <span class="ruby-identifier">columns</span>, <span class="ruby-identifier">attributes</span>)
+      <span class="ruby-identifier">action</span> = <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">new_record?</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">create</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:update</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">parent_record</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">authorized_for?</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>)
+
+      <span class="ruby-identifier">multi_parameter_attributes</span> = {}
+      <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">'('</span>
+        <span class="ruby-identifier">column_name</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'('</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_sym</span>
+        <span class="ruby-identifier">multi_parameter_attributes</span>[<span class="ruby-identifier">column_name</span>] <span class="ruby-operator">||=</span> []
+        <span class="ruby-identifier">multi_parameter_attributes</span>[<span class="ruby-identifier">column_name</span>] <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>]
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each</span> <span class="ruby-identifier">:for</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">parent_record</span>, <span class="ruby-identifier">:flatten</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multi_parameter_attributes</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>
+          <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:assign_multiparameter_attributes</span>, <span class="ruby-identifier">multi_parameter_attributes</span>[<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>])
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>
+          <span class="ruby-identifier">value</span> = <span class="ruby-identifier">attributes</span>[<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>]
+
+          <span class="ruby-comment cmt"># convert the value, possibly by instantiating associated objects</span>
+          <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+            <span class="ruby-comment cmt"># this is just for backwards compatibility. we should clean this up in 2.0.</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">form_ui</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:select</span>
+              <span class="ruby-identifier">ids</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">singular_association?</span>
+                <span class="ruby-identifier">value</span>[<span class="ruby-identifier">:id</span>]
+              <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">value</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">:id</span>]}
+              <span class="ruby-keyword kw">end</span>
+              (<span class="ruby-identifier">ids</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">empty?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">ids</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">singular_association?</span>
+              <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">value</span>
+              <span class="ruby-identifier">record</span> = <span class="ruby-identifier">find_or_create_for_params</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{column.name}&quot;</span>))
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>
+                <span class="ruby-identifier">record_columns</span> = <span class="ruby-identifier">active_scaffold_config_for</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>).<span class="ruby-identifier">subform</span>.<span class="ruby-identifier">columns</span>
+                <span class="ruby-identifier">update_record_from_params</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">record_columns</span>, <span class="ruby-identifier">hash</span>)
+                <span class="ruby-identifier">record</span>.<span class="ruby-identifier">unsaved</span> = <span class="ruby-keyword kw">true</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">record</span>
+
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">plural_association?</span>
+              <span class="ruby-identifier">collection</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key_value_pair</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">key_value_pair</span>[<span class="ruby-value">1</span>]
+                <span class="ruby-identifier">record</span> = <span class="ruby-identifier">find_or_create_for_params</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{column.name}&quot;</span>))
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>
+                  <span class="ruby-identifier">record_columns</span> = <span class="ruby-identifier">active_scaffold_config_for</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>).<span class="ruby-identifier">subform</span>.<span class="ruby-identifier">columns</span>
+                  <span class="ruby-identifier">update_record_from_params</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">record_columns</span>, <span class="ruby-identifier">hash</span>)
+                  <span class="ruby-identifier">record</span>.<span class="ruby-identifier">unsaved</span> = <span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">record</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">compact</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">singular_association?</span>
+              <span class="ruby-comment cmt"># it's a single id</span>
+              <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">plural_association?</span>
+              <span class="ruby-comment cmt"># it's an array of ids</span>
+              <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-comment cmt"># convert empty strings into nil. this works better with 'null =&gt; true' columns (and validations),</span>
+              <span class="ruby-comment cmt"># and 'null =&gt; false' columns should just convert back to an empty string.</span>
+              <span class="ruby-comment cmt"># ... but we can at least check the ConnectionAdapter::Column object to see if nulls are allowed</span>
+              <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">column</span>.<span class="ruby-identifier">column</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">column</span>.<span class="ruby-identifier">null</span>
+              <span class="ruby-identifier">value</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-comment cmt"># we avoid assigning a value that already exists because otherwise has_one associations will break (AR bug in has_one_association.rb#replace)</span>
+          <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{column.name}=&quot;</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">through_association?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>
+          
+          <span class="ruby-comment cmt"># Set any passthrough parameters that may be associated with this column (ie, file column &quot;keep&quot; and &quot;temp&quot; attributes)</span>
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">params</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-identifier">column</span>.<span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{p}=&quot;</span>, <span class="ruby-identifier">attributes</span>[<span class="ruby-identifier">p</span>])}
+          <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># plural associations may not actually appear in the params if all of the options have been unselected or cleared away.</span>
+        <span class="ruby-comment cmt"># NOTE: the &quot;form_ui&quot; check isn't really necessary, except that without it we have problems</span>
+        <span class="ruby-comment cmt"># with subforms. the UI cuts out deep associations, which means they're not present in the</span>
+        <span class="ruby-comment cmt"># params even though they're in the columns list. the result is that associations were being</span>
+        <span class="ruby-comment cmt"># emptied out way too often. BUT ... this means there's still a lingering bug in the default association</span>
+        <span class="ruby-comment cmt"># form code: you can't delete the last association in the list.</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">form_ui</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">plural_association?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">through_association?</span>
+          <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{column.name}=&quot;</span>, [])
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">new_record?</span>
+        <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">reflect_on_all_associations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> [<span class="ruby-identifier">:has_one</span>, <span class="ruby-identifier">:has_many</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">macro</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:through</span>]
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">association_proxy</span> = <span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{a.name}&quot;</span>)
+
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">ReverseAssociationRequired</span>, <span class="ruby-value str">&quot;In order to support :has_one and :has_many where the parent record is new and the child record(s) validate the presence of the parent, ActiveScaffold requires the reverse association (the belongs_to).&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">reverse</span>
+
+          <span class="ruby-identifier">association_proxy</span> = [<span class="ruby-identifier">association_proxy</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">macro</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:has_one</span>
+          <span class="ruby-identifier">association_proxy</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{a.reverse}=&quot;</span>, <span class="ruby-identifier">parent_record</span>) }
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parent_record</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

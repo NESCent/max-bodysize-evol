@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>prepare_bodysize_for_modification (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 619</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_bodysize_for_modification</span> <span class="ruby-comment cmt"># :doc:</span>
+    <span class="ruby-ivar">@editing</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-ivar">@bodysize</span> = <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]) <span class="ruby-operator">||</span> <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:creator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_logged_in_user</span>)
+    <span class="ruby-ivar">@period_options</span> = <span class="ruby-constant">Period</span>.<span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">set_formula_options</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

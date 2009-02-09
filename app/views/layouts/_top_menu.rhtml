@@ -1,0 +1,9 @@
+<!-- id='current' indicates highlighting -->
+
+<% if @current_logged_in_user %>
+	<%= link_to("Contact Bodysize"+image_tag("mail.png"), "mailto:bodysize-admin@nescent.org", :id => "contact_link") %>
+<% end %>
+	
+<ul>
+  <%= render :partial => 'layouts/menu_item', :object => @top_menu_items %>
+</ul>

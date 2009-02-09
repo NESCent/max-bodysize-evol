@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>generate_delete_helpers (FileColumnHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/bridges/file_column/lib/file_column_helpers.rb, line 7</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_delete_helpers</span>(<span class="ruby-identifier">klass</span>)
+      <span class="ruby-identifier">file_column_fields</span>(<span class="ruby-identifier">klass</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:class_eval</span>, <span class="ruby-value str">&quot;attr_reader :delete_\#{field}\n\ndef delete_\#{field}=(value)\nvalue = (value==\&quot;true\&quot;) if String===value\nreturn unless value\n\n# passing nil to the file column causes the file to be deleted.  Don't delete if we just uploaded a file!\nself.\#{field} = nil unless self.\#{field}_just_uploaded?\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>  <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">methods</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-node">&quot;#{field}_with_delete=&quot;</span>)
+      }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

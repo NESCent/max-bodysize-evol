@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveScaffold::DataStructures::Sorting</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::DataStructures::Sorting</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/data_structures/sorting_rb.html">
+                vendor/plugins/active_scaffold/lib/data_structures/sorting.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+encapsulates the column sorting configuration for the List view
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000859">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000858">add</a>&nbsp;&nbsp;
+      <a href="#M000861">clear</a>&nbsp;&nbsp;
+      <a href="#M000863">direction_of</a>&nbsp;&nbsp;
+      <a href="#M000866">each</a>&nbsp;&nbsp;
+      <a href="#M000867">first</a>&nbsp;&nbsp;
+      <a href="#M000868">get_clause</a>&nbsp;&nbsp;
+      <a href="#M000869">get_column</a>&nbsp;&nbsp;
+      <a href="#M000870">mixed_sorting?</a>&nbsp;&nbsp;
+      <a href="#M000857">new</a>&nbsp;&nbsp;
+      <a href="#M000860">set</a>&nbsp;&nbsp;
+      <a href="#M000864">sorts_by_method?</a>&nbsp;&nbsp;
+      <a href="#M000865">sorts_by_sql?</a>&nbsp;&nbsp;
+      <a href="#M000862">sorts_on?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Enumerable</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000857" class="method-detail">
+        <a name="M000857"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000857.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000857.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(columns)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000859" class="method-detail">
+        <a name="M000859"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000859.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000859.html');return false;">
+          <span class="method-name">&lt;&lt;</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+an alias for <tt><a href="Sorting.html#M000858">add</a></tt>. must accept
+its arguments in a slightly different form, though.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000858" class="method-detail">
+        <a name="M000858"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000858.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000858.html');return false;">
+          <span class="method-name">add</span><span class="method-args">(column_name, direction = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Sorting.html#M000858">add</a> a clause to the sorting, assuming
+the column is sortable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000861" class="method-detail">
+        <a name="M000861"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000861.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000861.html');return false;">
+          <span class="method-name">clear</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+clears the sorting
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000863" class="method-detail">
+        <a name="M000863"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000863.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000863.html');return false;">
+          <span class="method-name">direction_of</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000866" class="method-detail">
+        <a name="M000866"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000866.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000866.html');return false;">
+          <span class="method-name">each</span><span class="method-args">() {|clause| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+iterate over the clauses
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000867" class="method-detail">
+        <a name="M000867"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000867.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000867.html');return false;">
+          <span class="method-name">first</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+provides quick access to the <a href="Sorting.html#M000867">first</a> (and
+sometimes only) clause
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000860" class="method-detail">
+        <a name="M000860"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000860.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000860.html');return false;">
+          <span class="method-name">set</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+clears the sorting before setting to the given column/direction
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000864" class="method-detail">
+        <a name="M000864"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000864.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000864.html');return false;">
+          <span class="method-name">sorts_by_method?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+checks whether any column is configured to sort by method (using a proc)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000865" class="method-detail">
+        <a name="M000865"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000865.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000865.html');return false;">
+          <span class="method-name">sorts_by_sql?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000862" class="method-detail">
+        <a name="M000862"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000862.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000862.html');return false;">
+          <span class="method-name">sorts_on?</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+checks whether the given column (a <a href="Column.html">Column</a> object
+or a column name) is in the sorting
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000868" class="method-detail">
+        <a name="M000868"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000868.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000868.html');return false;">
+          <span class="method-name">get_clause</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+retrieves the sorting clause for the given column
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000869" class="method-detail">
+        <a name="M000869"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000869.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000869.html');return false;">
+          <span class="method-name">get_column</span><span class="method-args">(name_or_column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+possibly converts the given argument into a column object from @columns (if
+it&#8216;s not already)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000870" class="method-detail">
+        <a name="M000870"></a>
+
+        <div class="method-heading">
+          <a href="Sorting.src/M000870.html" target="Code" class="method-signature"
+            onclick="popupCode('Sorting.src/M000870.html');return false;">
+          <span class="method-name">mixed_sorting?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

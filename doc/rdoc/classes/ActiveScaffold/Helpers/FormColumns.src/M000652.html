@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>active_scaffold_input_file_column (ActiveScaffold::Helpers::FormColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/bridges/file_column/lib/form_ui.rb, line 5</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_input_file_column</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">options</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>) 
+          <span class="ruby-comment cmt"># we already have a value?  display the form for deletion.</span>
+          <span class="ruby-identifier">content_tag</span>(
+            <span class="ruby-identifier">:div</span>, 
+            <span class="ruby-identifier">content_tag</span>(
+              <span class="ruby-identifier">:div</span>, 
+              <span class="ruby-identifier">get_column_value</span>(<span class="ruby-ivar">@record</span>, <span class="ruby-identifier">column</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; &quot;</span> <span class="ruby-operator">+</span>
+              <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">:record</span>, <span class="ruby-node">&quot;delete_#{column.name}&quot;</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;false&quot;</span>) <span class="ruby-operator">+</span>
+              <span class="ruby-value str">&quot; | &quot;</span> <span class="ruby-operator">+</span>
+              <span class="ruby-identifier">link_to_function</span>(<span class="ruby-identifier">as_</span>(<span class="ruby-value str">&quot;Remove file&quot;</span>), <span class="ruby-value str">&quot;$(this).previous().value='true'; p=$(this).up(); p.hide(); p.next().show();&quot;</span>),
+              {}
+            ) <span class="ruby-operator">+</span>
+            <span class="ruby-identifier">content_tag</span>(
+              <span class="ruby-identifier">:div</span>,
+              <span class="ruby-identifier">file_column_field</span>(<span class="ruby-value str">&quot;record&quot;</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>),
+              <span class="ruby-identifier">:style</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;display: none&quot;</span>
+            ),
+            {}
+          )
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-comment cmt"># no, just display the file_column_field</span>
+          <span class="ruby-identifier">file_column_field</span>(<span class="ruby-value str">&quot;record&quot;</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

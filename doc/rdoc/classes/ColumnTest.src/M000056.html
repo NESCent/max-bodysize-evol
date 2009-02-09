@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_equality (ColumnTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/data_structures/column_test.rb, line 52</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_equality</span>
+    <span class="ruby-comment cmt"># create a separate columns object, and make sure it's not ==</span>
+    <span class="ruby-identifier">columns</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Columns</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ModelStub</span>, <span class="ruby-identifier">:a</span>, <span class="ruby-identifier">:b</span>)
+    <span class="ruby-identifier">assert</span> <span class="ruby-identifier">columns</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@column</span>
+
+    <span class="ruby-comment cmt"># create a separate action_columns object, and make sure it's not ==</span>
+    <span class="ruby-identifier">columns</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionColumns</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:a</span>, <span class="ruby-identifier">:b</span>)
+    <span class="ruby-identifier">assert</span> <span class="ruby-identifier">columns</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@column</span>
+
+    <span class="ruby-comment cmt"># identity</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@column</span>
+
+    <span class="ruby-comment cmt"># string comparison</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'a'</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">'fake'</span>
+
+    <span class="ruby-comment cmt"># symbol comparison</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:a</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:fake</span>
+
+    <span class="ruby-comment cmt"># comparison with different object of same type</span>
+    <span class="ruby-identifier">column2</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:fake</span>, <span class="ruby-constant">ModelStub</span>)
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">column2</span>
+    <span class="ruby-identifier">column2</span>.<span class="ruby-identifier">name</span> = <span class="ruby-value str">'a'</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">column2</span>
+
+    <span class="ruby-comment cmt"># special comparisons</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">''</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

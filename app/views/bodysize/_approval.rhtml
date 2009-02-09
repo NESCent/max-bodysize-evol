@@ -1,0 +1,17 @@
+  <% if approval.approved? && @current_logged_in_user.is_a?(Approver)  %>
+    <div class='approval_status' id="approved">
+      <h2>This record is approved</h2>
+				<% form_remote_tag :url => { :action => :unapprove, :id => approval.id} do %>
+        	<%= submit_tag "Un-Approve" %>
+				<% end %>
+    </div>    
+  <% elsif !approval.approved? %>
+    <div class='approval_status' id="unapproved">
+      <h2>This record has not yet been approved</h2>
+      <% if @current_logged_in_user.is_a?(Approver) %>
+				<% form_remote_tag :url => { :action => :approve, :id => approval.id} do %>
+	        <%= submit_tag "Approve" %>
+	      <% end %>     
+			<% end %>
+    </div>    
+  <% end %>

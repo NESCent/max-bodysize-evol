@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_basic_properties (ColumnTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/data_structures/column_test.rb, line 14</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_basic_properties</span>
+    <span class="ruby-comment cmt"># test that it was set during initialization</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:a</span>
+    <span class="ruby-comment cmt"># test that we can change it</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">:b</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:b</span>
+
+    <span class="ruby-comment cmt"># label</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">label</span> = <span class="ruby-value str">'foo'</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'foo'</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">label</span>
+
+    <span class="ruby-comment cmt"># description</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">'hello world'</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'hello world'</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">description</span>
+
+    <span class="ruby-comment cmt"># css class</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">css_class</span> = <span class="ruby-value str">'style_me'</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'style_me'</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">css_class</span>
+
+    <span class="ruby-comment cmt"># required</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@column</span>.<span class="ruby-identifier">required?</span>, <span class="ruby-value str">'default is false'</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">required</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">required?</span>, <span class="ruby-value str">'can be changed'</span>
+
+    <span class="ruby-comment cmt"># calculation</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@column</span>.<span class="ruby-identifier">calculation?</span>, <span class="ruby-value str">'default is nil'</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">calculate</span> = <span class="ruby-identifier">:sum</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">calculation?</span>, <span class="ruby-value str">'can be changed'</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>search (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 180</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span>(<span class="ruby-identifier">options</span> = {})
+    
+      <span class="ruby-comment cmt"># Options must be given in order for any records to be found</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
+
+      <span class="ruby-identifier">conditions</span> = []
+
+      <span class="ruby-comment cmt"># Limit the resulting records to records that the current user is allowed to access</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Approver</span>)
+        <span class="ruby-identifier">conditions</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">&quot;(complete_bodysizes.approved=? OR complete_bodysizes.creator_id=?)&quot;</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">id</span>]
+      <span class="ruby-keyword kw">end</span>  
+      
+      <span class="ruby-comment cmt"># Save search criteria in the list of conditions</span>
+      <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">field</span> <span class="ruby-keyword kw">in</span> [<span class="ruby-identifier">:kingdom_id</span>, <span class="ruby-identifier">:phylum_id</span>, <span class="ruby-identifier">:environment_id</span>, <span class="ruby-identifier">:motility_id</span>] <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">conditions</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;complete_bodysizes.#{field}=?&quot;</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">field</span>]] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">field</span>].<span class="ruby-identifier">blank?</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">conditions</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">&quot;lower(complete_bodysizes.class_classification) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{options[:class_classification].downcase}%&quot;</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:class_classification</span>].<span class="ruby-identifier">blank?</span>
+      
+      <span class="ruby-identifier">start_period</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:start_period_midpoint</span>]
+      <span class="ruby-identifier">end_period</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:end_period_midpoint</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">start_period</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">end_period</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">periods</span> = <span class="ruby-constant">Period</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;midpoint DESC&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># If no start period is given, then set the start period to the midpoint of the first period</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">start_period</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">start_period</span> = <span class="ruby-identifier">periods</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">midpoint</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># If no end period is given, then set the end period to the midpoint of the last period</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">end_period</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">end_period</span> = <span class="ruby-identifier">periods</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">midpoint</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">conditions</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">&quot;(complete_bodysizes.midpoint &lt;= ? AND complete_bodysizes.midpoint &gt;= ?)&quot;</span>, <span class="ruby-identifier">start_period</span>, <span class="ruby-identifier">end_period</span>]
+      
+      <span class="ruby-comment cmt">## Combine all given search criteria</span>
+      <span class="ruby-identifier">combined_conditions</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">combined_conditions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">condition</span><span class="ruby-operator">|</span> <span class="ruby-identifier">condition</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; AND &quot;</span>)
+      <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">condition</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">combined_conditions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">condition</span>[<span class="ruby-value">1</span>]
+        <span class="ruby-identifier">combined_conditions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">condition</span>[<span class="ruby-value">2</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">condition</span>[<span class="ruby-value">2</span>]
+      <span class="ruby-keyword kw">end</span>
+
+      
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:group_by</span>].<span class="ruby-identifier">blank?</span>
+        <span class="ruby-comment cmt">## The user is searching, but has not requested any grouping of results</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:show_all</span>]
+          <span class="ruby-ivar">@bodysizes</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">accessible_bodysize_records</span>({ <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">combined_conditions</span> })
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-ivar">@bodysizes</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">accessible_bodysize_records</span>({ <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">combined_conditions</span>, <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:page</span>] <span class="ruby-operator">||</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span> })
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>  
+        <span class="ruby-comment cmt">## The user is requesting grouped search results</span>
+        <span class="ruby-ivar">@grouping_field</span> = <span class="ruby-ivar">@groups</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:group_by</span>]]
+          
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Results are being grouped by #{@grouping_field}&quot;</span>)
+        
+        <span class="ruby-identifier">graph_criteria</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:graph</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@grouping_field</span>.<span class="ruby-identifier">field_name</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;period_id&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;, complete_bodysizes.period_id&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;&quot;</span>
+
+        
+        <span class="ruby-comment cmt">## Create a query that takes into account search criteria, grouping options, and graph options</span>
+        <span class="ruby-identifier">group_maxes_sql</span> = <span class="ruby-node">&quot;(SELECT MAX(complete_bodysizes.#{@data_field}) AS max_biovolume, complete_bodysizes.#{@grouping_field.field_name} #{graph_criteria} FROM complete_bodysizes&quot;</span>
+        <span class="ruby-identifier">group_maxes_sql</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; WHERE (#{combined_conditions[0]})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">combined_conditions</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">group_maxes_sql</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; GROUP BY complete_bodysizes.#{@grouping_field.field_name} #{graph_criteria}) AS maxes&quot;</span>
+        <span class="ruby-identifier">full_records_grouped_by_max_sql</span> = <span class="ruby-node">&quot;complete_bodysizes INNER JOIN #{group_maxes_sql} ON maxes.max_biovolume=complete_bodysizes.#{@data_field} AND maxes.#{@grouping_field.field_name}=complete_bodysizes.#{@grouping_field.field_name}&quot;</span>
+
+        <span class="ruby-identifier">sql</span> = <span class="ruby-node">&quot;SELECT DISTINCT complete_bodysizes.* FROM #{full_records_grouped_by_max_sql}&quot;</span>
+
+        <span class="ruby-identifier">sql</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; ORDER BY complete_bodysizes.#{@grouping_field.field_name} #{graph_criteria}&quot;</span>
+
+        <span class="ruby-identifier">combined_conditions</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">sql</span>
+        
+        <span class="ruby-comment cmt">## Run this query along with any additional criteria that may limit records the user can view</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:show_all</span>]
+          <span class="ruby-ivar">@bodysizes</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">get_complete_records</span>({ <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">combined_conditions</span> })
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-ivar">@bodysizes</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">get_complete_records</span>({ <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">combined_conditions</span> }, { <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">&quot;page&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span> })
+        <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:graph</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1&quot;</span>
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">&quot;Graph - Yes&quot;</span>)
+        <span class="ruby-comment cmt">## Prepare a graph of the results</span>
+        <span class="ruby-identifier">bodysizes_for_graph</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">get_complete_records</span>({ <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">combined_conditions</span> })
+        <span class="ruby-ivar">@periods</span> = <span class="ruby-constant">Period</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;midpoint &lt;=? AND midpoint &gt;=?&quot;</span>, <span class="ruby-identifier">start_period</span>, <span class="ruby-identifier">end_period</span>], <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;midpoint DESC&quot;</span>)
+        <span class="ruby-ivar">@charts</span> = []
+        <span class="ruby-ivar">@charts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">Graph</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">bodysizes_for_graph</span>, <span class="ruby-ivar">@periods</span>, { <span class="ruby-identifier">:grouping_field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@grouping_field</span>, <span class="ruby-identifier">:data_field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@data_field</span>, <span class="ruby-identifier">:period_spacing</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;midpoint&quot;</span>, <span class="ruby-identifier">:x_axis_label_row_count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span> } )
+        <span class="ruby-ivar">@charts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">Graph</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">bodysizes_for_graph</span>, <span class="ruby-ivar">@periods</span>, { <span class="ruby-identifier">:grouping_field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@grouping_field</span>, <span class="ruby-identifier">:data_field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@data_field</span> } )
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

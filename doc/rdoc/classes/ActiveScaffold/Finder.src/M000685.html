@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_if_allowed (ActiveScaffold::Finder)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/finder.rb, line 66</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_if_allowed</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">klass</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>
+      <span class="ruby-identifier">record</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotAllowed</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">authorized_for?</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_sym</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">record</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,91 @@
+# == Schema Information
+# Schema version: 15
+#
+# Table name: periods
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  midpoint   :float
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# == Schema Information
+# Schema version: 15
+#
+# Table name: periods
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  midpoint   :float
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+Modern:
+  id: 1
+  name: Modern
+  midpoint: 0.0
+  
+Neogene:
+  id: 2
+  name: Neogene
+  midpoint: 11.515
+  
+Paleogene:
+  id: 3
+  name: Paleogene
+  midpoint: 44.265
+  
+Jurassic:
+  id: 4
+  name: Jurassic
+  midpoint: 172.55
+ 
+Triassic:
+  id: 5
+  name: Triassic
+  midpoint: 225.3
+  
+Permian:
+  id: 6
+  name: Permian 
+  midpoint: 275.0
+  
+Carboniferous:
+  id: 7
+  name: Carboniferous
+  midpoint: 329.1
+  
+Devonian:
+  id: 8
+  name: Devonian
+  midpoint: 387.6
+  
+Ordovician:
+  id: 9
+  name: Ordovician
+  midpoint: 466.0
+  
+Cambrian:
+  id: 10
+  name: Cambrian
+  midpoint: 515.15
+
+Tonian_Cryogeniar:
+  id: 11
+  name: Tonian/Cryogenian
+  midpoint: 740.0
+  
+Statherian:
+  id: 12
+  name: Statherian
+  midpoint: 1700.0
+  
+Paleoarchean:
+  id: 13
+  name: Paleoarchean
+  midpoint: 3400.0

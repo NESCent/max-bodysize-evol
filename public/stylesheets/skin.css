@@ -1,0 +1,94 @@
+/* Application Skin */
+
+h1 {
+	margin: 0.5em 0.2em;
+}
+
+img.thumbnail {
+  max-width: 150px;
+  max-height: 200px;
+}
+
+* html img.thumbnail {
+	width: 150px;
+}
+
+fieldset {
+  padding: 2px;
+}
+
+
+.section {
+	border: 1px solid #000;
+	padding: 3px;
+}
+
+fieldset h2, fieldset h3, .section h2 {
+  font-size: 1.3em;
+  padding: 0.1em;
+  margin: 0 0 3px 0;
+  background-color: #DDD;
+  border-bottom: 1px solid #CCC;
+  width: auto;
+}
+
+
+div#image_container {
+  width:100%;
+  text-align:center;
+  min-height:100px;
+}
+
+dt {
+  width: 130px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 0 3px 0;
+  min-height: 22px;
+}
+
+dt.narrow {
+  width: 80px;
+}
+
+
+dd.wide, dt.wide {
+  width: 100%;
+}
+
+
+#top_menu ul li {
+	border: 1px solid gray;
+}
+
+#top_menu ul li a, #top_menu ul li span {
+}
+
+#bodysize_end_period_midpoint {
+	margin-left: 6px;
+}
+
+.caption {
+	font-size:0.8em;
+	color:#AAA;
+}
+
+
+.button  {
+	display: block;
+	padding: 3px;
+	border: 1px solid gray;
+	float: right;
+	font-size: 0.7em;
+	text-decoration: none;
+	background-color: #EEE;
+	margin: 1px;
+}
+
+.botton:hover {
+	background-color: #88A;
+	color: #DDF;
+}

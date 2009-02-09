@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>onclick_function (DHTMLConfirm)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/dhtml_confirm.rb, line 32</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onclick_function</span>( <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">link_id</span> )
+    <span class="ruby-identifier">script</span> = <span class="ruby-value str">&quot;window.gFireModalLink = function() {\nvar link = $('\#{link_id}').action_link;\nlink.open_action.call( link );\n};\n\#{ensure_termination(onclick_handler(controller,link_id))}\nreturn false;\n&quot;</span>
+    <span class="ruby-comment cmt"># script = &quot;window.gModalLink = $('#{link_id}').action_link;#{onclick_handler(controller,link_id)}return false;&quot;</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

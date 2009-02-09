@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Maximum Size Database</title>
+  <%= stylesheet_link_tag 'application', :media => "all" %>
+  <%= stylesheet_link_tag 'layout', :media => "all" %>
+  <%= stylesheet_link_tag 'skin', :media => "all" %>
+  <% if @side_menu_items.blank? %>
+    <%= stylesheet_link_tag 'menu_override', :media => "all" %>
+  <% end %>
+  <%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag 'menu/menu' %>
+  
+  <% # Allow content to be added to the head from any templates that use this layout%>
+  <%= yield :head %>
+</head>
+
+<body>
+<div id="container">
+  
+  <!-- Header Banner -->
+  <table id="header"><tr>
+    <td id="header_left">
+    <table><tr><td><img src="/images/sizelogo_small.jpg" /></td><td><h1>Maximum Size Database</h1></td></tr></table>
+    
+    </td>
+    <td id="header_right">
+      <% if @current_logged_in_user.blank? %>
+        <%= link_to 'Login', :controller => 'login', :action => 'login' %>
+      <% else %>
+        <%= "#{@current_logged_in_user} is currently logged in" %><br /> 
+        <%= link_to 'Logout', :controller => 'login', :action => 'logout' %>
+      <% end %>
+    </td>
+  </tr></table>
+  
+  <!-- Top Menu -->
+    <div id="top_menu">
+      <%= render :partial => 'layouts/top_menu' %>
+    </div>
+
+  <% unless @side_menu_items.blank? %>
+  <!-- Left Side (which contains sidemenu) -->
+  <div id="leftside">
+    <div class="outerpair1">
+      <div class="outerpair2">
+        <div class="shadowbox">
+          <div class="innerbox">
+          
+            <!-- Side Menu -->
+            <div id="side_menu_title">
+              <%= menu_link(@side_menu_header) %>
+            </div>
+        
+            <%= render :partial => 'layouts/side_menu', :object => @side_menu_items %>
+            <!-- End of Side Menu -->
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Left Side -->
+  <% end %>
+  
+  <!-- Main Content -->
+  <div id="main">
+	
+		<% flash.each do |message_type, message| %>
+			<div id="message" class="<%= message_type %>">
+				<%= message %>
+			</div>
+		<% end %>
+  

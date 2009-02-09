@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>nested_habtm? (ActiveScaffold::Actions::Nested)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/nested.rb, line 83</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">nested_habtm?</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">a</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">nested_association</span>]
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">macro</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:has_and_belongs_to_many</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">a</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">nested?</span>
+        <span class="ruby-keyword kw">false</span>
+      <span class="ruby-keyword kw">rescue</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">MalformedConstraint</span>, <span class="ruby-identifier">constraint_error</span>(<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>, <span class="ruby-identifier">nested_association</span>), <span class="ruby-identifier">caller</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>write_file (Bodysize)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/bodysize.rb, line 299</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_file</span>
+    <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">&quot;Attempting to save bodysize image&quot;</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@file_data</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">&quot;File data not blank&quot;</span>)
+      
+      <span class="ruby-identifier">directory</span> = <span class="ruby-node">&quot;#{BODYSIZE_DATA_STORAGE_PATH}/#{id}/images/&quot;</span>
+      <span class="ruby-identifier">picture_path</span> = <span class="ruby-identifier">directory</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">picture_filename</span>
+         
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">makedirs</span>(<span class="ruby-identifier">directory</span>)
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;makedirs ok with #{directory}&quot;</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Could not make directory #{directory}&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Opening file #{self.picture_path}&quot;</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">picture_path</span>, <span class="ruby-value str">&quot;wb&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">&quot;Writing to file &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">path</span>)
+        <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@file_data</span>.<span class="ruby-identifier">read</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

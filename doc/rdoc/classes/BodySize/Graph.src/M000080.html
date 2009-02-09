@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_graph_lines (BodySize::Graph)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/body_size/graph.rb, line 244</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_graph_lines</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">labels</span>, <span class="ruby-identifier">period_spacing</span>, <span class="ruby-identifier">data_field</span>)
+      <span class="ruby-identifier">graph_lines</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      
+      <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field_value</span>, <span class="ruby-identifier">specimens</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">graph_line</span> = <span class="ruby-constant">GraphLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">field_value</span>)
+        <span class="ruby-identifier">specimens</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">specimen</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">period_spacing</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;midpoint&quot;</span>
+            <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">add_point</span>(<span class="ruby-identifier">specimen</span>.<span class="ruby-identifier">period</span>.<span class="ruby-identifier">midpoint</span>, <span class="ruby-identifier">specimen</span>.<span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">data_field</span>))
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">position</span> = <span class="ruby-identifier">find_period_position</span>(<span class="ruby-identifier">labels</span>, <span class="ruby-identifier">specimen</span>.<span class="ruby-identifier">period</span>)
+            <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">add_point</span>(<span class="ruby-identifier">position</span>, <span class="ruby-identifier">specimen</span>.<span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">data_field</span>))
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">graph_lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">graph_line</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">graph_lines</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

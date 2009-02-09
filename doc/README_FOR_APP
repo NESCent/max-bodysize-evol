@@ -1,0 +1,10 @@
+CSV format for bodysize import can be found in the documents in the doc/CSV Data folder.
+
+There is a data model diagram in the doc/Data Structure folder.
+
+Deployment.txt contains details needed for proper deployment of the app.
+
+Development.txt contains information about how the development environment was configured.
+
+# following information is added by Xianhua after SciMed delivery.
+The feeding group data are not need for the UI or for any editing.  The group won't use that field in the database. 

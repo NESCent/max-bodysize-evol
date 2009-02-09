@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold::Helpers::FormColumns</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::Helpers::FormColumns</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge.rb
+                </a>
+        <br />
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/bridges/file_column/lib/form_ui_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/file_column/lib/form_ui.rb
+                </a>
+        <br />
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/helpers/form_column_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="../Helpers.html">Helpers</a> that assist with the rendering of a
+Form Column
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000667">active_scaffold_input_boolean</a>&nbsp;&nbsp;
+      <a href="#M000651">active_scaffold_input_calendar_date_select</a>&nbsp;&nbsp;
+      <a href="#M000661">active_scaffold_input_checkbox</a>&nbsp;&nbsp;
+      <a href="#M000662">active_scaffold_input_country</a>&nbsp;&nbsp;
+      <a href="#M000652">active_scaffold_input_file_column</a>&nbsp;&nbsp;
+      <a href="#M000653">active_scaffold_input_for</a>&nbsp;&nbsp;
+      <a href="#M000656">active_scaffold_input_options</a>&nbsp;&nbsp;
+      <a href="#M000663">active_scaffold_input_password</a>&nbsp;&nbsp;
+      <a href="#M000658">active_scaffold_input_plural_association</a>&nbsp;&nbsp;
+      <a href="#M000660">active_scaffold_input_record_select</a>&nbsp;&nbsp;
+      <a href="#M000659">active_scaffold_input_select</a>&nbsp;&nbsp;
+      <a href="#M000657">active_scaffold_input_singular_association</a>&nbsp;&nbsp;
+      <a href="#M000655">active_scaffold_input_text_options</a>&nbsp;&nbsp;
+      <a href="#M000664">active_scaffold_input_textarea</a>&nbsp;&nbsp;
+      <a href="#M000665">active_scaffold_input_usa_state</a>&nbsp;&nbsp;
+      <a href="#M000666">active_scaffold_input_virtual</a>&nbsp;&nbsp;
+      <a href="#M000675">column_renders_as</a>&nbsp;&nbsp;
+      <a href="#M000654">form_column</a>&nbsp;&nbsp;
+      <a href="#M000674">form_partial_for_column</a>&nbsp;&nbsp;
+      <a href="#M000677">is_subform?</a>&nbsp;&nbsp;
+      <a href="#M000676">is_subsection?</a>&nbsp;&nbsp;
+      <a href="#M000671">override_form_field</a>&nbsp;&nbsp;
+      <a href="#M000670">override_form_field?</a>&nbsp;&nbsp;
+      <a href="#M000669">override_form_field_partial</a>&nbsp;&nbsp;
+      <a href="#M000668">override_form_field_partial?</a>&nbsp;&nbsp;
+      <a href="#M000673">override_input</a>&nbsp;&nbsp;
+      <a href="#M000672">override_input?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000667" class="method-detail">
+        <a name="M000667"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000667.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000667.html');return false;">
+          <span class="method-name">active_scaffold_input_boolean</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Column.type-based inputs
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000651" class="method-detail">
+        <a name="M000651"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000651.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000651.html');return false;">
+          <span class="method-name">active_scaffold_input_calendar_date_select</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000661" class="method-detail">
+        <a name="M000661"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000661.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000661.html');return false;">
+          <span class="method-name">active_scaffold_input_checkbox</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000662" class="method-detail">
+        <a name="M000662"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000662.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000662.html');return false;">
+          <span class="method-name">active_scaffold_input_country</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000652" class="method-detail">
+        <a name="M000652"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000652.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000652.html');return false;">
+          <span class="method-name">active_scaffold_input_file_column</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000653" class="method-detail">
+        <a name="M000653"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000653.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000653.html');return false;">
+          <span class="method-name">active_scaffold_input_for</span><span class="method-args">(column, scope = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method decides which input to use for the given column. It does not do
+any rendering. It only decides which method is responsible for rendering.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000656" class="method-detail">
+        <a name="M000656"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000656.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000656.html');return false;">
+          <span class="method-name">active_scaffold_input_options</span><span class="method-args">(column, scope = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the standard active scaffold options used for class, name and scope
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000663" class="method-detail">
+        <a name="M000663"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000663.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000663.html');return false;">
+          <span class="method-name">active_scaffold_input_password</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000658" class="method-detail">
+        <a name="M000658"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000658.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000658.html');return false;">
+          <span class="method-name">active_scaffold_input_plural_association</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000660" class="method-detail">
+        <a name="M000660"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000660.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000660.html');return false;">
+          <span class="method-name">active_scaffold_input_record_select</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+only works for singular associations requires RecordSelect plugin to be
+installed and configured. &#8230; maybe this should be provided in a
+bridge?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000659" class="method-detail">
+        <a name="M000659"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000659.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000659.html');return false;">
+          <span class="method-name">active_scaffold_input_select</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000657" class="method-detail">
+        <a name="M000657"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000657.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000657.html');return false;">
+          <span class="method-name">active_scaffold_input_singular_association</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Form input methods
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000655" class="method-detail">
+        <a name="M000655"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000655.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000655.html');return false;">
+          <span class="method-name">active_scaffold_input_text_options</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the standard active scaffold options used for textual inputs
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000664" class="method-detail">
+        <a name="M000664"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000664.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000664.html');return false;">
+          <span class="method-name">active_scaffold_input_textarea</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000665" class="method-detail">
+        <a name="M000665"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000665.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000665.html');return false;">
+          <span class="method-name">active_scaffold_input_usa_state</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000666" class="method-detail">
+        <a name="M000666"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000666.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000666.html');return false;">
+          <span class="method-name">active_scaffold_input_virtual</span><span class="method-args">(column, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000675" class="method-detail">
+        <a name="M000675"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000675.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000675.html');return false;">
+          <span class="method-name">column_renders_as</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Macro-level rendering decisions for columns
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000654" class="method-detail">
+        <a name="M000654"></a>
+
+        <div class="method-heading">
+          <span class="method-name">form_column</span><span class="method-args">(column, scope = nil)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="FormColumns.html#M000653">active_scaffold_input_for</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000674" class="method-detail">
+        <a name="M000674"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000674.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000674.html');return false;">
+          <span class="method-name">form_partial_for_column</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000677" class="method-detail">
+        <a name="M000677"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000677.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000677.html');return false;">
+          <span class="method-name">is_subform?</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000676" class="method-detail">
+        <a name="M000676"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000676.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000676.html');return false;">
+          <span class="method-name">is_subsection?</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000671" class="method-detail">
+        <a name="M000671"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000671.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000671.html');return false;">
+          <span class="method-name">override_form_field</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the naming convention for overriding form fields with helpers
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000670" class="method-detail">
+        <a name="M000670"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000670.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000670.html');return false;">
+          <span class="method-name">override_form_field?</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000669" class="method-detail">
+        <a name="M000669"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000669.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000669.html');return false;">
+          <span class="method-name">override_form_field_partial</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the naming convention for overriding form fields with partials
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000668" class="method-detail">
+        <a name="M000668"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000668.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000668.html');return false;">
+          <span class="method-name">override_form_field_partial?</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Form column override signatures
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000673" class="method-detail">
+        <a name="M000673"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000673.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000673.html');return false;">
+          <span class="method-name">override_input</span><span class="method-args">(form_ui)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the naming convention for overriding form input types with helpers
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000672" class="method-detail">
+        <a name="M000672"></a>
+
+        <div class="method-heading">
+          <a href="FormColumns.src/M000672.html" target="Code" class="method-signature"
+            onclick="popupCode('FormColumns.src/M000672.html');return false;">
+          <span class="method-name">override_input?</span><span class="method-args">(form_ui)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+ <fieldset id="source" class='wide'>
+  <h2>Source &amp; References</h2>
+  <table>
+    <tr><td><label>Expert Contacted</td></label><td><%= h(bodysize.expert_contacted) %></td></tr>
+    <tr><td><label>Photo Available?</td></label><td><%= h(bodysize.photo_available) %></td></tr>
+    <tr><td><label>Compiler</td></label><td><%= h(bodysize.compiler) %></td></tr>
+    <tr><td><label>Confidence Score (1-10)</td></label><td><%= h(bodysize.confidence_score) %></td></tr>
+		<br />
+    <tr><td><label class='wide'>literature Citation</td></label><td><%= h(bodysize.literature_citation).gsub(/\n/, '<br />') %></td></tr>
+    <tr><td><label class='wide'>Other Source of Data</td></label><td><%= h(bodysize.other_data_source).gsub(/\n/, '<br />') %></td></tr>
+    <tr><td><label class='wide'>How The Estimation Was Achieved</td></label><td><%= h(bodysize.how_estimation_was_achieved).gsub(/\n/, '<br />') %></td></tr>
+    <tr><td><label class='wide'>Expert's Comments on Confidence</td></label><td><%= h(bodysize.confidence_comment).gsub(/\n/, '<br />') %></td></tr>
+    <tr><td><label class='wide'>literature Source for First Description of Species</td></label><td><%= h(bodysize.first_description_literature_source).gsub(/\n/, '<br />') %></td></tr>
+
+  </table>
+</fieldset>

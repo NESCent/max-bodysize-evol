@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>render_with_active_scaffold (ActionController::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/extensions/action_controller_rendering.rb, line 4</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_with_active_scaffold</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">uses_active_scaffold?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:adapter</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@rendering_adapter</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-ivar">@rendering_adapter</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-comment cmt"># recursion control</span>
+        <span class="ruby-comment cmt"># if we need an adapter, then we render the actual stuff to a string and insert it into the adapter template</span>
+        <span class="ruby-identifier">render</span> <span class="ruby-identifier">:file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rewrite_template_path_for_active_scaffold</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:adapter</span>]),
+               <span class="ruby-identifier">:locals</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:payload</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">render_to_string</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)},
+               <span class="ruby-identifier">:use_full_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-ivar">@rendering_adapter</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-comment cmt"># recursion control</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">render_without_active_scaffold</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

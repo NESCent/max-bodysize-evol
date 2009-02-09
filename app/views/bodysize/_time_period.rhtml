@@ -1,0 +1,9 @@
+<fieldset id="time_period">
+  <h2>Time Period</h2>
+  <ul class='fields'>
+    <li><label>Period</label><%= indicate_when_missing(bodysize.period) %></li>
+    <li><label>Midpoint</label><%= h(bodysize.period.midpoint) if bodysize.period %></li>
+    <li><label>Epoch</label><%= indicate_when_missing(bodysize.epoch) %></li>
+    <li><label>Stage</label><%= indicate_when_missing(bodysize.stage) %></li>
+  </ul>
+</fieldset>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>page= (ActiveScaffold::DataStructures::ActionLink)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/action_link.rb, line 96</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">page=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@page</span> = (<span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@page</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inline</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">popup</span> = <span class="ruby-keyword kw">false</span>
+
+        <span class="ruby-comment cmt"># when :method is defined, ActionView adds an onclick to use a form ...</span>
+        <span class="ruby-comment cmt"># so it's best to just empty out :method whenever possible.</span>
+        <span class="ruby-comment cmt"># we only ever need to know @method = :get for things that default to POST.</span>
+        <span class="ruby-comment cmt"># the only things that default to POST are forms and ajax calls.</span>
+        <span class="ruby-comment cmt"># when @page = true, we don't use ajax.</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">method</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:get</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

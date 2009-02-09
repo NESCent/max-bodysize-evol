@@ -1,0 +1,19 @@
+<fieldset id="picture">
+  <h2>Picture</h2>
+  
+  <div id="image_container">
+    <% if !bodysize.picture_filename.blank? %>
+      <%= "<img class='thumbnail' src='../../#{bodysize.picture_path}' alt='#{h(bodysize)} - Picture' />" %>
+    <% end %> 
+  </div>
+  <dl>
+    <dt class='narrow'>Add a Picture</dt>
+    <dd>
+       <%= file_field "bodysize", "picture" %>
+     </dd>
+  </dl>
+  <div class='buttons'>
+    <%= submit_tag 'Save', :class => 'clear_both' %>
+  </div>
+ </fieldset>
+      

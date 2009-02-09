@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>response_object (ActiveScaffold::Actions::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/core.rb, line 44</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">response_object</span>
+      <span class="ruby-ivar">@response_object</span> = <span class="ruby-identifier">successful?</span> <span class="ruby-value">? </span>(<span class="ruby-ivar">@record</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@records</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">errors</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

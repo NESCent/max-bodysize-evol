@@ -1,0 +1,16 @@
+<fieldset id="other">
+  <h2>Other</h2>
+  <dl>
+		<ul class='plain'>
+			<li>
+    <dt>Environment</dt><dd><%= select("bodysize", 'environment_id', Environment.options) %></dd>
+			</li>
+			<li>
+    <dt>Motility</dt><dd><%= select("bodysize", 'motility_id', Motility.options) %></dd>
+			</li>
+		<ul>
+  </dl>
+  <div class='buttons'>
+    <%= submit_tag 'Save', :class => 'clear_both' %>
+  </div>
+</fieldset>

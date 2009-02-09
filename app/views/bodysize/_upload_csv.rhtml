@@ -1,0 +1,13 @@
+<fieldset id="upload_csv" class='wide'>
+  <% form_tag({:action => 'import', :id => @bodysize.id}, {:multipart => true}) do -%>
+		<h2>Upload Dataset</h2>
+		<p>As an administrator you can create bodysize records individually below, or you can upload a dataset with many bodysize records at one time.</p>
+	  <dl>
+	    <dt>CSV Data File</dt><dd><%= file_field "csv", "datafile" %></dd>
+
+	  </dl>
+		<div class='buttons'>
+			<%= submit_tag 'Upload Dataset', :class => 'clear_both' %>
+		</div>
+  <% end %>
+</fieldset>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_validate_format (FormulaTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/unit/formula_test.rb, line 53</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_validate_format</span>()
+        <span class="ruby-identifier">formula</span> = <span class="ruby-constant">Formula</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'foo'</span>)
+
+        <span class="ruby-comment cmt"># Note that you don't test for presence of whitespace character</span>
+        <span class="ruby-comment cmt"># because there is a validates_presence_of validation on the </span>
+        <span class="ruby-comment cmt"># model.</span>
+        <span class="ruby-identifier">good_characters</span> = [<span class="ruby-value str">'0'</span>, <span class="ruby-value str">'9'</span>, <span class="ruby-value str">'H'</span>, <span class="ruby-value str">'W'</span>, <span class="ruby-value str">'L'</span>, <span class="ruby-value str">'*'</span>, <span class="ruby-value str">'+'</span>, <span class="ruby-value str">'-'</span>, <span class="ruby-value str">'('</span>, <span class="ruby-value str">')'</span>, <span class="ruby-value str">'.'</span>]
+        <span class="ruby-identifier">good_characters</span>.<span class="ruby-identifier">each</span>() <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">formula</span> = <span class="ruby-identifier">char</span>
+            <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">valid?</span>(), <span class="ruby-node">&quot;Invalid unit test character: #{char}&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># A sampling of some disallowed characters</span>
+        <span class="ruby-identifier">bad_characters</span> = [<span class="ruby-value str">'h'</span>, <span class="ruby-value str">'w'</span>, <span class="ruby-value str">'l'</span>, <span class="ruby-value str">'E'</span>, <span class="ruby-value str">'e'</span>, <span class="ruby-value str">'&amp;'</span>, <span class="ruby-value str">'%'</span>, <span class="ruby-value str">'='</span> <span class="ruby-value str">'/'</span>]
+        <span class="ruby-identifier">bad_characters</span>.<span class="ruby-identifier">each</span>() <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">formula</span> = <span class="ruby-identifier">char</span>
+            <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">valid?</span>(), <span class="ruby-node">&quot;Invalid unit test character: #{char}&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># Ensure that a full formula is valid.</span>
+        <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">formula</span> = <span class="ruby-value str">'H * W * L'</span>
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">valid?</span>())
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>password_reset (Emailer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/emailer.rb, line 3</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">password_reset</span>(<span class="ruby-identifier">recipient</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">sent_at</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+        <span class="ruby-ivar">@subject</span> = <span class="ruby-value str">&quot;Bodysize - Password Reset&quot;</span>
+        <span class="ruby-ivar">@recipients</span> = <span class="ruby-identifier">recipient</span>.<span class="ruby-identifier">email_address</span>
+        <span class="ruby-ivar">@from</span> = <span class="ruby-value str">'password-manager@#{SERVER_NAME}'</span>
+        <span class="ruby-ivar">@sent_on</span> = <span class="ruby-identifier">sent_at</span>
+        <span class="ruby-ivar">@body</span> = {<span class="ruby-identifier">:recipient</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">recipient</span>, <span class="ruby-identifier">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">password</span>, <span class="ruby-identifier">:server</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SERVER_NAME</span>}
+        <span class="ruby-ivar">@headers</span> = {}
+     <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

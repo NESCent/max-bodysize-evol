@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_drop_view (ViewTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/rails_sql_views/test/view_test.rb, line 17</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_drop_view</span>
+    <span class="ruby-identifier">assert_nothing_raised</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_view</span>(<span class="ruby-identifier">:v_place</span>, <span class="ruby-value str">'select * from places'</span>, <span class="ruby-identifier">:force</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:v_address</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:v_city</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:v_state</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:v_country</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">drop_view</span>(<span class="ruby-identifier">:v_place</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">assert_raises</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StatementInvalid</span>) <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span> <span class="ruby-value str">&quot;SELECT * FROM v_place&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

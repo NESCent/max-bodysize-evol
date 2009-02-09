@@ -1,0 +1,16 @@
+ <fieldset id="preservation">
+  <h2>Preservation</h2>
+  <dl>
+    <dt>Lithology</dt><dd><%= text_field_tag 'bodysize[lithology]', @bodysize.lithology %></dd>
+    <dt>Preservation Mode</dt><dd><%= text_field_tag 'bodysize[preservation_mode]', @bodysize.preservation_mode %></dd>
+    <dt>Location</dt><dd><%= text_field_tag 'bodysize[location]', @bodysize.location %></dd>
+    <dt>Formation</dt><dd><%= text_field_tag 'bodysize[formation_location]', @bodysize.formation_location %></dd>
+    <dt>Member</dt><dd><%= text_field_tag 'bodysize[member]', @bodysize.member %></dd>
+    <dt>Bed</dt><dd><%= text_field_tag 'bodysize[bed]', @bodysize.bed %></dd>
+    <dt>Local Environment</dt><dd><%= text_field_tag 'bodysize[local_environment]', @bodysize.local_environment %></dd>
+    <dt>Regional Environment</dt><dd><%= text_field_tag 'bodysize[regional_environment]', @bodysize.regional_environment %></dd>
+  </dl>
+  <div class='buttons'>
+    <%= submit_tag 'Save', :class => 'clear_both' %>
+  </div>
+</fieldset>

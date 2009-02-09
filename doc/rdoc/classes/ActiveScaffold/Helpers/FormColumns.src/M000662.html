@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>active_scaffold_input_country (ActiveScaffold::Helpers::FormColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb, line 140</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_input_country</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">options</span>)
+        <span class="ruby-identifier">priority</span> = [<span class="ruby-value str">&quot;United States&quot;</span>]
+        <span class="ruby-identifier">select_options</span> = {<span class="ruby-identifier">:prompt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">as_</span>(<span class="ruby-value str">'- select -'</span>)}
+        <span class="ruby-identifier">select_options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+        <span class="ruby-identifier">country_select</span>(<span class="ruby-identifier">:record</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:priority</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">priority</span>, <span class="ruby-identifier">select_options</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

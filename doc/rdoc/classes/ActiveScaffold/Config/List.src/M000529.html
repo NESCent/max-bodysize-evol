@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (ActiveScaffold::Config::List)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/config/list.rb, line 5</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">core_config</span>)
+      <span class="ruby-ivar">@core</span> = <span class="ruby-identifier">core_config</span>
+
+      <span class="ruby-comment cmt"># inherit from global scope</span>
+      <span class="ruby-comment cmt"># full configuration path is: defaults =&gt; global table =&gt; local table</span>
+      <span class="ruby-ivar">@per_page</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">per_page</span>
+
+      <span class="ruby-comment cmt"># originates here</span>
+      <span class="ruby-ivar">@sorting</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Sorting</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@core</span>.<span class="ruby-identifier">columns</span>)
+      <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-ivar">@core</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">primary_key</span>, <span class="ruby-value str">'ASC'</span>
+
+      <span class="ruby-comment cmt"># inherit from global scope</span>
+      <span class="ruby-ivar">@empty_field_text</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">empty_field_text</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

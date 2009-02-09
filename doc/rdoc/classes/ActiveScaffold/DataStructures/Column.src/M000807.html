@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>field_name (ActiveScaffold::DataStructures::Column)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/column.rb, line 204</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">field_name</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">virtual?</span>
+      <span class="ruby-identifier">column</span> <span class="ruby-value">? </span><span class="ruby-ivar">@active_record_class</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">association</span>.<span class="ruby-identifier">primary_key_name</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

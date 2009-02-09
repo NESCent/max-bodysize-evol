@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>exception_notification (ExceptionNotifier)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/exception_notification/lib/exception_notifier.rb, line 40</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exception_notification</span>(<span class="ruby-identifier">exception</span>, <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">data</span>={})
+    <span class="ruby-identifier">content_type</span> <span class="ruby-value str">&quot;text/plain&quot;</span>
+
+    <span class="ruby-identifier">subject</span>    <span class="ruby-node">&quot;#{email_prefix}#{controller.controller_name}##{controller.action_name} (#{exception.class}) #{exception.message.inspect}&quot;</span>
+
+    <span class="ruby-identifier">recipients</span> <span class="ruby-identifier">exception_recipients</span>
+    <span class="ruby-identifier">from</span>       <span class="ruby-identifier">sender_address</span>
+
+    <span class="ruby-identifier">body</span>       <span class="ruby-identifier">data</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">:request</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>,
+                  <span class="ruby-identifier">:exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">exception</span>, <span class="ruby-identifier">:host</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;HTTP_X_FORWARDED_HOST&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;HTTP_HOST&quot;</span>]),
+                  <span class="ruby-identifier">:backtrace</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sanitize_backtrace</span>(<span class="ruby-identifier">exception</span>.<span class="ruby-identifier">backtrace</span>),
+                  <span class="ruby-identifier">:rails_root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rails_root</span>, <span class="ruby-identifier">:data</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>,
+                  <span class="ruby-identifier">:sections</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sections</span> })
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

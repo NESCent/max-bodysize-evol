@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>attributes_hash_is_empty? (ActiveScaffold::AttributeParams)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/attribute_params.rb, line 163</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attributes_hash_is_empty?</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">klass</span>)
+      <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">all?</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt"># convert any possible multi-parameter attributes like 'created_at(5i)' to simply 'created_at'</span>
+        <span class="ruby-identifier">column_name</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'('</span>).<span class="ruby-identifier">first</span>
+        <span class="ruby-identifier">column</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">column_name</span>]
+
+        <span class="ruby-comment cmt"># booleans and datetimes will always have a value. so we ignore them when checking whether the hash is empty.</span>
+        <span class="ruby-comment cmt"># this could be a bad idea. but the current situation (excess record entry) seems worse.</span>
+        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span> <span class="ruby-keyword kw">and</span> [<span class="ruby-identifier">:boolean</span>, <span class="ruby-identifier">:datetime</span>, <span class="ruby-identifier">:date</span>, <span class="ruby-identifier">:time</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span>)
+
+        <span class="ruby-comment cmt"># defaults are pre-filled on the form. we can't use them to determine if the user intends a new row.</span>
+        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">default</span>.<span class="ruby-identifier">to_s</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+          <span class="ruby-identifier">attributes_hash_is_empty?</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">klass</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:empty?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,50 @@
+The BodySize module is intended to import and export Bodysize data in CSV
+format.  It adheres to a strict column order and naming convention which 
+is found in "doc/CSV Data/Bodysize Official CSV Column Order.csv".  This location
+can be overridden with the :header_source_path option.
+
+IMPORT
+Instantiate the object with BodySize::Import::CSV.new(data, options)
+where data represents a string of CSV data to import and options is
+a standard parameter hash.  The :user option is a required parameter.
+
+u = User.find(:first)
+i = BodySize::Import.CSV.new(@data, :user => u)
+begin
+    i.execute()
+rescue BodySize::ImportError => e
+    pp e.errors
+else
+    puts "#{i.insert_count} Bodysize records created."
+end
+
+Notice that the ImportError instance in the example, e, contains an attribute
+called errors which is an array of all of the errors that were collected during
+the execute() method.  No records will be committed to the database if a 
+BodySize::ImportError is raised.
+
+If no error was raised then the import was successful.  You can find out the 
+number of Bodysize records that were created by checking the insert_count
+attribute.
+
+
+EXPORT
+Instantiate the object with BodySize::Export::CSV.new(data, options)
+where data represents a collection of Active Record Bodysize objects to export
+and options is defined as with Import above.
+
+The passed in options may include the :fields_to_include parameter which should
+be an array of strings or symbols that represent desired attributes from the 
+Bodysize model.  If :fields_to_include is missing then all attributes will be
+exported.  If :fields_to_include contains an attribute name which doesn't exist
+on Bodysize then a BodySize::ExportError will be raised.
+
+u = User.find(:first)
+export = BodySize::Export::CSV.new(Bodysize.find(:all))
+begin
+    export.execute()
+rescue BodySize::ExportError
+    # the export failed
+else
+    puts export.csv_string
+end

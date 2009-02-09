@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (BodySize::Graph)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/body_size/graph.rb, line 312</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">bodysizes</span>, <span class="ruby-identifier">periods</span>, <span class="ruby-identifier">options</span> = {})
+      <span class="ruby-identifier">grouping_field</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:grouping_field</span>]
+      <span class="ruby-identifier">data_field</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:data_field</span>]
+      
+      <span class="ruby-identifier">period_spacing</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:period_spacing</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;even&quot;</span>
+      <span class="ruby-identifier">x_range</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:x_range</span>] <span class="ruby-operator">||</span> [<span class="ruby-value">0</span><span class="ruby-value">.0</span>,<span class="ruby-value">1000.0</span>]
+      <span class="ruby-identifier">number_of_x_axis_label_rows</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:x_axis_label_row_count</span>] <span class="ruby-operator">||</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">number_of_periods</span> = <span class="ruby-identifier">periods</span>.<span class="ruby-identifier">size</span>
+      
+      <span class="ruby-comment cmt"># Create labels for each period</span>
+      <span class="ruby-identifier">labels</span> = <span class="ruby-identifier">create_labels</span>(<span class="ruby-identifier">periods</span>, <span class="ruby-identifier">period_spacing</span>)
+      <span class="ruby-identifier">x_axis_label_rows</span> = <span class="ruby-identifier">create_label_rows</span>(<span class="ruby-identifier">labels</span>, <span class="ruby-identifier">number_of_x_axis_label_rows</span>)  
+      
+      <span class="ruby-comment cmt"># Get the data</span>
+      <span class="ruby-identifier">results</span> = <span class="ruby-identifier">get_data</span>(<span class="ruby-identifier">bodysizes</span>, <span class="ruby-identifier">grouping_field</span>)
+
+      <span class="ruby-comment cmt"># Create Graph Lines</span>
+      <span class="ruby-identifier">graph_lines</span> = <span class="ruby-identifier">create_graph_lines</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">labels</span>, <span class="ruby-identifier">period_spacing</span>, <span class="ruby-identifier">data_field</span>)
+
+      <span class="ruby-comment cmt"># Find the range across all lines</span>
+      <span class="ruby-identifier">specimen_size_range</span> = <span class="ruby-identifier">find_range</span>(<span class="ruby-identifier">graph_lines</span>)      
+      
+      
+      <span class="ruby-comment cmt"># If any lines have only one point, duplicate the point so that a point will show up!</span>
+      <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">graph_line</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">graph_lines</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">add_point</span>(<span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">get_point</span>(<span class="ruby-value">0</span>).<span class="ruby-identifier">dup</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+
+      
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">specimen_size_range</span>.<span class="ruby-identifier">nil?</span>
+        
+        <span class="ruby-comment cmt"># Find maximum value on the x axis</span>
+        <span class="ruby-identifier">max_x_value</span> = <span class="ruby-identifier">number_of_periods</span>.<span class="ruby-identifier">to_f</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">period_spacing</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;midpoint&quot;</span>
+          <span class="ruby-identifier">max_x_value</span> = <span class="ruby-identifier">periods</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">period</span><span class="ruby-operator">|</span> <span class="ruby-identifier">period</span>.<span class="ruby-identifier">midpoint</span> }.<span class="ruby-identifier">max</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt"># Scale each line to the correct domain 1000 - 0 and range 0 - 1000</span>
+        <span class="ruby-identifier">graph_lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">graph_line</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">scale_line</span>(<span class="ruby-identifier">max_x_value</span>, <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">x_range</span>.<span class="ruby-identifier">max</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt"># Scale the period label positions to the 1000 - 0 scale.</span>
+        <span class="ruby-identifier">x_axis_label_rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">label_row</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">label_row</span>.<span class="ruby-identifier">labels</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">label</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">label</span>.<span class="ruby-identifier">scale_position</span>(<span class="ruby-identifier">max_x_value</span>, <span class="ruby-identifier">x_range</span>.<span class="ruby-identifier">max</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+                
+        
+        <span class="ruby-comment cmt"># When there is only one point, give the range a little padding</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">1</span>]
+          <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-=</span> <span class="ruby-value">10</span>
+          <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">10</span> 
+        <span class="ruby-keyword kw">end</span>
+  
+        <span class="ruby-comment cmt"># Create an XY Line Chart</span>
+        <span class="ruby-identifier">chart</span> = <span class="ruby-constant">GoogleChart</span><span class="ruby-operator">::</span><span class="ruby-constant">LineChart</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'750x400'</span>, <span class="ruby-node">&quot;Maximum Body Size by #{grouping_field} over time&quot;</span>, <span class="ruby-keyword kw">true</span>)
+        <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">show_legend</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">fill</span>(<span class="ruby-identifier">:background</span>, <span class="ruby-identifier">:gradient</span>, {<span class="ruby-identifier">:angle</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">90</span>, <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> [[<span class="ruby-value str">'76A4FB'</span>,<span class="ruby-value">0</span>],[<span class="ruby-value str">'ffffff'</span>,<span class="ruby-value">1</span>]]})
+
+        <span class="ruby-comment cmt"># Add the data points</span>
+        <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">graph_line</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">graph_lines</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">data</span>(<span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">label</span>, <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">data</span>, <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">color</span>)
+          <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">shape_marker</span> <span class="ruby-identifier">:circle</span>, <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">graph_line</span>.<span class="ruby-identifier">color</span>, <span class="ruby-identifier">:data_set_index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">count</span>, <span class="ruby-identifier">:data_point_index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">-1</span>, <span class="ruby-identifier">:pixel_size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>
+          <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        
+        
+        <span class="ruby-comment cmt"># The Charting API does not appear to have a way to set the domain of the graph</span>
+        <span class="ruby-comment cmt"># This will add a point at 1000, 1000 (or the max value of x_range if set) so that the domain is always at least 1000</span>
+        <span class="ruby-comment cmt"># The label color is set to a shade of blue that blends in with the chart's background</span>
+        <span class="ruby-comment cmt"># This can be removed when there is a way to set the range correctly on google charts</span>
+        <span class="ruby-comment cmt"># Currently if this line is missing, then the maximum value on the x-axis will show up on the far right side</span>
+        <span class="ruby-comment cmt"># even if it should be somewhere in the middle</span>
+        <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">data</span>(<span class="ruby-value str">&quot;&quot;</span>, [[<span class="ruby-identifier">x_range</span>.<span class="ruby-identifier">max</span>, <span class="ruby-identifier">x_range</span>.<span class="ruby-identifier">max</span>]], <span class="ruby-value str">'BDD3FD'</span>)
+                                            
+                                            
+
+        <span class="ruby-comment cmt"># Add each label row</span>
+        <span class="ruby-identifier">x_axis_label_rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">label_row</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">axis</span> <span class="ruby-identifier">:x</span>, <span class="ruby-identifier">:labels</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">label_row</span>.<span class="ruby-identifier">get_names</span>, <span class="ruby-identifier">:range</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x_range</span>, <span class="ruby-identifier">:positions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">label_row</span>.<span class="ruby-identifier">get_positions</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt"># Add the y axis labels</span>
+        <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">axis</span> <span class="ruby-identifier">:y</span>, <span class="ruby-identifier">:range</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">0</span>, <span class="ruby-identifier">specimen_size_range</span>[<span class="ruby-value">1</span>]]
+        
+        <span class="ruby-comment cmt"># Add the grid</span>
+        <span class="ruby-identifier">chart</span>.<span class="ruby-identifier">grid</span> <span class="ruby-identifier">:x_step</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-value">100.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">20</span>), <span class="ruby-identifier">:y_step</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-value">5</span>), <span class="ruby-identifier">:length_segment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:length_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+
+        <span class="ruby-comment cmt"># Save the graph for later!</span>
+        <span class="ruby-ivar">@graph</span> = <span class="ruby-identifier">chart</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

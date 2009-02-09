@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveScaffold::DataStructures::Columns</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::DataStructures::Columns</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/data_structures/columns_rb.html">
+                vendor/plugins/active_scaffold/lib/data_structures/columns.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000769">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000773">[]</a>&nbsp;&nbsp;
+      <a href="#M000768">add</a>&nbsp;&nbsp;
+      <a href="#M000774">each</a>&nbsp;&nbsp;
+      <a href="#M000770">exclude</a>&nbsp;&nbsp;
+      <a href="#M000772">find_by_name</a>&nbsp;&nbsp;
+      <a href="#M000771">find_by_names</a>&nbsp;&nbsp;
+      <a href="#M000767">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Enumerable</span>
+        <span class="include-name"><a href="../Configurable.html">ActiveScaffold::Configurable</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">_inheritable</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The motivation for this collection is that this <a
+href="Columns.html">Columns</a> data structure fills two roles: it provides
+the master list of all known columns, and it provides an inheritable list
+for all other actions (e.g. Create and Update and List). Well we actually
+want to <b>know</b> about as many columns as possible, so we don&#8216;t
+want people actually removing columns from @set. But at the same time, we
+want to be able to manage which columns get inherited. Tada!
+
+<p>
+This collection is referenced by other parts of <a
+href="../../ActiveScaffold.html">ActiveScaffold</a> and by methods within
+this DataStructure. IT IS NOT MEANT FOR PUBLIC USE (but if you know what
+you&#8216;re doing, go ahead)
+</p>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">active_record_class</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+This accessor is used by <a href="ActionColumns.html">ActionColumns</a> to
+create <a href="Columns.html#M000767">new</a> <a
+href="Column.html">Column</a> objects without adding them to this set
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000767" class="method-detail">
+        <a name="M000767"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000767.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000767.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(active_record_class, *args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000769" class="method-detail">
+        <a name="M000769"></a>
+
+        <div class="method-heading">
+          <span class="method-name">&lt;&lt;</span><span class="method-args">(*args)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Columns.html#M000768">add</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000773" class="method-detail">
+        <a name="M000773"></a>
+
+        <div class="method-heading">
+          <span class="method-name">[]</span><span class="method-args">(name)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Columns.html#M000772">find_by_name</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000768" class="method-detail">
+        <a name="M000768"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000768.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000768.html');return false;">
+          <span class="method-name">add</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the way to <a href="Columns.html#M000768">add</a> columns to the set. this
+is primarily useful for virtual columns. note that this also makes columns
+inheritable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000774" class="method-detail">
+        <a name="M000774"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000774.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000774.html');return false;">
+          <span class="method-name">each</span><span class="method-args">() {|i| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000770" class="method-detail">
+        <a name="M000770"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000770.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000770.html');return false;">
+          <span class="method-name">exclude</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000772" class="method-detail">
+        <a name="M000772"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000772.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000772.html');return false;">
+          <span class="method-name">find_by_name</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns the column of the given name.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000771" class="method-detail">
+        <a name="M000771"></a>
+
+        <div class="method-heading">
+          <a href="Columns.src/M000771.html" target="Code" class="method-signature"
+            onclick="popupCode('Columns.src/M000771.html');return false;">
+          <span class="method-name">find_by_names</span><span class="method-args">(*names)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns an array of columns with the provided names
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

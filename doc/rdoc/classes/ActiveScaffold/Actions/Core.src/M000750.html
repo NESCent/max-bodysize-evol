@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>accepts? (ActiveScaffold::Actions::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/core.rb, line 25</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">accepts?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">types</span>)
+      <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">priority</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">accepts</span>.<span class="ruby-identifier">compact</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">priority</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ALL</span>
+          <span class="ruby-comment cmt"># Because IE always sends */* in the accepts header and we assume</span>
+          <span class="ruby-comment cmt"># that if you really wanted XML or something else you would say so</span>
+          <span class="ruby-comment cmt"># explicitly, we will assume */* to only ask for :html</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">:html</span>)
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">priority</span>.<span class="ruby-identifier">to_sym</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

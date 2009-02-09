@@ -1,0 +1,72 @@
+<table><tr><td>
+  <h1>Welcome to Maximum Size Database!</h1>
+<%= render :partial => '/layouts/introduction' %>
+  
+  </td>
+  <td valign=top >
+  <% unless @current_logged_in_user %>
+
+
+	<fieldset class="narrow">
+    
+    <h2>Please Log In</h2>
+   <% form_tag 'login/login' do %>
+      <table>
+        <tr>
+          <td>Email Address</td><td><%= text_field_tag :email_address, params[:email_address] %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Password
+          </td>
+          <td><%= password_field_tag :password %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class='form_submit'>
+            <%= submit_tag 'Login' %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class='form_label'>
+            <%= link_to("I forgot my password!", :controller => 'login', :action => "password_reset") %>
+          </td>
+        </tr>
+        <tr> 
+          <td colspan="2" class='form_label'>
+            <%= link_to("I am a new user and want to register.",:controller => 'register', :action => 'index') %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  </fieldset>
+  <% end %>
+  <% form_tag 'bodysize/list' do %>
+		<input type="hidden" name="need_template" />
+		<input type="hidden" name="group_by" value=""/>
+		<input type="hidden" name="bodysize[graph]" value="0" />
+		
+		<fieldset  class="narrow">
+		<h2>Search Data</h2>
+        <table>
+			<tr><td>Start</td><td><%= select("bodysize", "start_period_midpoint", @start_period_options) %></td></tr>
+			<tr><td>End</td><td><%= select("bodysize", "end_period_midpoint", @end_period_options) %></td></tr>
+			<tr><td>Kingdom</td><td><%= select("bodysize", "kingdom_id", @kingdom_options, {:include_blank => true}) %></td></tr>
+			<tr><td>Phylum</td><td><%= select("bodysize", "phylum_id", @phylum_options, {:include_blank => true}) %></td></tr>
+			<tr><td>Class</td><td><%= text_field_tag "bodysize[class_classification]" %></td></tr>
+			<tr><td>Environment</td><td><%= select("bodysize", "environment_id", @environment_options, {:include_blank => true}) %></td></tr>
+			<tr><td>Motility</td><td><%= select("bodysize", "motility_id", @motility_options, {:include_blank => true}) %></td></tr>
+			<tr><td><%= submit_tag 'Search', :id => "search_button" %></td><td></td></tr>
+		</table>
+	</fieldset>
+	
+	<% end %>
+	
+  
+  
+
+	</td>
+	</tr>
+	</table>

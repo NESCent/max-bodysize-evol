@@ -1,0 +1,91 @@
+# == Schema Information
+# Schema version: 15
+#
+# Table name: users
+#
+#  id                          :integer         not null, primary key
+#  type                        :string(255)
+#  first_name                  :string(255)
+#  last_name                   :string(255)
+#  country                     :string(255)
+#  state                       :string(255)
+#  city                        :string(255)
+#  school_name                 :string(255)
+#  school_level                :string(255)
+#  number_of_students_in_class :integer
+#  nickname                    :string(255)
+#  email_address               :string(255)
+#  profile_description         :text
+#  picture_filename            :string(255)
+#  disabled                    :boolean         not null
+#  login                       :string(255)
+#  hashed_password             :string(255)
+#  salt                        :string(255)
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#
+
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+<% SALT = "NaCl" unless defined?(SALT) %>
+
+admin:
+  id: 1
+  email_address: adams@scimedsolutions.com
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: Admin
+  first_name: Adam
+  last_name: Stasio
+  city: Seattle
+  state: Washington
+  country: United States
+  picture_filename: 1.jpg
+  profile_description: I'm going to measure some critters!
+  
+mike:
+  id: 2
+  email_address: michaelk@scimedsolutions.com
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: Admin
+  first_name: Mike
+  last_name: K
+
+standarduser:
+  id: 3
+  email_address: test@dev.null
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: StandardUser
+  first_name: Testy
+  last_name: McGee
+  
+standarduser2:
+  id: 4
+  email_address: john@dev.null
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: StandardUser
+  first_name: John
+  last_name: Greene
+  
+approver:
+  id: 5
+  email_address: jane@dev.null
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: Approver
+  first_name: Jane
+  last_name: Smith
+  
+disabled_user:
+  id: 6
+  email_address: disabled@dev.null
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: Admin
+  first_name: Bob
+  last_name: Larva
+  disabled: true
+  

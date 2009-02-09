@@ -1,0 +1,15 @@
+<fieldset id="private_notes">
+  <h2>Private Notes</h2>
+	<% if bodysize.private_notes %>
+		<%= render :partial => "comment", :collection => bodysize.private_notes %>
+	<% end %>
+	
+	<div class='comment'>
+		<h3>Write a Private Note</h3>
+		<% form_remote_tag	:url => { :action => :add_private_note, :id => bodysize.id },
+		 										:update => { :success => "privatenote-container", :failure => "privatenote-container" } do %>
+			<%= text_area_tag "note" %>
+			<%= submit_tag "Add" %>
+		<% end %>
+	</div>
+</fieldset>

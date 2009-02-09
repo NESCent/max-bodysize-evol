@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>us_state_options_for_select (ActionView::Helpers::FormOptionsHelper)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/us_states/lib/us_states.rb, line 4</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">us_state_options_for_select</span>(<span class="ruby-identifier">selected</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">us_state_options</span> = {})
+        <span class="ruby-identifier">state_options</span>      = <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">priority_states</span>    = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">state</span><span class="ruby-operator">|</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:priority</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">state</span>.<span class="ruby-identifier">last</span>) }
+        <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:show</span>] = <span class="ruby-identifier">:full</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:with_abbreviation</span>]
+        <span class="ruby-identifier">states_label</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:show</span>]
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:full</span>          <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">state</span><span class="ruby-operator">|</span> [<span class="ruby-node">&quot;#{state.last} - #{state.first}&quot;</span>, <span class="ruby-identifier">state</span>.<span class="ruby-identifier">last</span>] }
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:abbreviations</span> <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">state</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">state</span>.<span class="ruby-identifier">last</span>, <span class="ruby-identifier">state</span>.<span class="ruby-identifier">last</span>] }
+          <span class="ruby-keyword kw">else</span>                     <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">state</span><span class="ruby-operator">|</span> <span class="ruby-identifier">state</span> }
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:include_blank</span>]
+          <span class="ruby-identifier">state_options</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;&lt;option value=\&quot;\&quot;&gt;--&lt;/option&gt;\n&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:priority</span>]
+          <span class="ruby-identifier">state_options</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">options_for_select</span>(<span class="ruby-constant">US_STATES</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">priority_states</span>).<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">states_label</span>), <span class="ruby-identifier">selected</span>)
+          <span class="ruby-identifier">state_options</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;&lt;option value=\&quot;\&quot;&gt;--&lt;/option&gt;\n&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:priority</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">us_state_options</span>[<span class="ruby-identifier">:priority</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">selected</span>)
+          <span class="ruby-identifier">state_options</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">options_for_select</span>(<span class="ruby-constant">US_STATES</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">priority_states</span>).<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">states_label</span>), <span class="ruby-identifier">selected</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">state_options</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">options_for_select</span>(<span class="ruby-constant">US_STATES</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">states_label</span>), <span class="ruby-identifier">selected</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">state_options</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

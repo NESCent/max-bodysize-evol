@@ -1,0 +1,71 @@
+<div id="bodysize_list">
+	
+	<% form_remote_tag :url => 'list', :update => 'search_results' do %>
+		<fieldset id="specimen_search">
+			<fieldset id="criteria">
+				<h3>Search Criteria</h3>
+       
+        <ul style='margin-left:0;'>
+			    <li>
+            <dt>Period</dt>
+			      <dd><%= select("bodysize", "start_period_midpoint", @start_period_options) %><%= select("bodysize", "end_period_midpoint", @end_period_options) %></dd>
+	        </li>
+          <li>
+			<dt>Kingdom</dt>
+			<dd><%= select("bodysize", "kingdom_id", @kingdom_options, {:include_blank => true}) %></dd>
+	</li>
+          <li>
+			<dt>Phylum</dt>
+			<dd><%= select("bodysize", "phylum_id", @phylum_options, {:include_blank => true}) %></dd>
+	</li>
+          <li>
+			<dt>Class</dt>
+			<dd><%= text_field_tag "bodysize[class_classification]" %></dd>
+	</li>
+          <li>
+			<dt>Environment</dt>
+			<dd><%= select("bodysize", "environment_id", @environment_options, {:include_blank => true}) %></dd>
+	</li>
+          <li>
+			<dt>Motility</dt>
+			<dd><%= select("bodysize", "motility_id", @motility_options, {:include_blank => true}) %></dd>
+			</li>
+     </ul>
+      </fieldset>
+	
+			<fieldset id="analyze">
+				<h3>Result Analysis</h3>
+				<ul style='margin-left:0;'>
+					<li>
+					Show the largest record from each <%= select("bodysize","group_by", @group_options, {:include_blank => true}) %>
+						<p>
+							If you wish to graph this data, you must select a grouping from the drop-down above. When you choose to graph the data, the number of resulting records may increase because records are shown over time.
+						</p>
+					</li>
+					<li>
+						<input type="checkbox" id="bodysize_graph" name="bodysize[graph]" value="1" /><label for="bodysize_graph">Graph the largest over time</label>
+						<input type="hidden" name="bodysize[graph]" value="0" />
+					</li>
+					<li>
+						<input type="radio" id="bodysize_use_log10_biovolume_false" name="bodysize[use_log10_biovolume]" value="0" checked /><label for="bodysize_use_log10_biovolume_false"> Show Biovolume</label>
+						<input type="radio" id="bodysize_use_log10_biovolume_true" name="bodysize[use_log10_biovolume]" value="1" /><label for="bodysize_use_log10_biovolume_true"> Show Log10 Biovolume</label>
+					</li>
+				</ul>
+			</fieldset>
+	
+			<div class="buttons">
+				<%= submit_tag 'Search', :id => "search_button" %>
+			</div>
+		</fieldset>
+	
+	
+	
+	<% end %>
+
+
+	<div id="search_results">
+		<%= render :partial => 'search_results', :locals => {:user => @current_logged_in_user, :bodysizes => @bodysizes, :chart => nil, :data_field => @data_field, :show_export => true, :ajax_pagination => true } %>
+	</div>
+
+	<div class='clear_both'></div>
+</div>

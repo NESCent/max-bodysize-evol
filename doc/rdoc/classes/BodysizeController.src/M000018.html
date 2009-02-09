@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>delete (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 524</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">authorize_approver</span>
+    
+    <span class="ruby-ivar">@bodysize</span> = <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+    <span class="ruby-identifier">name</span> = <span class="ruby-ivar">@bodysize</span>.<span class="ruby-identifier">to_s</span>
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">post?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@bodysize</span>.<span class="ruby-identifier">approved</span>
+      <span class="ruby-ivar">@bodysize</span>.<span class="ruby-identifier">destroy</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:success</span>] = <span class="ruby-node">&quot;#{name} has been deleted&quot;</span>
+      <span class="ruby-constant">AuditLog</span>.<span class="ruby-identifier">log</span>(<span class="ruby-node">&quot;Deleted the bodysize record called #{name}&quot;</span>, <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:warning</span>] = <span class="ruby-node">&quot;#{name} can not be deleted&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unapproved</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_evaluate (FormulaTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/unit/formula_test.rb, line 6</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_evaluate</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">24</span>, <span class="ruby-identifier">res</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">34</span>, <span class="ruby-identifier">res</span>)
+
+        <span class="ruby-comment cmt"># test using floating points in options</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2.1</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.2</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4.3</span>)
+        <span class="ruby-identifier">assert_in_delta</span>(<span class="ruby-value">28.896</span>, <span class="ruby-identifier">res</span>, <span class="ruby-value">0</span><span class="ruby-value">.00001</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">28</span>, <span class="ruby-identifier">res</span>)
+
+        <span class="ruby-comment cmt"># test using floating points in constants</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box_fp</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>)
+        <span class="ruby-identifier">assert_in_delta</span>(<span class="ruby-value">2.4</span>, <span class="ruby-identifier">res</span>, <span class="ruby-value">0</span><span class="ruby-value">.0001</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">24</span>, <span class="ruby-identifier">res</span>)
+
+        <span class="ruby-comment cmt"># test using not all parameters</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:area</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">6</span>, <span class="ruby-identifier">res</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">34</span>, <span class="ruby-identifier">res</span>)
+      
+        <span class="ruby-comment cmt"># test that required parameters not passed in will fail</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box</span>)
+        <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">RuntimeError</span>) {<span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>()}
+
+        <span class="ruby-comment cmt"># test exponentiation</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:cylinder</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">6</span>)
+        <span class="ruby-identifier">assert_in_delta</span>(<span class="ruby-value">75.36</span>, <span class="ruby-identifier">res</span>, <span class="ruby-value">0</span><span class="ruby-value">.00001</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">34</span>, <span class="ruby-identifier">res</span>)
+
+        <span class="ruby-comment cmt"># more exponetiation</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:sphere</span>)
+        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">6</span>)
+        <span class="ruby-identifier">assert_in_delta</span>(<span class="ruby-value">33.492496</span>, <span class="ruby-identifier">res</span>, <span class="ruby-value">0</span><span class="ruby-value">.00001</span>)
+        <span class="ruby-identifier">assert_not_equal</span>(<span class="ruby-value">34</span>, <span class="ruby-identifier">res</span>)
+
+        <span class="ruby-comment cmt"># a digit must be preceeded by a digit</span>
+        <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box_bad_dot</span>)
+        <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">RuntimeError</span>) <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>, <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">6</span>)
+        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

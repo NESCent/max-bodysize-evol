@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>add_private_note (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 569</span>
+ <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_private_note</span>
+   <span class="ruby-ivar">@bodysize</span> = <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+   <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">can_edit?</span>(<span class="ruby-ivar">@bodysize</span>)
+   
+   <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@bodysize</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:note</span>]
+     <span class="ruby-ivar">@bodysize</span>.<span class="ruby-identifier">private_notes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PrivateNote</span>.<span class="ruby-identifier">create</span>( <span class="ruby-identifier">:comment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:note</span>],
+                                                 <span class="ruby-identifier">:owner</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current_logged_in_user</span>)
+   <span class="ruby-keyword kw">end</span>
+   
+   <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;private_notes&quot;</span>, <span class="ruby-identifier">:locals</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:bodysize</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bodysize</span> }
+ <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

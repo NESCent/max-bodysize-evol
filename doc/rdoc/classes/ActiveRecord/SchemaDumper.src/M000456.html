@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>view (ActiveRecord::SchemaDumper)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/rails_sql_views/lib/rails_sql_views/schema_dumper.rb, line 46</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">stream</span>)
+      <span class="ruby-identifier">columns</span> = <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">columns</span>(<span class="ruby-identifier">view</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span> }
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">v</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;  create_view #{view.inspect}&quot;</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;, #{@connection.view_select_statement(view).dump}&quot;</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;, :force =&gt; true&quot;</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot; do |v|&quot;</span>
+
+        <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">v</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;    v.column :#{column}&quot;</span>
+          <span class="ruby-identifier">v</span>.<span class="ruby-identifier">puts</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;  end&quot;</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">puts</span>
+        
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">rewind</span>
+        <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">read</span>
+      <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# Could not dump view #{view.inspect} because of following #{e.class}&quot;</span>
+        <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#   #{e.message}&quot;</span>
+        <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">puts</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">stream</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

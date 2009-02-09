@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: User</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">User</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/models/user_rb.html">
+                app/models/user.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActiveRecord::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="User.html">User</a></h1>
+<p>
+Purpose: Serves as an abstract base class for all other user types in the
+system. Provides general user functionality.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000018">accessible_bodysize_records</a>&nbsp;&nbsp;
+      <a href="#M000020">accessible_formulas</a>&nbsp;&nbsp;
+      <a href="#M000007">authenticate</a>&nbsp;&nbsp;
+      <a href="#M000021">can_access?</a>&nbsp;&nbsp;
+      <a href="#M000022">can_edit?</a>&nbsp;&nbsp;
+      <a href="#M000015">create_new_salt</a>&nbsp;&nbsp;
+      <a href="#M000010">enabled?</a>&nbsp;&nbsp;
+      <a href="#M000014">encrypted_password</a>&nbsp;&nbsp;
+      <a href="#M000019">get_complete_records</a>&nbsp;&nbsp;
+      <a href="#M000006">name</a>&nbsp;&nbsp;
+      <a href="#M000008">password</a>&nbsp;&nbsp;
+      <a href="#M000009">password=</a>&nbsp;&nbsp;
+      <a href="#M000016">picture=</a>&nbsp;&nbsp;
+      <a href="#M000017">picture_path</a>&nbsp;&nbsp;
+      <a href="#M000011">public_location</a>&nbsp;&nbsp;
+      <a href="#M000013">random_password</a>&nbsp;&nbsp;
+      <a href="#M000012">reset_password</a>&nbsp;&nbsp;
+      <a href="#M000005">to_s</a>&nbsp;&nbsp;
+      <a href="#M000003">validate</a>&nbsp;&nbsp;
+      <a href="#M000004">validate_on_create</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">password_confirmation</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Allow access to a password_confirmation field to verify the user has typed
+their <a href="User.html#M000008">password</a> correctly
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000007.html');return false;">
+          <span class="method-name">authenticate</span><span class="method-args">(email_address, password)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Authentication method used in LoginController
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>email_address (String) - The email address to use in order to <a
+href="User.html#M000007">authenticate</a> a user
+
+</li>
+<li><a href="User.html#M000008">password</a> (String) - The <a
+href="User.html#M000008">password</a> the user is trying to use to <a
+href="User.html#M000007">authenticate</a>
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>The <a href="User.html">User</a> object that matches the given email
+address, if the <a href="User.html#M000008">password</a> is valid
+
+</li>
+<li>nil otherwise
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000014.html');return false;">
+          <span class="method-name">encrypted_password</span><span class="method-args">(password, salt)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Encrypt a <a href="User.html#M000008">password</a>
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li><a href="User.html#M000008">password</a> (String) - The <a
+href="User.html#M000008">password</a> to encrypt
+
+</li>
+<li>salt (String) - The salt to use to improve encryption
+
+</li>
+</ul>
+<p>
+Output: The SHA1 encrypted version of the given <a
+href="User.html#M000008">password</a>
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000018.html');return false;">
+          <span class="method-name">accessible_bodysize_records</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Provide an array of <a href="Bodysize.html">Bodysize</a> objects
+which a particular user can access
+</p>
+<p>
+Input: options (Hash) [optional] - Options include the following
+possibilities:
+</p>
+<ul>
+<li>page (Integer) - The page number as used by Will Paginate (if nil, or false
+then all results will be returned)
+
+</li>
+<li>per_page (Integer) - The number of results to return, as used by Will
+Paginate
+
+</li>
+<li>joins - Joins option as used by active record find methods
+
+</li>
+<li>group - Group option as used by active record find methods
+
+</li>
+<li>order - Order option as used by active record find methods
+
+</li>
+<li>conditions - Conditions option as used by active record find methods
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000020.html');return false;">
+          <span class="method-name">accessible_formulas</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Retrieve all formulae that are accessible to the user. This method
+may be over-ridden by sub-classes to change the scope of different
+user&#8216;s access
+</p>
+<p>
+Input: None
+</p>
+<p>
+Output: An Array of <a href="Formula.html">Formula</a> objects which the
+user can use.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000021.html');return false;">
+          <span class="method-name">can_access?</span><span class="method-args">(thing)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Currently an unimplemented stub - Determine whether the user can
+access an object
+</p>
+<p>
+Input: thing (Object) - The object to determine if the user can access
+Output:
+</p>
+<ul>
+<li>True if the user can access the object
+
+</li>
+<li>False otherwise
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000022.html');return false;">
+          <span class="method-name">can_edit?</span><span class="method-args">(thing)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Determine if the user can edit and object
+</p>
+<p>
+Input: thing (Object) - The object to determine if the user can access
+(currently only supports <a href="Bodysize.html">Bodysize</a> and <a
+href="CompleteBodysize.html">CompleteBodysize</a> objects) Output:
+</p>
+<ul>
+<li>True if the user can edit the given object
+
+</li>
+<li>False otherwise
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000015.html');return false;">
+          <span class="method-name">create_new_salt</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create a new salt for <a href="User.html#M000008">password</a>
+encryption
+</p>
+<p>
+Input: None Output: (String) a new partly random salt string
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000010.html');return false;">
+          <span class="method-name">enabled?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Determine if the current use is enabled
+</p>
+<p>
+Input: None (Uses disabled) Output:
+</p>
+<ul>
+<li>True if the user is enabled
+
+</li>
+<li>False if the user is disabled
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000019.html');return false;">
+          <span class="method-name">get_complete_records</span><span class="method-args">(conditions = {}, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Retrieve <a href="CompleteBodysize.html">CompleteBodysize</a>
+records which the user can access
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>conditions (Hash) [optional] - The following keys are used:
+
+</li>
+</ul>
+<p>
+** :conditions (String) - A sql condition string to be sent to
+find_by_sql()
+</p>
+<ul>
+<li>options (Hash) [optional] - Additional options that may be sent include:
+
+</li>
+</ul>
+<p>
+** page (Integer) - The page to display as used by Will Paginate (Note: If
+page is nil or false, all records will be returned) ** per_page (Integer) -
+The number of records to return at a time, as used by Will Paginate
+</p>
+<p>
+Output:
+</p>
+<ul>
+<li>an Array of <a href="CompleteBodysize.html">CompleteBodysize</a> records
+found using the given conditions and options
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000006.html');return false;">
+          <span class="method-name">name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Retrieve the user&#8216;s full <a
+href="User.html#M000006">name</a>
+</p>
+<p>
+Input: None (uses first_name, and last_name)
+</p>
+<p>
+Output: String - the user&#8216;s full <a href="User.html#M000006">name</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000008.html');return false;">
+          <span class="method-name">password</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Provide access to read @<a href="User.html#M000008">password</a>,
+which is an attribute that is not persisted Input: None Output: String -
+The user&#8216;s <a href="User.html#M000008">password</a>
+</p>
+<p>
+Note: Since the <a href="User.html#M000008">password</a> is not persisted,
+this method will only return the user&#8216;s <a
+href="User.html#M000008">password</a> when the user is setting or changing
+their <a href="User.html#M000008">password</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000009.html');return false;">
+          <span class="method-name">password=</span><span class="method-args">(pwd)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow a user to set their <a
+href="User.html#M000008">password</a>. This encrypts the given <a
+href="User.html#M000008">password</a> and persists the encrypted value.
+</p>
+<p>
+Input: pwd (String) - The value to use as the new <a
+href="User.html#M000008">password</a> Output: String - The user&#8216;s new
+hashed <a href="User.html#M000008">password</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000016.html');return false;">
+          <span class="method-name">picture=</span><span class="method-args">(file_data)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow a user to set a picture for their profile. The picture path
+is stored in the user record, and picture data is stored in a class
+attribute until the user is saved, at which point the file is written to
+disk in the appropriate location.
+</p>
+<p>
+Input: file_data (StringIO) - The file data which makes up the user&#8216;s
+picture Output: None (Sets @file_data, and picture_filename)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000017.html');return false;">
+          <span class="method-name">picture_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Retrieve the web location of the user&#8216;s picture
+</p>
+<p>
+Input: None (Uses USER_DATA_WEB_PATH, id, and picture_filename) Output:
+String - The web path to the user&#8216;s picture
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000011.html');return false;">
+          <span class="method-name">public_location</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Concatenate the user&#8216;s location into a string
+</p>
+<p>
+Input: None (Uses city, state, country) Output:
+</p>
+<ul>
+<li>String - A combination of any of the location values which are set
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000013.html');return false;">
+          <span class="method-name">random_password</span><span class="method-args">(size = 8)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create a new random <a href="User.html#M000008">password</a>
+</p>
+<p>
+Input: size (integer) [optional] - The number of charaters to use in the <a
+href="User.html#M000008">password</a> Output: A random string of length
+&quot;size&quot;, that contains upper-case and lower-case letters, as well
+as digits
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000012.html');return false;">
+          <span class="method-name">reset_password</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Reset the user&#8216;s <a href="User.html#M000008">password</a> by
+setting it to a new random <a href="User.html#M000008">password</a>
+</p>
+<p>
+Input: None Output: The user&#8216;s new <a
+href="User.html#M000008">password</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000005.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Provide a text representation of the user
+</p>
+<p>
+Input: None (Uses <a href="User.html#M000006">name</a>) Output: String - A
+text representation of the user
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000003.html');return false;">
+          <span class="method-name">validate</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Verify that the user is valid before saving it
+</p>
+<p>
+Input: None Output: None (Adds errors to the model)
+</p>
+<p>
+Users cannot be saved if they are trying to upload a file that is anything
+other than JPG, GIF, or PNG.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000004.html');return false;">
+          <span class="method-name">validate_on_create</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Verify that the user is valid before creating it
+</p>
+<p>
+Input: None Output: None (Adds errors to the model)
+</p>
+<p>
+New users cannot be created unless they are given a <a
+href="User.html#M000008">password</a>, and type the <a
+href="User.html#M000008">password</a> the same way a second time.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

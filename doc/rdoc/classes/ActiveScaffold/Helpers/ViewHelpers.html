@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold::Helpers::ViewHelpers</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::Helpers::ViewHelpers</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge.rb
+                </a>
+        <br />
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/helpers/view_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+All extra helpers that should be included in the View. Also a dumping
+ground for uncategorized helpers.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000598">active_scaffold_config</a>&nbsp;&nbsp;
+      <a href="#M000599">active_scaffold_config_for</a>&nbsp;&nbsp;
+      <a href="#M000600">active_scaffold_controller_for</a>&nbsp;&nbsp;
+      <a href="#M000605">active_scaffold_includes</a>&nbsp;&nbsp;
+      <a href="#M000597">active_scaffold_includes_with_calendar_date_select</a>&nbsp;&nbsp;
+      <a href="#M000612">column_calculation</a>&nbsp;&nbsp;
+      <a href="#M000610">column_class</a>&nbsp;&nbsp;
+      <a href="#M000611">column_empty?</a>&nbsp;&nbsp;
+      <a href="#M000604">form_remote_upload_tag</a>&nbsp;&nbsp;
+      <a href="#M000601">generate_temporary_id</a>&nbsp;&nbsp;
+      <a href="#M000603">in_subform?</a>&nbsp;&nbsp;
+      <a href="#M000608">link_to_visibility_toggle</a>&nbsp;&nbsp;
+      <a href="#M000606">loading_indicator_tag</a>&nbsp;&nbsp;
+      <a href="#M000602">option_tags_for</a>&nbsp;&nbsp;
+      <a href="#M000607">params_for</a>&nbsp;&nbsp;
+      <a href="#M000609">render_action_link</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="Ids.html">ActiveScaffold::Helpers::Ids</a></span>
+        <span class="include-name"><a href="Associations.html">ActiveScaffold::Helpers::Associations</a></span>
+        <span class="include-name"><a href="Pagination.html">ActiveScaffold::Helpers::Pagination</a></span>
+        <span class="include-name"><a href="ListColumns.html">ActiveScaffold::Helpers::ListColumns</a></span>
+        <span class="include-name"><a href="FormColumns.html">ActiveScaffold::Helpers::FormColumns</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000598" class="method-detail">
+        <a name="M000598"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000598.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000598.html');return false;">
+          <span class="method-name">active_scaffold_config</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+access to the configuration variable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000599" class="method-detail">
+        <a name="M000599"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000599.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000599.html');return false;">
+          <span class="method-name">active_scaffold_config_for</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000600" class="method-detail">
+        <a name="M000600"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000600.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000600.html');return false;">
+          <span class="method-name">active_scaffold_controller_for</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000605" class="method-detail">
+        <a name="M000605"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000605.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000605.html');return false;">
+          <span class="method-name">active_scaffold_includes</span><span class="method-args">(frontend = :default)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+easy way to include <a href="../../ActiveScaffold.html">ActiveScaffold</a>
+assets
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000597" class="method-detail">
+        <a name="M000597"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000597.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000597.html');return false;">
+          <span class="method-name">active_scaffold_includes_with_calendar_date_select</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000612" class="method-detail">
+        <a name="M000612"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000612.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000612.html');return false;">
+          <span class="method-name">column_calculation</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000610" class="method-detail">
+        <a name="M000610"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000610.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000610.html');return false;">
+          <span class="method-name">column_class</span><span class="method-args">(column, column_value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000611" class="method-detail">
+        <a name="M000611"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000611.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000611.html');return false;">
+          <span class="method-name">column_empty?</span><span class="method-args">(column_value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000604" class="method-detail">
+        <a name="M000604"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000604.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000604.html');return false;">
+          <span class="method-name">form_remote_upload_tag</span><span class="method-args">(url_for_options = {}, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000601" class="method-detail">
+        <a name="M000601"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000601.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000601.html');return false;">
+          <span class="method-name">generate_temporary_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Uncategorized
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000603" class="method-detail">
+        <a name="M000603"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000603.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000603.html');return false;">
+          <span class="method-name">in_subform?</span><span class="method-args">(column, parent_record)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Should this column be displayed in the subform?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000608" class="method-detail">
+        <a name="M000608"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000608.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000608.html');return false;">
+          <span class="method-name">link_to_visibility_toggle</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a javascript-based link that toggles the visibility of some element
+on the page. By default, it toggles the visibility of the sibling after the
+one it&#8216;s nested in. You may pass custom javascript logic in
+options[:of] to change that, though. For example, you could say :of =&gt;
+&#8217;$(&quot;my_div_id&quot;)&#8217;. You may also flag whether the other
+element is visible by default or not, and the initial text will adjust
+accordingly.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000606" class="method-detail">
+        <a name="M000606"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000606.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000606.html');return false;">
+          <span class="method-name">loading_indicator_tag</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+a general-use loading indicator (the &quot;stuff is happening, please
+wait&quot; feedback)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000602" class="method-detail">
+        <a name="M000602"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000602.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000602.html');return false;">
+          <span class="method-name">option_tags_for</span><span class="method-args">(select_options, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Turns [[label, value]] into &lt;option&gt; tags Takes optional parameter of
+:include_blank
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000607" class="method-detail">
+        <a name="M000607"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000607.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000607.html');return false;">
+          <span class="method-name">params_for</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000609" class="method-detail">
+        <a name="M000609"></a>
+
+        <div class="method-heading">
+          <a href="ViewHelpers.src/M000609.html" target="Code" class="method-signature"
+            onclick="popupCode('ViewHelpers.src/M000609.html');return false;">
+          <span class="method-name">render_action_link</span><span class="method-args">(link, url_options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

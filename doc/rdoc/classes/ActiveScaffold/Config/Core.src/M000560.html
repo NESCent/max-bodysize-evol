@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (ActiveScaffold::Config::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/config/core.rb, line 92</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">model_id</span>)
+      <span class="ruby-comment cmt"># model_id is the only absolutely required configuration value. it is also not publicly accessible.</span>
+      <span class="ruby-ivar">@model_id</span> = <span class="ruby-identifier">model_id</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">pluralize</span>.<span class="ruby-identifier">singularize</span>
+
+      <span class="ruby-comment cmt"># inherit the actions list directly from the global level</span>
+      <span class="ruby-ivar">@actions</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">actions</span>.<span class="ruby-identifier">clone</span>
+
+      <span class="ruby-comment cmt"># create a new default columns datastructure, since it doesn't make sense before now</span>
+      <span class="ruby-identifier">attribute_names</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span> }.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_s</span> }
+      <span class="ruby-identifier">association_column_names</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">reflect_on_all_associations</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span> }.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_s</span> }
+      <span class="ruby-ivar">@columns</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Columns</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>, <span class="ruby-identifier">attribute_names</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">association_column_names</span>)
+
+      <span class="ruby-comment cmt"># and then, let's remove some columns from the inheritable set.</span>
+      <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">exclude</span>(<span class="ruby-operator">*</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">ignore_columns</span>)
+      <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">exclude</span>(<span class="ruby-operator">*</span><span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">column</span> <span class="ruby-keyword kw">and</span> (<span class="ruby-identifier">c</span>.<span class="ruby-identifier">column</span>.<span class="ruby-identifier">primary</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(_id|_count)$/</span>) }.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>})
+      <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">exclude</span>(<span class="ruby-operator">*</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">reflect_on_all_associations</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{a.name}_type&quot;</span><span class="ruby-node">&quot;#{a.name}_type&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:polymorphic</span>]}.<span class="ruby-identifier">compact</span>)
+
+      <span class="ruby-comment cmt"># inherit the global frontend</span>
+      <span class="ruby-ivar">@frontend</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">frontend</span>
+      <span class="ruby-ivar">@theme</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">theme</span>
+
+      <span class="ruby-comment cmt"># inherit from the global set of action links</span>
+      <span class="ruby-ivar">@action_links</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">action_links</span>.<span class="ruby-identifier">clone</span>
+
+      <span class="ruby-comment cmt"># the default label</span>
+      <span class="ruby-ivar">@label</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model_id</span>.<span class="ruby-identifier">pluralize</span>.<span class="ruby-identifier">titleize</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

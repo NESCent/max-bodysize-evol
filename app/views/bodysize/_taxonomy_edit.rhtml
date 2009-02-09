@@ -1,0 +1,15 @@
+<fieldset id="taxonomy">
+  <h2>Taxonomy</h2>
+    <ul class='fields'>
+      <li><label>Kingdom</label><%= select("bodysize", "kingdom_id", Kingdom.options) %></li>
+      <li><label>Phylum</label><%= select("bodysize", 'phylum_id', Phylum.options) %></li>
+      <li><label>Class</label><%= text_field_tag 'bodysize[class_classification]', bodysize.class_classification %></li>
+      <li><label>Order</label><%= text_field_tag 'bodysize[order_classification]', bodysize.order_classification %></li>
+      <li><label>Family</label><%= text_field_tag 'bodysize[family]', bodysize.family %></li>
+      <li><label>Genus</label><%= text_field_tag 'bodysize[genus]', bodysize.genus %></li>
+      <li><label>Species</label><%= text_field_tag 'bodysize[species]', bodysize.species %></li>
+    </ul>
+  <div class='buttons'>
+    <%= submit_tag 'Save', :class => 'clear_both' %>
+  </div>
+</fieldset>

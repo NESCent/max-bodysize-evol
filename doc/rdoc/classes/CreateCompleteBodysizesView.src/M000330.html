@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>up (CreateCompleteBodysizesView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File db/migrate/012_create_complete_bodysizes_view.rb, line 2</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">up</span>
+        <span class="ruby-identifier">create_view</span> <span class="ruby-identifier">:complete_bodysizes</span>, <span class="ruby-value str">&quot;SELECT b.id, b.creator_id, b.period_id, b.kingdom_id, b.phylum_id, b.class_classification, b.order_classification, b.family, b.genus, b.species, b.environment_id, b.motility_id, b.feeding_id, b.approved, b.width, b.height, b.length, b.mass, b.formula_id, b.picture_path, b.picture_filename, b.epoch, b.stage, b.how_estimation_was_achieved, b.expert_contacted, b.literature_citation, b.other_data_source, b.confidence_comment, b.photo_available, b.compiler, b.first_description_literature_source, b.confidence_score, b.volume, b.biovolume, b.log10_biovolume, b.lithology, b.preservation_mode, b.location, b.formation_location, b.member, b.bed, b.local_environment, b.regional_environment, b.notes, b.created_at, b.updated_at, p.name, p.midpoint FROM bodysizes AS b JOIN periods AS p ON b.period_id = p.id&quot;</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:creator_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:period_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:kingdom_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:phylum_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:class_classification</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:order_classification</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:family</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:genus</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:species</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:environment_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:motility_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:feeding_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:approved</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:width</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:height</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:length</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:mass</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:formula_id</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:picture_path</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:picture_filename</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:epoch</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:stage</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:how_estimation_was_achieved</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:expert_contacted</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:literature_citation</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:other_data_source</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:confidence_comment</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:photo_available</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:compiler</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:first_description_literature_source</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:confidence_score</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:volume</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:biovolume</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:log10_biovolume</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:lithology</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:preservation_mode</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:location</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:formation_location</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:member</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:bed</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:local_environment</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:regional_environment</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:notes</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:created_at</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:updated_at</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:name</span>
+                <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:midpoint</span>
+            <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

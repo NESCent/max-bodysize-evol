@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>do_search (ActiveScaffold::Actions::FieldSearch)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/field_search.rb, line 26</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_search</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:search</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">like_pattern</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">field_search</span>.<span class="ruby-identifier">full_text_search?</span> <span class="ruby-value">? </span><span class="ruby-value str">'%?%'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'?%'</span>
+        <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_conditions</span>
+        <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:search</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">field_search</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+          <span class="ruby-identifier">column</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">key</span>]
+          <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">merge_conditions</span>(<span class="ruby-identifier">conditions</span>, <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Finder</span>.<span class="ruby-identifier">condition_for_column</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">like_pattern</span>))
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_conditions</span> = <span class="ruby-identifier">conditions</span>
+
+        <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">field_search</span>.<span class="ruby-identifier">columns</span>
+        <span class="ruby-identifier">includes_for_search_columns</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">includes</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">compact</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">includes_for_search_columns</span>
+
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">page</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

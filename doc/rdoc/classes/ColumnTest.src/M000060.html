@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_custom_sort (ColumnTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/data_structures/column_test.rb, line 106</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_custom_sort</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-identifier">hash</span> = {<span class="ruby-identifier">:sql</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'model_stubs.a'</span>}
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">hash</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort</span>
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-identifier">:sql</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'foobar'</span>
+    <span class="ruby-identifier">hash</span> = {<span class="ruby-identifier">:sql</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'foobar'</span>}
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">hash</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort</span>
+
+    <span class="ruby-identifier">some_proc</span> = <span class="ruby-identifier">proc</span> {<span class="ruby-value str">'foobar'</span>}
+    <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">some_proc</span>
+    <span class="ruby-identifier">hash</span> = {<span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">some_proc</span>}
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">hash</span>, <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sort</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">sortable?</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

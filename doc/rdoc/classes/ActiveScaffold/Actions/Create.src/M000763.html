@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>do_create (ActiveScaffold::Actions::Create)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/create.rb, line 70</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_create</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">update_record_from_params</span>(<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">create</span>.<span class="ruby-identifier">columns</span>, <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:record</span>])
+          <span class="ruby-identifier">apply_constraints_to_record</span>(<span class="ruby-ivar">@record</span>, <span class="ruby-identifier">:allow_autosave</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+          <span class="ruby-identifier">before_create_save</span>(<span class="ruby-ivar">@record</span>)
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">successful</span> = [<span class="ruby-ivar">@record</span>.<span class="ruby-identifier">valid?</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">associated_valid?</span>].<span class="ruby-identifier">all?</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>} <span class="ruby-comment cmt"># this syntax avoids a short-circuit</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">successful?</span>
+            <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">save!</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">save_associated!</span>
+            <span class="ruby-identifier">after_create_save</span>(<span class="ruby-ivar">@record</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordInvalid</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

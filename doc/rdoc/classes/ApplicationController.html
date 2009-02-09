@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ApplicationController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ApplicationController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/application_rb.html">
+                app/controllers/application.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActionController::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Application Controller</h1>
+<p>
+<a href="ApplicationController.html">ApplicationController</a> provides
+application-wide methods for controlling the flow of the application. This
+controller provides an &quot;abstract&quot; base class for all of the other
+controllers in the system.
+</p>
+<p>
+Note: Filters added to this controller apply to all controllers in the
+application.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000046">authorize</a>&nbsp;&nbsp;
+      <a href="#M000048">authorize_admin</a>&nbsp;&nbsp;
+      <a href="#M000049">authorize_approver</a>&nbsp;&nbsp;
+      <a href="#M000047">is_authorized</a>&nbsp;&nbsp;
+      <a href="#M000050">is_authorized_admin</a>&nbsp;&nbsp;
+      <a href="#M000051">is_authorized_approver</a>&nbsp;&nbsp;
+      <a href="#M000052">menu_setup</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Private Instance methods</h3>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000046.html');return false;">
+          <span class="method-name">authorize</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized. If the user is not
+authorized then they are sent to the login page. Input: None Output:
+</p>
+<ul>
+<li>If the user is authorized, true
+
+</li>
+<li>If the user is not authorized, issues a redirect and returns false
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000048.html');return false;">
+          <span class="method-name">authorize_admin</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized as an administrator. If
+the user is not authorized then they are sent to the login page. Input:
+None Output:
+</p>
+<ul>
+<li>If the user is authorized, returns the current user
+
+</li>
+<li>If the user is not authorized, issues a redirect and returns false
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000049.html');return false;">
+          <span class="method-name">authorize_approver</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized as an approver. If the
+user is not authorized then they are sent to the login page. Input: None
+Output:
+</p>
+<ul>
+<li>If the user is authorized, returns the current user
+
+</li>
+<li>If the user is not authorized, issues a redirect and returns false
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000047.html');return false;">
+          <span class="method-name">is_authorized</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized. Input: None Output:
+</p>
+<ul>
+<li>If the user has logged in, returns the currently logged in user
+
+</li>
+<li>Otherwise, returns nil
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000050.html');return false;">
+          <span class="method-name">is_authorized_admin</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized as an admin. Input: None
+Output:
+</p>
+<ul>
+<li>If the user has logged in, returns true
+
+</li>
+<li>Otherwise, returns false
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000051.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000051.html');return false;">
+          <span class="method-name">is_authorized_approver</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To verify the current user is authorized as an approver. Input:
+None Output:
+</p>
+<ul>
+<li>If the user has logged in, returns true
+
+</li>
+<li>Otherwise, returns false
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000052.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000052.html');return false;">
+          <span class="method-name">menu_setup</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To prepare the drop-down menus for display by including the
+correct menus for the current user Input: None Output:
+</p>
+<ul>
+<li>None. The menu structure is stored in @top_menu_items which is eventually
+used by the view /layouts/before_layout
+
+</li>
+</ul>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

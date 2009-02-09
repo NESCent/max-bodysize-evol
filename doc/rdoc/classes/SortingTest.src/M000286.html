@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_add (SortingTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/data_structures/sorting_test.rb, line 10</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_add</span>
+    <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-identifier">:a</span>, <span class="ruby-value str">'ASC'</span>
+    <span class="ruby-comment cmt"># test adding by symbol</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">sorts_on?</span>(<span class="ruby-identifier">:a</span>)
+    <span class="ruby-comment cmt"># test adding an uppercase string direction</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'ASC'</span>, <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">direction_of</span>(<span class="ruby-identifier">:a</span>)
+
+    <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-value str">'b'</span>, <span class="ruby-identifier">:ASC</span>
+    <span class="ruby-comment cmt"># test adding by string</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">sorts_on?</span>(<span class="ruby-identifier">:b</span>)
+    <span class="ruby-comment cmt"># test adding an uppercase symbol direction</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'ASC'</span>, <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">direction_of</span>(<span class="ruby-identifier">:b</span>)
+
+    <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-ivar">@columns</span>[<span class="ruby-identifier">:c</span>], <span class="ruby-value str">'desc'</span>
+    <span class="ruby-comment cmt"># test adding by object</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">sorts_on?</span>(<span class="ruby-identifier">:c</span>)
+    <span class="ruby-comment cmt"># test adding a lowercase string direction</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'DESC'</span>, <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">direction_of</span>(<span class="ruby-identifier">:c</span>)
+
+    <span class="ruby-ivar">@sorting</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">:d</span>, <span class="ruby-identifier">:desc</span>]
+    <span class="ruby-comment cmt"># testing adding with the alias</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">sorts_on?</span>(<span class="ruby-identifier">:d</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'DESC'</span>, <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">direction_of</span>(<span class="ruby-identifier">:d</span>)
+
+    <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">clear</span>
+
+    <span class="ruby-comment cmt"># test adding without a direction (test default)</span>
+    <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-identifier">:a</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'ASC'</span>, <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">direction_of</span>(<span class="ruby-identifier">:a</span>)
+
+    <span class="ruby-comment cmt"># test adding a bad column</span>
+    <span class="ruby-identifier">assert_raises</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-identifier">:foo</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># test adding a bad direction</span>
+    <span class="ruby-identifier">assert_raises</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-ivar">@sorting</span>.<span class="ruby-identifier">add</span> <span class="ruby-identifier">:b</span>, <span class="ruby-identifier">:FOO</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

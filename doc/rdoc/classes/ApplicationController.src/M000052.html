@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>menu_setup (ApplicationController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/application.rb, line 137</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">menu_setup</span> <span class="ruby-comment cmt"># :doc:</span>
+    <span class="ruby-comment cmt">#top menu setup</span>
+    <span class="ruby-ivar">@top_menu_items</span> = []
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@current_logged_in_user</span>
+      <span class="ruby-ivar">@top_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Login'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'login'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+      <span class="ruby-ivar">@top_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Register'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'register'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">bodysize_menu_items</span> = []
+      
+      <span class="ruby-identifier">bodysize_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Browse Records'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bodysize'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>}
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Approver</span>)
+        <span class="ruby-identifier">bodysize_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Unapproved Records'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bodysize'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'unapproved'</span>}
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">bodysize_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Add Records'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bodysize'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'new'</span> }
+      
+      <span class="ruby-ivar">@top_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Bodysize Records'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bodysize'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>, <span class="ruby-identifier">:menu_items</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bodysize_menu_items</span>}
+      
+      <span class="ruby-identifier">profile_menu_items</span> = []
+      <span class="ruby-identifier">profile_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'View Profile'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'profile'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'show'</span>}
+      <span class="ruby-identifier">profile_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Edit Profile'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'profile'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'edit'</span>}      
+      
+      <span class="ruby-ivar">@top_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'My Profile'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'profile'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'show'</span>, <span class="ruby-identifier">:menu_items</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">profile_menu_items</span>}
+      
+      
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Admin</span>)
+        <span class="ruby-identifier">admin_menu_items</span> = []
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Users'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'user'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Kingdoms'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'kingdom'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phylums'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'phylum'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Periods'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'period'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Environments'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'environment'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Motilities'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'motility'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Formulae'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'formula'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'School Levels'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'school_level'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>}
+        <span class="ruby-identifier">admin_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Audit Trail'</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'audit_log'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>}
+        
+        <span class="ruby-ivar">@top_menu_items</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'System Management'</span>, <span class="ruby-identifier">:menu_items</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">admin_menu_items</span> }
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    
+    <span class="ruby-comment cmt"># side menu highlighting, currently unused</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:menu_setup</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">profile_in_menu?</span>(<span class="ruby-ivar">@side_menu_items</span>)
+      <span class="ruby-comment cmt">#save current profile</span>
+      <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:menu_setup</span>] = <span class="ruby-identifier">params</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

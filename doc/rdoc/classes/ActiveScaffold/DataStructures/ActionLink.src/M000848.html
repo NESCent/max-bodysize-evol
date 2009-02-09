@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>position (ActiveScaffold::DataStructures::ActionLink)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/action_link.rb, line 123</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">position</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@position</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@position</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@position</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:replace</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:record</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">:top</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:table</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;what should the default position be for #{self.type}?&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

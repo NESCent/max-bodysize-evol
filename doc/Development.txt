@@ -1,0 +1,33 @@
+== Seed == 
+This project uses "seed".
+The seed rake file can be found in /lib/tasks/seed.rb
+Place yml seed data files in the db/seed/ directory.
+Run "rake db:seed" to insert seed data.
+
+
+== Gems used for development ==
+ - Annotate Models
+ - rcov
+
+== Active Scaffold ==
+Installed using:
+ruby script/plugin install http://activescaffold.googlecode.com/svn/tags/active_scaffold
+
+
+== RSpec ==
+Installed using:
+ruby script/plugin install svn://rubyforge.org/var/svn/rspec/tags/CURRENT/rspec
+ruby script/plugin install svn://rubyforge.org/var/svn/rspec/tags/CURRENT/rspec_on_rails
+ruby script/generate rspec
+
+And can be run with:
+rake spec
+
+
+== Country & State Plugins ==
+Country Codes:
+ruby script/plugin install http://opensvn.csie.org/country_codes/trunk/
+
+State Names:
+ruby script/plugin install http://techno-weenie.net/svn/projects/plugins/us_states/
+

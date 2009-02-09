@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>inherited (ActiveScaffold::Config::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/config/base.rb, line 6</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inherited</span>(<span class="ruby-identifier">subclass</span>)
+      <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subclass</span>
+        <span class="ruby-comment cmt"># the crud type of the action. possible values are :create, :read, :update, :destroy, and nil.</span>
+        <span class="ruby-comment cmt"># this is not a setting for the developer. it's self-description for the actions.</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">crud_type</span>; <span class="ruby-ivar">@crud_type</span>; <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">protected</span>
+
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">crud_type=</span>(<span class="ruby-identifier">val</span>)
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;unknown CRUD type #{val}&quot;</span> <span class="ruby-keyword kw">unless</span> [<span class="ruby-identifier">:create</span>, <span class="ruby-identifier">:read</span>, <span class="ruby-identifier">:update</span>, <span class="ruby-identifier">:destroy</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_sym</span>)
+          <span class="ruby-ivar">@crud_type</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_sym</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

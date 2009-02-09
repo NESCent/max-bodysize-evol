@@ -1,0 +1,20 @@
+ <fieldset id="source" class='wide'>
+  <h2>Source &amp; References</h2>
+  <ul class='fields'>
+    <li><label>Expert Contacted</label><%= text_field_tag 'bodysize[expert_contacted]', bodysize.expert_contacted %></li>
+		<li><label>Photo Available?</label><%= text_field_tag 'bodysize[photo_available]', bodysize.photo_available %></li>
+    <li><label>Compiler</label><%= text_field_tag 'bodysize[compiler]', bodysize.compiler %></li>
+		<li><label>Confidence Score (1-10)</label><%= select("bodysize", "confidence_score", Bodysize.confidence_score_options) %></li>
+	</ul>
+	<ul class='fields'>
+    <li class="wide"><label class='wide'>Literature Citation</label><%= text_area_tag 'bodysize[literature_citation]', bodysize.literature_citation %></li>
+    <li><label class='wide'>Other Source of Data</label><%= text_area_tag 'bodysize[other_data_source]', bodysize.other_data_source %></li>
+    <li class="wide"><label class='wide'>How The Estimation Was Achieved</label><%= text_area_tag 'bodysize[how_estimation_was_achieved]', bodysize.how_estimation_was_achieved %></li>
+    <li><label class='wide'>Expert's Comments on Confidence</label><%= text_area_tag 'bodysize[confidence_comment]', bodysize.confidence_comment %></li>
+    <li><label class='wide'>Literature Source for First Description of Species</label><%= text_area_tag 'bodysize[first_description_literature_source]', bodysize.first_description_literature_source %></li>
+    	
+  </ul>
+    <div class='buttons'>
+      <%= submit_tag 'Save', :class => 'clear_both' %>
+    </div>
+</fieldset>

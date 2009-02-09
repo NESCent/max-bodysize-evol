@@ -1,0 +1,16 @@
+
+<% for item in menu_item %>
+  <% if item[:controller] %>
+    <li <%= (item[:controller] == params[:controller] && item[:action] == params[:action])? "class='current'": '' %>>
+  <% else %>
+    <li>
+  <% end %>  
+      
+    <%= menu_link(item) %>
+    <% if item[:menu_items] %>
+      <ul>
+        <%= render :partial => 'layouts/menu_item', :object => item[:menu_items] %>
+      </ul>
+    <% end %>
+  </li>
+<% end %>

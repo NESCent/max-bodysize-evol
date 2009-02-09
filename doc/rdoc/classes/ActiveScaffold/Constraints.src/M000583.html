@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>conditions_from_constraints (ActiveScaffold::Constraints)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/constraints.rb, line 40</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">conditions_from_constraints</span>
+      <span class="ruby-identifier">conditions</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-identifier">active_scaffold_constraints</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">column</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">k</span>]
+        <span class="ruby-identifier">constraint_condition</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>
+          <span class="ruby-comment cmt"># Assume this is a multi-level association constraint.</span>
+          <span class="ruby-comment cmt"># example:</span>
+          <span class="ruby-comment cmt">#   data model: Park -&gt; Den -&gt; Bear</span>
+          <span class="ruby-comment cmt">#   constraint: :den =&gt; {:park =&gt; 5}</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+            <span class="ruby-identifier">far_association</span> = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">reflect_on_association</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>)
+            <span class="ruby-identifier">field</span> = <span class="ruby-identifier">far_association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">primary_key</span>
+            <span class="ruby-identifier">table</span> = <span class="ruby-identifier">far_association</span>.<span class="ruby-identifier">table_name</span>
+
+            <span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">concat</span>([{<span class="ruby-identifier">k</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>}]) <span class="ruby-comment cmt"># e.g. {:den =&gt; :park}</span>
+            <span class="ruby-identifier">constraint_condition_for</span>(<span class="ruby-node">&quot;#{table}.#{field}&quot;</span>, <span class="ruby-identifier">v</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>)
+
+          <span class="ruby-comment cmt"># association column constraint</span>
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>
+            <span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">includes</span>
+            <span class="ruby-identifier">condition_from_association_constraint</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>, <span class="ruby-identifier">v</span>)
+
+          <span class="ruby-comment cmt"># regular column constraints</span>
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">searchable?</span>
+            <span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">includes</span>
+            <span class="ruby-identifier">constraint_condition_for</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">search_sql</span>, <span class="ruby-identifier">v</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-comment cmt"># unknown-to-activescaffold-but-real-database-column constraint</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-identifier">constraint_condition_for</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">v</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">MalformedConstraint</span>, <span class="ruby-identifier">constraint_error</span>(<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>, <span class="ruby-identifier">k</span>), <span class="ruby-identifier">caller</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">merge_conditions</span>(<span class="ruby-identifier">conditions</span>, <span class="ruby-identifier">constraint_condition</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">conditions</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

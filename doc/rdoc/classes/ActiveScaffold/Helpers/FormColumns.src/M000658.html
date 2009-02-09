@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>active_scaffold_input_plural_association (ActiveScaffold::Helpers::FormColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb, line 75</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_input_plural_association</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">options</span>)
+        <span class="ruby-identifier">associated_options</span> = <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">name</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_label</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">id</span>]}
+        <span class="ruby-identifier">select_options</span> = <span class="ruby-identifier">associated_options</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">options_for_association</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'no options'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">select_options</span>.<span class="ruby-identifier">empty?</span>
+
+        <span class="ruby-identifier">html</span> = <span class="ruby-value str">'&lt;ul class=&quot;checkbox-list&quot;&gt;'</span>
+
+        <span class="ruby-identifier">associated_ids</span> = <span class="ruby-identifier">associated_options</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]}
+        <span class="ruby-identifier">select_options</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">label</span>, <span class="ruby-identifier">id</span> = <span class="ruby-identifier">option</span>
+          <span class="ruby-identifier">this_name</span> = <span class="ruby-node">&quot;#{options[:name]}[#{i}][id]&quot;</span>
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;&lt;li&gt;&quot;</span>
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">check_box_tag</span>(<span class="ruby-identifier">this_name</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">associated_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">id</span>))
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;label for='#{this_name}'&gt;&quot;</span>
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">label</span>
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;&lt;/label&gt;&quot;</span>
+          <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;&lt;/li&gt;&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">html</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'&lt;/ul&gt;'</span>
+        <span class="ruby-identifier">html</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

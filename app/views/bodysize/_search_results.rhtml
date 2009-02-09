@@ -1,0 +1,124 @@
+<% show_date_modified = nil if local_assigns[:show_date_modified].nil? %>
+<% allow_delete = nil if local_assigns[:allow_delete].nil? %>
+<% data_field = nil if local_assigns[:data_field].nil? %>
+<% show_export = nil if local_assigns[:show_export].nil? %>
+<% ajax_pagination = nil if local_assigns[:ajax_pagination].nil? %>
+<% total_records_for_graph = nil if local_assigns[:total_records_for_graph].nil? %>
+
+<script language="javascript">
+	function adjust_graph_location(){
+		for(var i=1; i<3;i++){
+			var hookid="hook"+i;
+			var chartid="chart"+i;
+			var hook=document.getElementById(hookid);
+			if(hook!=null){
+				var subid=1;
+				var g=document.getElementById(chartid+subid);
+				while(g!=null){
+					var top=getTop(hook);
+					var left=getLeft(hook);
+					g.style.top=top+"px";
+					g.style.left=left+"px";
+					subid++;
+					g=document.getElementById(chartid+subid);
+				}
+			}
+		}
+	}
+		
+</script>
+
+<fieldset>
+	<h2>Bodysize Records</h2>
+	<table class='bodysize_records'>
+	  <tr>
+	    <th>Owner</th>
+	    <th>Period</th>
+	    <th>Kingdom</th>
+	    <th>Phylum</th>
+	    <th>Class</th>
+	    <th>Environment</th>
+	    <th>Motility</th>
+			<th><%= h(data_field.sub("_"," ").titlecase) %></th>
+			<% if show_date_modified %>
+				<th>Date Modified</th>
+			<% end %>
+	    <th>View</th>
+	    <th>Edit</th>
+			<% if allow_delete %>
+				<th>Delete</th>
+			<% end %>
+	  </tr>
+
+	<% if bodysizes.size == 0 %>
+		<tr>
+			<td colspan="12" class='no_results'>No Results Were Found!</td>
+		</tr>
+	<% end %>
+
+	<% bodysizes.each do |bodysize| %>
+	  <tr>
+	    <td><%= link_to bodysize.creator, :controller => :profile, :action => :show, :id => bodysize.creator.id %></td>
+	    <td><%= h(bodysize.period) %></td>
+	    <td><%= h(bodysize.kingdom) %></td>
+	    <td><%= h(bodysize.phylum) %></td>
+	    <td><%= h(bodysize.class_classification) %></td>
+	    <td><%= h(bodysize.environment) %></td>
+	    <td><%= h(bodysize.motility) %></td>
+	    <td><%= h("%.3f" % bodysize.read_attribute(data_field)) %></td>
+			<% if show_date_modified %>
+				<td><%= bodysize.updated_at.strftime("%m/%d/%Y") %></td>
+			<% end %>
+	    <td><%= link_to 'view', :action => 'view', :id => bodysize.id %></td>
+	    <td>
+					<% if user && user.can_edit?(bodysize) %>
+						<%= link_to 'edit', :action => 'edit', :id => bodysize.id %>
+					<% end %>
+			</td>
+			<% if allow_delete && user && user.can_edit?(bodysize) %>
+				<td>
+					<%= link_to 'delete', { :action => 'delete',
+																:id => bodysize.id }, 
+																:confirm => "Are you sure you want to delete this record?",
+																:method => :POST
+																%>
+	
+				</td>
+			<% end %>
+	  </tr>
+	<% end %>
+	</table>
+	
+	<% if ajax_pagination %>
+	<%= will_paginate @bodysizes, :renderer => 'AjaxLinkRenderer' , :remote => { :method => "POST" , :update => 'search_results'} %>
+	<% else %>
+		<%= will_paginate @bodysizes %>
+	<% end %>
+	
+	<% if show_export %>
+		<%= link_to "Export Results", { :action => :export }, :class => 'button right-button' %>
+	<% end %>
+</fieldset>
+
+<% if @charts %>
+ 	<% count=0 %>
+ 	
+	<% @charts.each do |chart| %>
+		<% count+=1 %>
+		<% subcount=0 %>
+		<fieldset>
+		<h2><%= chart.title %></h2>
+		<div id="hook<%= count %>" style="height:400px;">
+		<% for i in 1..chart.graph.subcharts_count %>
+        	<div id="chart<%= count %><%= i %>" style="position:absolute; top:<%= 800+(2*(count-1)+i)*420 %>px;left: 200px;">
+				<%= "<img src='#{chart.graph.to_url_subchart(i-1)}' class='graph' alt='you may not see the image due to the record number limitation of the Google Chart API' />" %>
+			</div>	
+		<% end %>
+		</div>
+		</fieldset>	
+	<% end %>
+<% end %>
+
+<script language="javascript">
+adjust_graph_location();
+</script>

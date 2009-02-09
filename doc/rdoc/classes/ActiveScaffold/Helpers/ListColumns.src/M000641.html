@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>active_scaffold_column_checkbox (ActiveScaffold::Helpers::ListColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb, line 75</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_column_checkbox</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">record</span>)
+        <span class="ruby-identifier">column_value</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">inplace_edit</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">authorized_for?</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:update</span>, <span class="ruby-identifier">:column</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>)
+          <span class="ruby-identifier">id_options</span> = {<span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'update_column'</span>, <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>}
+          <span class="ruby-identifier">tag_options</span> = {<span class="ruby-identifier">:tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;span&quot;</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">element_cell_id</span>(<span class="ruby-identifier">id_options</span>), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;in_place_editor_field&quot;</span>}
+          <span class="ruby-identifier">script</span> = <span class="ruby-identifier">remote_function</span>(<span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params_for</span>[<span class="ruby-identifier">:controller</span>], <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;update_column&quot;</span>, <span class="ruby-identifier">:column</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">column_value</span>})
+          <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">:span</span>, <span class="ruby-identifier">check_box_tag</span>(<span class="ruby-identifier">tag_options</span>[<span class="ruby-identifier">:id</span>], <span class="ruby-value">1</span>, <span class="ruby-identifier">column_value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">column_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>, {<span class="ruby-identifier">:onchange</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">script</span>}) , <span class="ruby-identifier">tag_options</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">check_box_tag</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">column_value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">column_value</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:disabled</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

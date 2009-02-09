@@ -1,0 +1,5 @@
+/* override application.css styles */
+#main {
+  margin-left: 5px !important;
+  max-width: 97% !important;
+}

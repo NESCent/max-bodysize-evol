@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>form_remote_upload_tag (ActiveScaffold::Helpers::ViewHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 64</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_remote_upload_tag</span>(<span class="ruby-identifier">url_for_options</span> = {}, <span class="ruby-identifier">options</span> = {})
+        <span class="ruby-identifier">onsubmits</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] <span class="ruby-operator">?</span> [ <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] ] <span class="ruby-operator">:</span> [ ]
+        <span class="ruby-comment cmt"># simulate a &quot;loading&quot;. the setTimeout prevents the Form.disable from being called before the submit, so that data actually posts.</span>
+        <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;setTimeout(function() { #{options[:loading]} }, 10); &quot;</span>
+        <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;return true&quot;</span> <span class="ruby-comment cmt"># make sure the form still submits</span>
+
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] = <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">*</span> <span class="ruby-value str">';'</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:target</span>] = <span class="ruby-identifier">action_iframe_id</span>(<span class="ruby-identifier">url_for_options</span>)
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:multipart</span>] = <span class="ruby-keyword kw">true</span>
+
+        <span class="ruby-identifier">output</span>=<span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;iframe id='#{action_iframe_id(url_for_options)}' name='#{action_iframe_id(url_for_options)}' style='display:none'&gt;&lt;/iframe&gt;&quot;</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form_tag</span>(<span class="ruby-identifier">url_for_options</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

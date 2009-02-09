@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_conditions_for_columns (ActiveScaffold::Finder)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/finder.rb, line 6</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_conditions_for_columns</span>(<span class="ruby-identifier">tokens</span>, <span class="ruby-identifier">columns</span>, <span class="ruby-identifier">like_pattern</span> = <span class="ruby-value str">'%?%'</span>)
+      <span class="ruby-comment cmt"># if there aren't any columns, then just return a nil condition</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+
+      <span class="ruby-identifier">tokens</span> = [<span class="ruby-identifier">tokens</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tokens</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+
+      <span class="ruby-identifier">where_clauses</span> = []
+      <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">where_clauses</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;LOWER(#{column.search_sql}) LIKE ?&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">phrase</span> = <span class="ruby-node">&quot;(#{where_clauses.join(' OR ')})&quot;</span>
+
+      <span class="ruby-identifier">sql</span> = ([<span class="ruby-identifier">phrase</span>] <span class="ruby-operator">*</span> <span class="ruby-identifier">tokens</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">' AND '</span>)
+      <span class="ruby-identifier">tokens</span> = <span class="ruby-identifier">tokens</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">like_pattern</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'?'</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">downcase</span>)] <span class="ruby-operator">*</span> <span class="ruby-identifier">where_clauses</span>.<span class="ruby-identifier">length</span> }.<span class="ruby-identifier">flatten</span>
+
+      [<span class="ruby-identifier">sql</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">tokens</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

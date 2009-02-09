@@ -1,0 +1,20 @@
+== CSV Data Import Requirements ==
+
+- The text will be in UTF-8 format.
+- Values will be enclosed in double-quotes.
+- Double-quotation marks will be escaped by adding a second double-quotation mark.
+
+On the CSV, the Formula field will contain the name of the formula for each entry. 
+This will include things like Block, Sphere, and each of these will be found in the 
+formulas table.  You can see more examples in the spreadsheet: 
+"docs/Bodysize Application Details.xls".
+ 
+No entries are added if any errors occur.
+If any errors are found, a complete list of problems with the dataset (not just the first)
+should be displayed.
+
+If the data in the import contains a real Phylum, Kingdom, etc. which is not yet in our 
+database, then an error should be displayed saying that the field was not found.
+
+The user can correct their CSV data, or modify the data in any associated tables (like
+Phylums, Formulas, Environments, Motilities, etc) -- and try to re-import the data.

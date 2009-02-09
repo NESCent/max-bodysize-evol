@@ -1,0 +1,97 @@
+<% content_for :head do %>
+	<%= active_scaffold_includes %>
+<% end %>
+
+
+<div class='center_content'>
+  
+	<% if @bodysize.id && !@editing && @current_logged_in_user && @current_logged_in_user.can_edit?(@bodysize) %>
+		<%= link_to "Edit", { :action => :edit, :id => @bodysize.id }, :class => "button" %>
+	<% elsif @bodysize.id && @editing %>
+		<%= link_to "View", { :action => :view, :id => @bodysize.id }, :class => "button" %>
+	<% end %>
+	
+	<% if @current_logged_in_user && @current_logged_in_user.is_a?(Admin) && @bodysize.id %>
+	<%= link_to_remote '<div id="view_audit_log_button" class="button">View Audit Log</div>', 
+														:url => {:action => "show_audit_log", :id => @bodysize.id }, 
+														:update => {:success => "audit_log", :failure => "audit_log"} %>
+	<% end %>
+	
+	<h1><%= h(@bodysize) %></h1>
+
+	<div id="error_message"><%= error_messages_for 'bodysize' %></div>
+	
+	<% if @bodysize.id && (!@bodysize.approved? || (@current_logged_in_user && @current_logged_in_user.is_a?(Approver))) %>
+    <div id="approval">
+      <%= render(:partial => "approval", :object => @bodysize) %>
+    </div>
+  <% end %>
+	
+	
+	<% if @current_logged_in_user.is_a?(Admin) %>
+		<div id='audit_log'></div>
+	<% end %>
+	
+
+
+	<% if !@bodysize.id && @current_logged_in_user && @current_logged_in_user.is_a?(Admin) %>
+		<%= render :partial => 'upload_csv' %>
+	<% end %>
+
+
+  <% form_tag({:action => 'edit', :id => @bodysize.id}, {:multipart => true}) do -%>
+    <div class="column">
+      
+      <% if @editing %>
+        <%= render :partial => 'picture_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+        <%= render :partial => 'time_period_edit', :object => @bodysize, :locals => {:bodysize => @bodysize, :period_options => @period_options} %>
+        <%= render :partial => 'other_fields_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>    
+        <%= render :partial => 'notes_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+      <% else %>
+        <%= render :partial => 'picture', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+        <%= render :partial => 'time_period', :object => @bodysize, :locals => {:bodysize => @bodysize, :period_options => @period_options} %>
+        <%= render :partial => 'other_fields', :object => @bodysize, :locals => {:bodysize => @bodysize} %>    
+        <%= render :partial => 'notes', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+      <% end %>
+    </div>
+    
+    <div class="column" id="right_column">
+      
+      <% if @editing %>
+        <%= render :partial => 'size_details_edit', :object => @bodysize, :locals => {:bodysize => @bodysize, :formula_options => @formula_options } %>
+        <%= render :partial => 'taxonomy_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+        <%= render :partial => 'preservation_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+      <% else %>
+      <%= render :partial => 'size_details', :object => @bodysize, :locals => {:bodysize => @bodysize, :formula_options => @formula_options } %>
+        <%= render :partial => 'taxonomy', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+        <%= render :partial => 'preservation', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+      <% end %>
+    </div>
+    
+    <% if @editing %>
+      <%= render :partial => 'source_edit', :object => @bodysize, :locals => {:bodysize => @bodysize} %>    
+    <% else %>
+      <%= render :partial => 'source', :object => @bodysize, :locals => {:bodysize => @bodysize} %>
+    <% end %>
+
+  <% end -%>
+
+	<% if !@bodysize.new_record? %>
+		<% if @current_logged_in_user && @current_logged_in_user.can_edit?(@bodysize) %>
+			<div id="privatenote-container">
+				<%= render :partial => 'private_notes', :locals => { :bodysize => @bodysize } %>
+			</div>
+		<% end %>
+		<% if @current_logged_in_user %>
+			<div id="publiccomment-container">
+				<%= render :partial => 'comments', :locals => { :bodysize => @bodysize } %>
+			</div>
+		<% end %>	
+	<% else %>
+		<input type="hidden" name="creator_id" value="<%= @current_logged_in_user.id %>" />
+	<% end %>	
+		
+		<div class='clear_both'></div>
+	
+
+</div>

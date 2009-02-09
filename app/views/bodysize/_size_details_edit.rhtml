@@ -1,0 +1,41 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'layouts/bodysize/edit' %>
+<% end %>
+
+<fieldset id="size">
+  <h2>Size</h2>
+  <dl>
+    <dt>Length (mm)</dt><dd><%= text_field_tag 'bodysize[length]', bodysize.length %></dd>
+    <dt>Width (mm)</dt><dd><%= text_field_tag 'bodysize[width]', bodysize.width %></dd>
+    <dt>Height (mm)</dt><dd><%= text_field_tag 'bodysize[height]', bodysize.height %></dd>
+    <dt>Mass (kg)</dt><dd><%= text_field_tag 'bodysize[mass]', bodysize.mass %></dd>
+	</dl>
+	<h3>Volume</h3>
+	<ul class='fields'>
+		<li><label>Formula</label><%= select("bodysize", "formula_id", formula_options, {:include_blank => true}) %></li>
+	</ul>
+
+	<div id='new_formula' style="display: none;">
+		<ul class='fields'>
+			<li><label>Formula Name</label><%= text_field_tag 'bodysize[formula_name]' %>
+				<div class='caption'> e.g. Rectangular Prism</div>
+			</li>
+			<li><label>Formula</label><%= text_field_tag 'bodysize[formula_equation]' %>
+				<div id='how_to_write_formulae_link' class='caption'> e.g. (3.14 * H * W * L)^2</div>
+			</li>
+		</ul>
+	</div>
+
+	<table>
+		<tr>
+			<td><label>Biovolume (mm<sup>3</sup>)</label></td><td><%= measurement_to_s(bodysize.biovolume) %></td>
+		</tr>
+		<tr>
+			<td><label>Log10 Biovolume</label></td><td><%= measurement_to_s(bodysize.log10_biovolume) %></td>
+		</tr>
+	</table>
+
+	<div class='buttons'>
+		<%= submit_tag 'Save', :class => 'clear_both' %>
+	</div>
+</fieldset>

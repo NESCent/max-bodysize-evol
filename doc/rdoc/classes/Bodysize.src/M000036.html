@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>before_save (Bodysize)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/bodysize.rb, line 96</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_save</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">height</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">height</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">blank?</span>
+    
+    
+    <span class="ruby-comment cmt">## If the user is creating a new formula, create and save it</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">set_formula</span>
+    
+    <span class="ruby-comment cmt">## Re-calculate the volume for this record based on the height, width, length, and formula given</span>
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">calculate_volume</span>
+    
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

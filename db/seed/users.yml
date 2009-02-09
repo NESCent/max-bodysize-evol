@@ -1,0 +1,15 @@
+<% SALT = "NaCl" unless defined?(SALT) %>
+
+admin:
+  id: 1
+  email_address: admin@nowhere.org
+  hashed_password: <%= User.encrypted_password('pwd', SALT) %>
+  salt: <%= SALT %>
+  type: Admin
+  first_name: Administrator
+  last_name: 
+  city: 
+  state: 
+  country: United States
+  picture_filename: 
+  profile_description:

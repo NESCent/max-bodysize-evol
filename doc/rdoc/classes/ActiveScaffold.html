@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/vendor/plugins/active_scaffold/lib/active_scaffold_rb.html">
+                vendor/plugins/active_scaffold/lib/active_scaffold.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/attribute_params_rb.html">
+                vendor/plugins/active_scaffold/lib/attribute_params.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/bridges/bridge_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/bridge.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/bridges/file_column/lib/form_ui_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/file_column/lib/form_ui.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/bridges/file_column/lib/list_ui_rb.html">
+                vendor/plugins/active_scaffold/lib/bridges/file_column/lib/list_ui.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/configurable_rb.html">
+                vendor/plugins/active_scaffold/lib/configurable.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/constraints_rb.html">
+                vendor/plugins/active_scaffold/lib/constraints.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/exceptions_rb.html">
+                vendor/plugins/active_scaffold/lib/exceptions.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/finder_rb.html">
+                vendor/plugins/active_scaffold/lib/finder.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/association_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/association_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/controller_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/controller_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/form_column_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/id_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/id_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/list_column_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/pagination_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/pagination_helpers.rb
+                </a>
+        <br />
+                <a href="../files/vendor/plugins/active_scaffold/lib/helpers/view_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000495">active_scaffold_config</a>&nbsp;&nbsp;
+      <a href="#M000496">active_scaffold_config_for</a>&nbsp;&nbsp;
+      <a href="#M000497">active_scaffold_session_storage</a>&nbsp;&nbsp;
+      <a href="#M000499">bridge</a>&nbsp;&nbsp;
+      <a href="#M000498">handle_user_settings</a>&nbsp;&nbsp;
+      <a href="#M000493">included</a>&nbsp;&nbsp;
+      <a href="#M000494">set_defaults</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="ActiveScaffold/Actions.html" class="link">ActiveScaffold::Actions</a><br />
+Module <a href="ActiveScaffold/AttributeParams.html" class="link">ActiveScaffold::AttributeParams</a><br />
+Module <a href="ActiveScaffold/ClassMethods.html" class="link">ActiveScaffold::ClassMethods</a><br />
+Module <a href="ActiveScaffold/Config.html" class="link">ActiveScaffold::Config</a><br />
+Module <a href="ActiveScaffold/Configurable.html" class="link">ActiveScaffold::Configurable</a><br />
+Module <a href="ActiveScaffold/Constraints.html" class="link">ActiveScaffold::Constraints</a><br />
+Module <a href="ActiveScaffold/DataStructures.html" class="link">ActiveScaffold::DataStructures</a><br />
+Module <a href="ActiveScaffold/Finder.html" class="link">ActiveScaffold::Finder</a><br />
+Module <a href="ActiveScaffold/Helpers.html" class="link">ActiveScaffold::Helpers</a><br />
+Class <a href="ActiveScaffold/Bridge.html" class="link">ActiveScaffold::Bridge</a><br />
+Class <a href="ActiveScaffold/ControllerNotFound.html" class="link">ActiveScaffold::ControllerNotFound</a><br />
+Class <a href="ActiveScaffold/DependencyFailure.html" class="link">ActiveScaffold::DependencyFailure</a><br />
+Class <a href="ActiveScaffold/MalformedConstraint.html" class="link">ActiveScaffold::MalformedConstraint</a><br />
+Class <a href="ActiveScaffold/RecordNotAllowed.html" class="link">ActiveScaffold::RecordNotAllowed</a><br />
+Class <a href="ActiveScaffold/ReverseAssociationRequired.html" class="link">ActiveScaffold::ReverseAssociationRequired</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000499" class="method-detail">
+        <a name="M000499"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000499.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000499.html');return false;">
+          <span class="method-name">bridge</span><span class="method-args">(name, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000493" class="method-detail">
+        <a name="M000493"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000493.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000493.html');return false;">
+          <span class="method-name">included</span><span class="method-args">(base)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000494" class="method-detail">
+        <a name="M000494"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000494.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000494.html');return false;">
+          <span class="method-name">set_defaults</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000495" class="method-detail">
+        <a name="M000495"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000495.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000495.html');return false;">
+          <span class="method-name">active_scaffold_config</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000496" class="method-detail">
+        <a name="M000496"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000496.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000496.html');return false;">
+          <span class="method-name">active_scaffold_config_for</span><span class="method-args">(klass)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000497" class="method-detail">
+        <a name="M000497"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000497.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000497.html');return false;">
+          <span class="method-name">active_scaffold_session_storage</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000498" class="method-detail">
+        <a name="M000498"></a>
+
+        <div class="method-heading">
+          <a href="ActiveScaffold.src/M000498.html" target="Code" class="method-signature"
+            onclick="popupCode('ActiveScaffold.src/M000498.html');return false;">
+          <span class="method-name">handle_user_settings</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+at some point we need to pass the session and params into config.
+we&#8216;ll just take care of that before any particular action occurs by
+passing those hashes off to the UserSettings class of each action.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

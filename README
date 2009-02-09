@@ -1,0 +1,61 @@
+Credits:
+1. Concept, content, and scientific requirements: the Phanerozoic Body Size Through Time and Space Working Group, Payne, Jonathan (Stanford University, PI), Stempien, Jennifer (University of Colorado at Boulder, PI), Kowalewski, Michal (Virginia Polytechnic Institute and State University, PI)
+2. Database and application programming: SciMed Solutions
+3. Technical support and consulting: Xianhua Liu (NESCent)
+4. Education and outreach consulting: Kristin Jenkins (NESCent)
+5. Project oversight: Hilmar Lapp (NESCent)
+
+
+Installation:
+1. Move application to desired location
+2. Set appropriate permissions to application directories
+3. Install required gems. Gems can be installed using the following syntax:
+	gem install gem_name
+	or
+	sudo gem install gem_name
+	
+See the list of required gems below
+
+4. Create a production database called: bodysize_production, with UTF-8 encoding
+5. Create a user with access to the database. By default bodysize uses
+User: root
+Password: 13ducks#
+6. Copy bodysize/config/database.yml.example to bodysize/config/database.yml and change the database connection settings accordingly. 
+7. Create database tables:
+	rake db:migrate RAILS_ENV=production
+8. Insert initial data:
+	rake db:seed RAILS_ENV=production
+9. Configure the SERVER_NAME and SMTP settings in bodysize/config/environments/production.rb
+10. Start the web server
+
+
+Upgrade:
+1. Stop servers
+2. Backup database
+3. Backup application files ( bodysize/, and all subdirectories /app, /db, /lib, /public, /config, ...)
+4. Update application files
+5. Upgrade the database:
+	rake db:migrate RAILS_ENV=production
+6. Restart servers
+
+Required Gems:
+  - logging version 0.9.1
+  - postgres-pr version 0.4.0
+  - gchartrb 0.8 -- REMOVED (gem is no longer needed, see note below)
+	- fastercsv 1.4.0
+	- mislav-will_paginate (2.3.6) -- Installation instructions below
+
+
+Installing mislav-will_paginate:
+	1. First add github to the list of gem sources
+		gem sources -a http://gems.github.com
+	
+	2. Then install the gem
+		sudo gem install mislav-will_paginate
+
+
+NOTE: The gchartrb gem is no longer required. Changes were needed to the gem, so the library has been modified an incorporated directly into the project in bodysize/lib/
+
+
+Released under the MIT license (included)
+

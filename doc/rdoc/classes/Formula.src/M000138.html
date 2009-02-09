@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>evaluate (Formula)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/formula.rb, line 66</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">options</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>())
+      <span class="ruby-identifier">options</span> = <span class="ruby-constant">DEFAULT_EVALUATION_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+
+      <span class="ruby-comment cmt"># Replace H, W, or L with passed in values.</span>
+      <span class="ruby-comment cmt"># If H, W, or L don't exist then it returns an unaltered string which</span>
+      <span class="ruby-comment cmt"># allows them to be optional.</span>
+      <span class="ruby-identifier">formula</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">formula</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'H'</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:height</span>].<span class="ruby-identifier">to_s</span>)
+      <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'W'</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:width</span>].<span class="ruby-identifier">to_s</span>)
+      <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'L'</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:length</span>].<span class="ruby-identifier">to_s</span>)
+
+      <span class="ruby-comment cmt"># Replace operators with correct notation.</span>
+      <span class="ruby-identifier">formula</span> = <span class="ruby-identifier">formula</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'^'</span>, <span class="ruby-value str">'**'</span>)
+
+      <span class="ruby-comment cmt"># TODO: a '.' must be preceded by an integer</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">formula</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^.*?\D\.\d.*?$/</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;A '.' must be preceeded by a digit.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@compiled</span> = <span class="ruby-identifier">formula</span>
+      <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">result</span> = <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">formula</span>)
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SyntaxError</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Cannot evaluate: #{self.formula}&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+      <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

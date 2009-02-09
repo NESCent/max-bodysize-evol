@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: BodysizeController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">BodysizeController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/bodysize_controller_rb.html">
+                app/controllers/bodysize_controller.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ApplicationController.html">
+                ApplicationController
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="Bodysize.html">Bodysize</a> Controller</h1>
+<p>
+Purpose: To handle all requests for things related to creating, modifying,
+viewing, finding, and analyzing body size records
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000019">add_comment</a>&nbsp;&nbsp;
+      <a href="#M000020">add_private_note</a>&nbsp;&nbsp;
+      <a href="#M000016">approve</a>&nbsp;&nbsp;
+      <a href="#M000018">delete</a>&nbsp;&nbsp;
+      <a href="#M000012">edit</a>&nbsp;&nbsp;
+      <a href="#M000015">export</a>&nbsp;&nbsp;
+      <a href="#M000014">import</a>&nbsp;&nbsp;
+      <a href="#M000005">index</a>&nbsp;&nbsp;
+      <a href="#M000006">list</a>&nbsp;&nbsp;
+      <a href="#M000011">new</a>&nbsp;&nbsp;
+      <a href="#M000022">prepare_bodysize_for_modification</a>&nbsp;&nbsp;
+      <a href="#M000007">prepare_search</a>&nbsp;&nbsp;
+      <a href="#M000021">remove_comment</a>&nbsp;&nbsp;
+      <a href="#M000008">search</a>&nbsp;&nbsp;
+      <a href="#M000023">set_formula_options</a>&nbsp;&nbsp;
+      <a href="#M000009">show_audit_log</a>&nbsp;&nbsp;
+      <a href="#M000017">unapprove</a>&nbsp;&nbsp;
+      <a href="#M000013">unapproved</a>&nbsp;&nbsp;
+      <a href="#M000010">view</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000019.html');return false;">
+          <span class="method-name">add_comment</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow users to comment on records Input:
+</p>
+<ul>
+<li>The &#8216;id&#8217; (int) parameter is used to identify the bodysize
+record which is being commented on.
+
+</li>
+<li>The &#8216;comment&#8217; (string) parameter is used as the body of the <a
+href="BodysizeController.html#M000011">new</a> comment
+
+</li>
+</ul>
+<p>
+Output: A partial template is rendered with all comments for the record
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000020.html');return false;">
+          <span class="method-name">add_private_note</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow record owners, approvers, and admins to create private notes
+for a record Input:
+</p>
+<ul>
+<li>The &#8216;id&#8217; (int) parameter is used to identify the bodysize
+record.
+
+</li>
+<li>The &#8216;note&#8217; (string) parameter is used as the body of the note
+
+</li>
+</ul>
+<p>
+Output: A partial template is rendered with all notes for the record
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000016.html');return false;">
+          <span class="method-name">approve</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow approvers to <a
+href="BodysizeController.html#M000016">approve</a> bodysize records. Input:
+The &#8216;id&#8217; parameter is used to identify the bodysize record
+which is being approved. Output: None
+</p>
+<p>
+Side Effects: The event is recorded in the audit log
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000018.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow approvers to <a
+href="BodysizeController.html#M000018">delete</a> <a
+href="BodysizeController.html#M000013">unapproved</a> bodysize records.
+Input: The &#8216;id&#8217; (int) parameter is used to identify the
+bodysize record which is being removed. Output: None
+</p>
+<p>
+Side Effects: The event is recorded in the audit log
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000012.html');return false;">
+          <span class="method-name">edit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow users to modify an existing bodysize record Input: None
+While no arguments are used, the &#8216;id&#8217; parameter is used to find
+the record that is being modified, if it exists. Otherwise, a <a
+href="BodysizeController.html#M000011">new</a> record is created. Users can
+only modify an existing record if they are the record&#8216;s creator, or
+if they are an <a href="Approver.html">Approver</a> or Admin user.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000015.html');return false;">
+          <span class="method-name">export</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow users to <a
+href="BodysizeController.html#M000015">export</a> bodysize records to CSV
+format Input: None Export uses the same <a
+href="BodysizeController.html#M000008">search</a> preparation as normal
+searching. See <a href="BodysizeController.html#M000007">prepare_search</a>
+for details. If no parameters are given, <a
+href="BodysizeController.html#M000007">prepare_search</a> will instead use
+the <a href="BodysizeController.html#M000008">search</a> criteria which is
+stored in the user&#8216;s session, which is the <a
+href="BodysizeController.html#M000008">search</a> criteria that the user
+last used. Output: The resulting records are not paginated and are not
+displayed to screen. Instead a CSV file is created and returned to the
+user.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000014.html');return false;">
+          <span class="method-name">import</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: All administrators to <a
+href="BodysizeController.html#M000014">import</a> records by uploading a
+CSV file. Input: The &#8216;csv[datafile]&#8217; parameter should contain
+the csv file&#8216;s data. Output: Upon successful upload, the user is sent
+to the bodysize record <a href="BodysizeController.html#M000006">list</a>.
+If the upload fails, the user remains on the bodysize modification page.
+</p>
+<p>
+Side Effects: If successful, the event is noted in the audit log.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000005.html');return false;">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: The default action for bodysize is <a
+href="BodysizeController.html#M000006">list</a>. The <a
+href="BodysizeController.html#M000005">index</a> action is here for
+convienence. Input: None Output: None
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000006.html');return false;">
+          <span class="method-name">list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Compile a <a href="BodysizeController.html#M000006">list</a> of
+records, and graphs depending on the options the user chooses. Input: None
+Although this method does not take any arguments, the parameters that are
+sent greatly effect the resulting behaviour. The parameters should be sent
+by POST and are all given in the &quot;bodysize&quot; namespace. See
+&quot;<a href="BodysizeController.html#M000007">prepare_search</a>&quot;
+for details on what parameters are used.
+</p>
+<p>
+Output: If &quot;<a href="BodysizeController.html#M000006">list</a>&quot;
+is requested by GET, it results in a full page being rendered with the
+appropriate bodysize records, and graphs This action is also requested by
+POST from ajax calls which result in a partial template being rendered
+instead.
+</p>
+<p>
+Side Effects: Search, sort, group, and graph parameters are saved in the
+user&#8216;s session, and are sometimes used in subsequent requests to
+reproduce the requested results.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000011.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow users to create a <a
+href="BodysizeController.html#M000011">new</a> record Input: None Output: A
+blank bodysize record template.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000007.html');return false;">
+          <span class="method-name">prepare_search</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Complete the necessary preparations to give the user the choices
+needed to <a href="BodysizeController.html#M000008">search</a> bodysize
+records. This method also begins the <a
+href="BodysizeController.html#M000008">search</a> process when requested.
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>options - Options given are merged with default options, and options from
+saved from previous searches in the user&#8216;s
+
+</li>
+</ul>
+<p>
+session, all of which are then passed on to the <a
+href="BodysizeController.html#M000008">search</a> method to initiate a
+bodysize <a href="BodysizeController.html#M000008">search</a>. In addition
+to those options detailed for the <a
+href="BodysizeController.html#M000008">search</a> method, options include:
+</p>
+<ul>
+<li>* use_log10_biovolume: when set to &quot;1&quot;, log10 biovolume will be
+displayed instead of biovolume.
+
+</li>
+<li>* page: The page number to display when there are enough results to
+necessitate pagination.
+
+</li>
+</ul>
+<p>
+Note that all options are stored in the user&#8216;s session. These options
+will be used in subsequent requests unless <a
+href="BodysizeController.html#M000011">new</a> options are provided which
+override the previous values.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000021.html');return false;">
+          <span class="method-name">remove_comment</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow administrators to remove public comments Input:
+</p>
+<ul>
+<li>The &#8216;id&#8217; (int) parameter is used to identify the comment which
+is being removed.
+
+</li>
+</ul>
+<p>
+Output: A partial template is rendered with all comments for the record
+upon success If the comment id is invalid, an error message is displayed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000008.html');return false;">
+          <span class="method-name">search</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: To find bodysize records based on the given options. If the
+correct options are given, graphs of the resulting data will also be
+produced.
+</p>
+<p>
+Input: options - a hash of options which are used as follows:
+</p>
+<ul>
+<li>kingdom_id: If given, only records with the given kingdom will be included
+
+</li>
+<li>phylum_id: If given, only records with the given phylum will be included
+
+</li>
+<li>environment_id: If given, only records with the given environment will be
+included
+
+</li>
+<li>motility_id: If given, only records with the given motility will be
+included
+
+</li>
+<li>class_classification: If given, only records which <em>contain</em> the
+given classification will be included (case-insensitive)
+
+</li>
+<li>start_period_midpoint: If given, only records which have a period midpoint
+that is at, or after the given midpoint will be included
+
+</li>
+<li>end_period_midpoint: If given, only records which have a period midpoint
+that is at, or before the given midpoint will be included
+
+</li>
+<li>group_by: If the name of a bodysize field is given, the results will be
+grouped by the given field.
+
+</li>
+<li>show_all: If set to true, all records that meet the criteria will be
+returned at one time. Otherwise, the results will be paginated.
+
+</li>
+<li>page: If show_all is not true, then the value given in page is used to
+choose which of the paginated result sets should be returned.
+
+</li>
+<li>graph: If a group by field is given, and graph is set to &quot;1&quot;,
+then the <a href="BodysizeController.html#M000008">search</a> will also be
+grouped by time period, and the resulting data will be displayed by graph.
+
+</li>
+</ul>
+<p>
+Output: None While the method does not return any specific data, a number
+of instance variables are set which may be used by the object in other
+places:
+</p>
+<ul>
+<li>@bodysizes - An array of <a href="Bodysize.html">Bodysize</a> records that
+matched the <a href="BodysizeController.html#M000008">search</a> criteria.
+
+</li>
+<li>@grouping_field - The <a href="ResultGroupField.html">ResultGroupField</a>
+object used to group the <a
+href="BodysizeController.html#M000008">search</a> results
+
+</li>
+<li>@periods - The Periods included in the <a
+href="BodysizeController.html#M000008">search</a> results
+
+</li>
+<li>@charts - An array of Bodysize::Graphs produced from the <a
+href="BodysizeController.html#M000008">search</a> results
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000009.html');return false;">
+          <span class="method-name">show_audit_log</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow administrators to <a
+href="BodysizeController.html#M000010">view</a> an audit trail for a
+particular record. Input: None While the method does not use any arguments,
+the &#8216;id&#8217; parameter is used to identify the record for which the
+audit trail should be displayed. Output: Results in the rendering of a
+partial template with the audit trail details.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000017.html');return false;">
+          <span class="method-name">unapprove</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow approvers to <a
+href="BodysizeController.html#M000017">unapprove</a> bodysize records.
+Input: The &#8216;id&#8217; (int) parameter is used to identify the
+bodysize record which is being <a
+href="BodysizeController.html#M000013">unapproved</a>. Output: None
+</p>
+<p>
+Side Effects: The event is recorded in the audit log
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000013.html');return false;">
+          <span class="method-name">unapproved</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow approvers to <a
+href="BodysizeController.html#M000010">view</a> <a
+href="BodysizeController.html#M000013">unapproved</a> bodysize records
+Input: None While the method does not use arguments, a &#8216;page&#8217;
+parameter can be given to change the page displayed through pagination.
+Output: The @bodysize instance variable contains the requested records
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000010.html');return false;">
+          <span class="method-name">view</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Allow users to <a href="BodysizeController.html#M000010">view</a>
+a bodysize record Input: None While the method does not use any arguments,
+the &#8216;id&#8217; parameter is used to identify the record which should
+be displayed Output: The method renders the bodysize/detail template. The
+instance variable @editing is used by the template to determine whether to
+display the record in <a href="BodysizeController.html#M000010">view</a> or
+<a href="BodysizeController.html#M000012">edit</a> mode.
+</p>
+<p>
+Side Effects: The event is recorded in the audit log.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Private Instance methods</h3>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000022.html');return false;">
+          <span class="method-name">prepare_bodysize_for_modification</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Prepare a bodysize record for modification Input:
+</p>
+<ul>
+<li>The &#8216;id&#8217; (int) parameter is used to identify record which is to
+be modified
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>The @editing instance variable is set to true
+
+</li>
+<li>The @bodysize instance variable contains the bodysize record what will be
+modified
+
+</li>
+<li>The @period_options instance varaible contains the <a
+href="BodysizeController.html#M000006">list</a> of all Periods to be
+displayed in the Period drop down <a
+href="BodysizeController.html#M000006">list</a>.
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="BodysizeController.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('BodysizeController.src/M000023.html');return false;">
+          <span class="method-name">set_formula_options</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Prepare the drop-down options for the current user in the <a
+href="Formula.html">Formula</a> drop-down field Input: None Output: An
+array of drop-down options
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

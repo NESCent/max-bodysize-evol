@@ -1,0 +1,20 @@
+
+  <h2>Picture 
+	<% if user.picture_filename %>
+		<%= link_to_remote '(x)', :url => {:action => "remove_picture", :id => user.id }, :update => {:success => "picture", :failure => "error_message"} %>
+	<% end %>	
+	</h2>
+  
+  <div id="image_container">
+   <% if !user.picture_filename.blank? %>
+     <%= "<img class='thumbnail' src='../../#{user.picture_path}' alt='#{h(user)} - Profile Picture' />" %>
+	<% else %>
+		<%= "<img src='/images/person.png' alt='Your Profile Picture' />"%>
+   <% end %>
+  </div>
+  <dl>
+    <dt class='narrow'>Add a Picture</dt>
+    <dd>
+       <%= file_field "user", "picture" %></dd>
+     </dd>
+  </dl>

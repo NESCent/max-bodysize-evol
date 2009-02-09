@@ -1,0 +1,15 @@
+<% if side_menu %>
+<ul class='side_menu_items'>
+  <% for item in side_menu %>
+    <% active = active_item?(session[:menu_setup], item)  %>
+    <li <%= (active)? "class='active'": '' %>>
+      <%= menu_link(item) %>
+    </li>            
+      <% if (active && !item[:submenu].blank?) || has_active_element?(session[:menu_setup], item[:submenu]) %>
+        <li class='submenu_list'>
+          <%= render :partial => 'layouts/side_menu', :object => item[:submenu] %>
+        </li>
+      <% end %>
+  <% end %>
+</ul>
+<% end %>

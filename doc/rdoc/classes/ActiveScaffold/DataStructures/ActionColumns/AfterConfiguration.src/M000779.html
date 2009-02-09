@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>each (ActiveScaffold::DataStructures::ActionColumns::AfterConfiguration)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/action_columns.rb, line 52</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:for</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">active_record_class</span>
+
+        <span class="ruby-ivar">@set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionColumns</span>
+            <span class="ruby-identifier">item</span> = (<span class="ruby-ivar">@columns</span>[<span class="ruby-identifier">item</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">active_record_class</span>))
+            <span class="ruby-comment cmt"># skip if this matches a constrained column</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">constraint_columns</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>)
+            <span class="ruby-comment cmt"># skip if this matches the field_name of a constrained column</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">field_name</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">constraint_columns</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">field_name</span>.<span class="ruby-identifier">to_sym</span>)
+            <span class="ruby-comment cmt"># skip this field if it's not authorized</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:for</span>].<span class="ruby-identifier">authorized_for?</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">action</span>.<span class="ruby-identifier">crud_type</span>, <span class="ruby-identifier">:column</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">name</span>)
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionColumns</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:flatten</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:flatten</span>]
+            <span class="ruby-identifier">item</span>.<span class="ruby-identifier">each</span>(<span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">item</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

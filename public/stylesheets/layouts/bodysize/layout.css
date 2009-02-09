@@ -1,0 +1,105 @@
+/* Bodysize Layout */
+
+
+
+#approval {
+  width: 98.5%;
+  margin: 1em auto;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+#approval #approved {
+  background-color: #CCFFCC;
+	padding:0.6em;
+}
+
+#approval #unapproved {
+  background-color: #FFCCCC;
+	padding:0.5em;
+}
+
+#approval h2 {
+	margin: 0.2em 1em;
+}
+
+#search_results {
+	clear: both;
+}
+
+
+fieldset#specimen_search {
+	width: 100%;
+	position: relative;
+	z-index: 0;
+}
+
+fieldset#specimen_search fieldset {
+	border:0;	
+	margin-top:0;
+	padding-top:0;
+	margin-left:0;
+	padding-left:0;
+	margin-bottom:0;
+
+}
+
+fieldset#specimen_search dt {
+	width:100px;
+}
+
+fieldset#specimen_search h3 {
+	margin-top:0;
+	width:100%;
+}
+
+#criteria {
+	float:left;
+	width:400px;
+}
+
+#analyze {
+	float:right;
+	width:340px;
+}
+
+fieldset#specimen_search .buttons {
+	position:absolute;
+	bottom:0;
+	right:3px;
+	width:150px;
+}
+
+
+#search_results fieldset {
+	width:100%;
+}
+
+#bodysize_list {
+	width: 750px;
+	margin: 0 auto;
+  z-index: 0;
+}
+
+dl {
+	margin-left:0;
+	padding-left:0;
+}
+
+#private_notes {
+	width: 805px;
+}
+
+.comment textarea {
+	width: 90%;
+}
+
+#comments {
+	width: 805px;
+}
+
+.timestamp {
+	float: right;
+}
+

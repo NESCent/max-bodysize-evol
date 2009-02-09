@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: BodySize::Import::CSV</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">BodySize::Import::CSV</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/body_size/import_rb.html">
+                lib/body_size/import.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Base.html">
+                BodySize::Base
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h3><a href="../../BodySize.html">BodySize</a> <a href="../Import.html">Import</a> <a href="CSV.html">CSV</a></h3>
+<p>
+Purpose: Provide functionality to import bodysize records from <a
+href="CSV.html">CSV</a> format
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000059">execute</a>&nbsp;&nbsp;
+      <a href="#M000058">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">insert_count</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Purpose: Provide read only access to instance variables
+
+<ul>
+<li>row_hashes (array) - An array of rows. Each is a hash with key value pairs
+for the attributes of a bodysize record
+
+</li>
+<li>insert_count (int) - A count of the number of records that were inserted.
+
+</li>
+</ul>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">row_hashes</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Purpose: Provide read only access to instance variables
+
+<ul>
+<li>row_hashes (array) - An array of rows. Each is a hash with key value pairs
+for the attributes of a bodysize record
+
+</li>
+<li>insert_count (int) - A count of the number of records that were inserted.
+
+</li>
+</ul>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="CSV.src/M000058.html" target="Code" class="method-signature"
+            onclick="popupCode('CSV.src/M000058.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(data, options = Hash.new())</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create a <a href="CSV.html#M000058">new</a> <a
+href="CSV.html">CSV</a> <a href="../Import.html">Import</a> object
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>data (string) - The <a href="CSV.html">CSV</a> data to import
+
+</li>
+<li>options (hash) - Additional options
+
+</li>
+</ul>
+<p>
+Most of the options are well, optional. There is however one required
+option:
+</p>
+<ul>
+<li>user (<a href="../../User.html">User</a>) - A user object (or subclass)
+must be given. The user that is given
+
+</li>
+</ul>
+<p>
+will be set as the creator of all of the imported bodysize objects.
+</p>
+<p>
+Output:
+</p>
+<ul>
+<li>requires fastercsv
+
+</li>
+<li>the @header_row instance variable is set
+
+</li>
+<li>@row_hashes, and @insert_count are initialized
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000059" class="method-detail">
+        <a name="M000059"></a>
+
+        <div class="method-heading">
+          <a href="CSV.src/M000059.html" target="Code" class="method-signature"
+            onclick="popupCode('CSV.src/M000059.html');return false;">
+          <span class="method-name">execute</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Begin the <a href="CSV.html">CSV</a> import process
+</p>
+<p>
+Input: None Output: Raises an <a href="../ImportError.html">ImportError</a>
+if any errors occur
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>format_time (ActiveScaffold::Helpers::ListColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb, line 120</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_time</span>(<span class="ruby-identifier">time</span>)
+        <span class="ruby-identifier">format</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">CoreExtensions</span><span class="ruby-operator">::</span><span class="ruby-constant">Time</span><span class="ruby-operator">::</span><span class="ruby-constant">Conversions</span><span class="ruby-operator">::</span><span class="ruby-constant">DATE_FORMATS</span>[<span class="ruby-identifier">:default</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;%m/%d/%Y %I:%M %p&quot;</span>
+        <span class="ruby-identifier">time</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-identifier">format</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

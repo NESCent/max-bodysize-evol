@@ -1,0 +1,12 @@
+<fieldset id="time_period">
+  <h2>Time Period</h2>
+  <ul class="fields">
+    <li><label>Period</label><%= select("bodysize", "period_id", period_options) %></li>
+    <li><label>Midpoint</label><%= h(bodysize.period.midpoint) if bodysize.period %></li>
+    <li><label>Epoch</label><%= text_field_tag 'bodysize[epoch]', bodysize.epoch %></li>
+    <li><label>Stage</label><%= text_field_tag 'bodysize[stage]', bodysize.stage %></li>
+  </ul>
+  <div class='buttons'>
+    <%= submit_tag 'Save', :class => 'clear_both' %>
+  </div>
+</fieldset>

@@ -1,0 +1,9 @@
+fieldset {
+  width: 25em;
+  margin: 1em auto;
+  float:none;
+}
+
+.form_submit {
+  text-align: right;
+}

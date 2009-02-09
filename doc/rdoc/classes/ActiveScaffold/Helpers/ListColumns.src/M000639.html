@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>render_list_column (ActiveScaffold::Helpers::ListColumns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb, line 45</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_list_column</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">column</span>, <span class="ruby-identifier">record</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">link</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;a class='disabled'&gt;#{text}&lt;/a&gt;&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">authorized_for?</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">link</span>.<span class="ruby-identifier">crud_type</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">text</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">singular_association?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">column_empty?</span>(<span class="ruby-identifier">text</span>)
+
+          <span class="ruby-identifier">url_options</span> = <span class="ruby-identifier">params_for</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">:link</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">text</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">singular_association?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">link</span>.<span class="ruby-identifier">action</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">'nested'</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">associated</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">name</span>)
+            <span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">associated</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">render_action_link</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">link</span>, <span class="ruby-identifier">url_options</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">text</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

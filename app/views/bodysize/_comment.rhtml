@@ -1,0 +1,13 @@
+<div class='comment'>
+	<h3>
+		<div class='timestamp'><%= h(comment.created_at.strftime("%B %d, %Y %I:%M %p")) %></div>
+		<%= h(comment.owner) %>
+		<% if @current_logged_in_user.is_a?(Admin) %>	
+			<%= link_to_remote("(x)", :url => { :action => 'remove_comment', :id => comment.id},
+														:update => { :success => "#{comment.class.to_s.downcase}-container" },
+														:confirm => "Are you sure you want to delete this comment?") %>
+		<% end %>
+		
+	</h3>
+	<%= h(comment.to_s).gsub(/\n/, '<br />') %>
+</div>

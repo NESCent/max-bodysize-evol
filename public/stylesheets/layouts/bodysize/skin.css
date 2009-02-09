@@ -1,0 +1,98 @@
+/* Bodysize Skin */
+
+fieldset h3 {
+  font-size:1.1em;
+  margin: 10px 0 8px 0;
+  background-color: #DDD;
+  width: 90%;
+}
+
+#notes textarea {
+  width: 98%;
+	min-height: 270px;
+	overflow-y: auto;
+}
+
+fieldset#source {
+  width: 805px;
+	margin: 1em auto;
+}
+
+#source dt {
+  width: 180px;
+}
+
+
+fieldset#source textarea {
+  width: 98%;
+	min-height: 100px;
+}
+
+img.thumbnail {
+  max-width: 250px;
+  max-height: 350px;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+* html img.thumbnail {
+	width:250px;
+}
+
+
+
+#preservation input[type='text'] {
+  width: 200px;
+}
+
+
+#search_results table {
+	width:100%;
+}
+
+fieldset#specimen_search ul {
+	list-style-type:none;
+	padding:0 0 0 5px;
+}
+
+.bodysize_notes {
+	min-height:300px;
+	display: block; /* IE 6 Was rendering this incorrectly as a div, so now it is a span with display:block */
+}
+
+
+
+#audit_log table {
+	border-collapse: collapse;
+	border: 1px solid #000;
+	width: 100%;
+}
+
+#audit_log-content td, #audit_log-content th {
+	border: 1px solid #000;
+	padding: 2px 10px;
+}
+
+#audit_log .actions {
+	display: none;
+}
+
+#audit_log-active-scaffold {
+	margin-top: 0;
+}
+
+
+table.bodysize_records tr:hover td {
+	background-color: #E0E0F0;
+}
+
+td.no_results {
+	text-align: center;
+	font-style: italic;
+	background-color: #FFCCCC;
+}
+
+
+#bodysize_formula_id {
+	font-size: 0.7em;
+}

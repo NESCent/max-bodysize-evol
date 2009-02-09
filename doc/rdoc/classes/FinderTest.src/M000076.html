@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_method_sorting (FinderTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/misc/finder_test.rb, line 51</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_method_sorting</span>
+    <span class="ruby-identifier">column</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'a'</span>, <span class="ruby-constant">ModelStub</span>)
+    <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">proc</span>{<span class="ruby-keyword kw">self</span>}
+
+    <span class="ruby-identifier">collection</span> = [<span class="ruby-value">16000</span>, <span class="ruby-value">2853</span>, <span class="ruby-value">98765</span>, <span class="ruby-value">6188</span>, <span class="ruby-value">4</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">sort</span>, <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:sort_collection_by_column</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">column</span>, <span class="ruby-value str">'asc'</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">reverse</span>, <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:sort_collection_by_column</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">column</span>, <span class="ruby-value str">'desc'</span>)
+
+    <span class="ruby-identifier">collection</span> = [<span class="ruby-value str">'a'</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'b'</span>]
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">assert_nothing_raised</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:sort_collection_by_column</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">column</span>, <span class="ruby-value str">'asc'</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">assert_equal</span> [<span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'a'</span>, <span class="ruby-value str">'b'</span>], <span class="ruby-identifier">result</span>
+
+    <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'self'</span>
+    <span class="ruby-identifier">collection</span> = [<span class="ruby-value">3</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">sort</span>, <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:sort_collection_by_column</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">column</span>, <span class="ruby-value str">'asc'</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

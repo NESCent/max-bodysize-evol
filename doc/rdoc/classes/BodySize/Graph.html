@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: BodySize::Graph</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">BodySize::Graph</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/body_size/graph_rb.html">
+                lib/body_size/graph.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2><a href="Graph.html">Graph</a></h2>
+<p>
+Purpose: Create a graph of bodysize records
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000080">create_graph_lines</a>&nbsp;&nbsp;
+      <a href="#M000077">create_label_rows</a>&nbsp;&nbsp;
+      <a href="#M000076">create_labels</a>&nbsp;&nbsp;
+      <a href="#M000079">find_period_position</a>&nbsp;&nbsp;
+      <a href="#M000081">find_range</a>&nbsp;&nbsp;
+      <a href="#M000078">get_data</a>&nbsp;&nbsp;
+      <a href="#M000082">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">graph</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Purpose: Allow access to the graph url
+
+<ul>
+<li>graph (string) - The url encoded to create a google chart
+
+</li>
+</ul>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000082.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(bodysizes, periods, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create a <a href="Graph.html#M000082">new</a> <a
+href="Graph.html">Graph</a> object
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>bodysizes (Array of Bodysizes) - The bodysize records to graph
+
+</li>
+<li>periods (Array of Periods) - The periods to include on the graph
+
+</li>
+<li>options (Hash) [optional] - Additional options including:
+
+</li>
+</ul>
+<p>
+** grouping_field (String) - The name of the field that was used to group
+the graph data ** data_field (String) - The name of the <a
+href="../Bodysize.html">Bodysize</a> attribute to use as the data source **
+x_axis_label_row_count - The number of rows to use when displaying labels
+along the x-axis. (Default value is 2) ** x_range - The values that should
+be used as the range along the x-axis (Default value is 0 - 1000) **
+period_spacing (String) - The way the Periods should be spaced on the
+graph. The options are: *** &quot;even&quot; (default) - Periods will be
+evenly spaced across the graph *** &quot;midpoint&quot; - Periods will be
+spaced according to their midpoint. This will give a more accurate
+representation of time
+</p>
+<p>
+*NOTE:* This graph currently sets a data point at 1000, 1000 to ensure that
+the axis ranges do not shrink or get scaled smaller than 1000 when here are
+no values at the maximum points of the graph. If a better way becomes
+apparent to set the ranges on google charts, use that method and remove the
+point at 1000, 1000
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000080.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000080.html');return false;">
+          <span class="method-name">create_graph_lines</span><span class="method-args">(data, labels, period_spacing, data_field)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create the curves that will be displayed as the data on the graph
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>data (Hash) - The graph data in a hash format. The key is the value to be
+graphed, and the value is the bodysize record
+
+</li>
+<li>labels (Array of Labels) - The labels to display on the graph
+
+</li>
+<li>period_spacing (String) - The type of spacing that will be used for the
+period labels
+
+</li>
+<li>data_field (String) - The bodysize attribute that is being used as the data
+source for the graph
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>An Array of GraphLines - The graph lines that will be displayed as the
+curves on the graph
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000077.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000077.html');return false;">
+          <span class="method-name">create_label_rows</span><span class="method-args">(labels, number)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create <a href="Label.html">Label</a> Rows for the graph
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>labels (Array of Labels) - All of the labels needed or the graph.
+
+</li>
+<li>number (integer) - The number of rows to create
+
+</li>
+</ul>
+<p>
+Output: Returns an Array of LabelRows containing all of the given labels
+broken up into &#8216;number&#8217; rows
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000076.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000076.html');return false;">
+          <span class="method-name">create_labels</span><span class="method-args">(periods, period_spacing)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Create Labels for the graph
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>periods (Array of Periods) - The periods to use as the labels of the graph
+
+</li>
+<li>period_spacing (String) - The type of spacing that should be used to
+position the labels
+
+</li>
+</ul>
+<p>
+Output: Returns an Array of Labels
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000079.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000079.html');return false;">
+          <span class="method-name">find_period_position</span><span class="method-args">(labels, period)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Determine the position of a given period
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>labels (Array of Labels) - The labels that will be displayed on the graph
+
+</li>
+<li>period (<a href="../Period.html">Period</a>) - The period for which the
+position should be given
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>The position of the given period, based on the position of the label which
+matches the period&#8216;s name
+
+</li>
+<li>If the period does not match any of the given labels, 0 is returned
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000081.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000081.html');return false;">
+          <span class="method-name">find_range</span><span class="method-args">(graph_lines)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Find the range of the data to be graphed
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>graph_lines (Array of GraphLines) - The graph lines that will be displayed
+on the graph
+
+</li>
+</ul>
+<p>
+Output:
+</p>
+<ul>
+<li>An array with two elements: the minimum value, and the maximum value of the
+graphs data
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="Graph.src/M000078.html" target="Code" class="method-signature"
+            onclick="popupCode('Graph.src/M000078.html');return false;">
+          <span class="method-name">get_data</span><span class="method-args">(bodysizes, grouping_field)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Purpose: Retreieve the pertinent data from each bodysize record
+</p>
+<p>
+Input:
+</p>
+<ul>
+<li>bodysizes (Array of Bodysizes) - The bodysize records from which the data
+should be retrieved
+
+</li>
+<li>grouping_field (string) - The bodysize field to use as the data source
+
+</li>
+</ul>
+<p>
+Output: Returns a Hash where each key is the value that will be used as the
+data point on the graph for a particular record, and the value is the
+entire bodysize record.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

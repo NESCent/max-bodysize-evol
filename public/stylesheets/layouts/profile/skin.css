@@ -1,0 +1,14 @@
+/* Profile Skin */
+
+#profile_description {
+	padding: 10px;
+}
+
+textarea {
+	width: 95%;
+	height: 250px;
+}
+
+#user_profile, #user_records {
+  width: 100%;
+}

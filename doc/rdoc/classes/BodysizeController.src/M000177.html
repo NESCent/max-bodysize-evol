@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>prepare_search (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 33</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_search</span>(<span class="ruby-identifier">options</span> = {})
+    <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">&quot;List, Search, or Group records&quot;</span>)
+    
+    <span class="ruby-ivar">@period_options</span> = <span class="ruby-constant">Period</span>.<span class="ruby-identifier">options_by_midpoint</span>
+    <span class="ruby-ivar">@start_period_options</span> = [[<span class="ruby-value str">&quot;Start Period&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>]]
+    <span class="ruby-ivar">@start_period_options</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@period_options</span>
+    <span class="ruby-ivar">@end_period_options</span> = [[<span class="ruby-value str">&quot;End Period&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>]]
+    <span class="ruby-ivar">@end_period_options</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@period_options</span>
+
+    <span class="ruby-ivar">@kingdom_options</span> = <span class="ruby-constant">Kingdom</span>.<span class="ruby-identifier">options</span>
+    <span class="ruby-ivar">@phylum_options</span> = <span class="ruby-constant">Phylum</span>.<span class="ruby-identifier">options</span>
+    <span class="ruby-ivar">@environment_options</span> = <span class="ruby-constant">Environment</span>.<span class="ruby-identifier">options</span>
+    <span class="ruby-ivar">@motility_options</span> = <span class="ruby-constant">Motility</span>.<span class="ruby-identifier">options</span>
+
+
+    <span class="ruby-comment cmt">## Create a list of things that can be used to group bodysize search results</span>
+    <span class="ruby-ivar">@groups</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;kingdom_id&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;kingdom_id&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Kingdom&quot;</span>)
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;phylum_id&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;phylum_id&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Phylum&quot;</span>)
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;class_classification&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;class_classification&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Class&quot;</span>, <span class="ruby-identifier">:attribute_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;class_classification&quot;</span>)
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;environment_id&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;environment_id&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Environment&quot;</span>)
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;motility_id&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;motility_id&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Motility&quot;</span>)
+
+    <span class="ruby-ivar">@graph_group_options</span> = <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">group</span>.<span class="ruby-identifier">display_name</span>, <span class="ruby-identifier">group</span>.<span class="ruby-identifier">field_name</span>] }
+
+    <span class="ruby-ivar">@groups</span>[<span class="ruby-value str">&quot;period_id&quot;</span>] = <span class="ruby-constant">ResultGroupField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;period_id&quot;</span>, <span class="ruby-identifier">:display_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Period&quot;</span>)
+    <span class="ruby-ivar">@group_options</span> = <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">group</span>.<span class="ruby-identifier">display_name</span>, <span class="ruby-identifier">group</span>.<span class="ruby-identifier">field_name</span>] }
+    
+
+    <span class="ruby-comment cmt"># Override default search values with anything in the session</span>
+    <span class="ruby-identifier">search_values</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:search</span>]
+      <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:search</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">search_values</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:search</span>][<span class="ruby-identifier">key</span>] }
+    <span class="ruby-keyword kw">end</span>
+      
+    <span class="ruby-comment cmt"># Override default and session values with anything in params</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">search_values</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>]  }
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:page</span>]
+      <span class="ruby-identifier">search_values</span>[<span class="ruby-identifier">:page</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:page</span>]
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># Save the search criteria </span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:search</span>] = <span class="ruby-identifier">search_values</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:search</span>][<span class="ruby-identifier">:show_all</span>] = <span class="ruby-keyword kw">false</span>
+
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">search_values</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">search_values</span>[<span class="ruby-identifier">:use_log10_biovolume</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">search_values</span>[<span class="ruby-identifier">:use_log10_biovolume</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1&quot;</span>
+      <span class="ruby-ivar">@data_field</span> = <span class="ruby-value str">&quot;log10_biovolume&quot;</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-ivar">@data_field</span> = <span class="ruby-value str">&quot;biovolume&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># Default records</span>
+    <span class="ruby-ivar">@bodysizes</span> = <span class="ruby-ivar">@current_logged_in_user</span>.<span class="ruby-identifier">accessible_bodysize_records</span>({ <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:page</span>] <span class="ruby-operator">||</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span> })
+    
+  
+    <span class="ruby-identifier">search</span>(<span class="ruby-identifier">search_values</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

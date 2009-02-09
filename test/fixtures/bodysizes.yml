@@ -1,0 +1,173 @@
+# == Schema Information
+# Schema version: 12
+#
+# Table name: bodysizes
+#
+#  id                                  :integer         not null, primary key
+#  creator_id                          :integer
+#  period_id                           :integer
+#  kingdom_id                          :integer
+#  phylum_id                           :integer
+#  class_classification                :string(255)
+#  order_classification                :string(255)
+#  family                              :string(255)
+#  genus                               :string(255)
+#  species                             :string(255)
+#  environment_id                      :integer
+#  motility_id                         :integer
+#  feeding_id                          :integer
+#  approved                            :boolean         not null
+#  width                               :float
+#  height                              :float
+#  length                              :float
+#  mass                                :float
+#  formula_id                          :integer
+#  picture_filename                    :string(255)
+#  picture_path                        :string(255)
+#  epoch                               :string(255)
+#  stage                               :string(255)
+#  how_estimation_was_achieved         :text
+#  expert_contacted                    :string(255)
+#  literature_citation                 :text
+#  other_data_source                   :text
+#  confidence_comment                  :text
+#  photo_available                     :string(255)
+#  compiler                            :string(255)
+#  first_description_literature_source :text
+#  confidence_score                    :integer
+#  volume                              :float
+#  biovolume                           :float
+#  log10_biovolume                     :float
+#  lithology                           :string(255)
+#  preservation_mode                   :string(255)
+#  location                            :string(255)
+#  formation_location                  :string(255)
+#  member                              :string(255)
+#  bed                                 :string(255)
+#  local_environment                   :string(255)
+#  regional_environment                :string(255)
+#  notes                               :text
+#  created_at                          :datetime
+#  updated_at                          :datetime
+#
+
+# == Schema Information
+# Schema version: 15
+#
+# Table name: bodysizes
+#
+#  id                                  :integer         not null, primary key
+#  creator_id                          :integer
+#  period_id                           :integer
+#  kingdom_id                          :integer
+#  phylum_id                           :integer
+#  class_classification                      :string(255)
+#  order                               :string(255)
+#  family                              :string(255)
+#  genus                               :string(255)
+#  species                             :string(255)
+#  environment_id                      :integer
+#  motility_id                         :integer
+#  feeding_id                          :integer
+#  approved                            :boolean         not null
+#  width                               :float
+#  height                              :float
+#  length                              :float
+#  mass                                :float
+#  formula_id                          :integer
+#  picture_filename                    :string(255)
+#  epoch                               :string(255)
+#  stage                               :string(255)
+#  how_estimation_was_achieved         :text
+#  expert_contacted                    :string(255)
+#  literature_citation                 :text
+#  other_data_source                   :text
+#  confidence_comment                  :text
+#  photo_available                     :string(255)
+#  compiler                            :string(255)
+#  first_description_literature_source :text
+#  confidence_score                    :integer
+#  volume                              :float
+#  biovolume                           :float
+#  log10_biovolume                     :float
+#  lithology                           :string(255)
+#  preservation_mode                   :string(255)
+#  location                            :string(255)
+#  formation_location                  :string(255)
+#  member                              :string(255)
+#  bed                                 :string(255)
+#  local_environment                   :string(255)
+#  regional_environment                :string(255)
+#  notes                               :text
+#  created_at                          :datetime
+#  updated_at                          :datetime
+#
+
+
+test_bodysize:
+  id: 1
+  creator_id: 3
+  formula_id: 10
+  period_id: 1
+  phylum_id: 7
+  kingdom_id: 3
+  class_classification: Happy
+  environment_id: 17
+  motility_id: 19
+  approved: true
+  epoch: Mid Pennsylvania
+  stage: Emsian
+  expert_contacted: B. Austin
+  literature_citation: Whyte,M.A., 2005.  Palaeoecology- A gigantic fossil arthropod trackway.  Nature 438- 576.
+  other_data_source: http://en.wikipedia.org/wiki/Dimetrodon
+  confidence_comment: Width estimated from tracks; length and height extrapolated based on dimensions of Pterygotus
+  photo_available: Photo of trackway, reconstruction of animal
+  compiler: S. Truebe
+  first_description_literature_source: Ulrich, E.O. and Bridge, Josiah 1931. Description of species-Gastropoda, in Ulrich, E.O., Foerste, A.F., and Bridge, Josiah- Systematic Paleontology, In Bridge, Josiah- Geology of the Eminence and Cardareva quadrangles. Missouri Bureau of Geology and Mines, 2d ser., vol. 24 p.186-207, pls. 18,21-22. Rolla, Mo.
+  confidence_score: 8
+  length: 1188
+  width: 396
+  height: 40
+  mass: 93.15
+  biovolume: 1624
+  log10_biovolume: 3.21058602
+  lithology: Dolomite
+  preservation_mode: Siltsone
+  location: Rhineland, Germany
+  formation_location: Battery Point Formation
+  member: Cap-aux-Os
+  bed: None
+  local_environment: Fluvial
+  regional_environment: Epicontinental seaway
+  notes: Largest
+  
+approved:
+  id: 2
+  creator_id: 3
+  period_id: 2
+  phylum_id: 8
+  kingdom_id: 3
+  class_classification: Little
+  environment_id: 17
+  motility_id: 19
+  approved: true
+  height: 2.1
+  width: 3.2
+  length: 4.5
+  formula_id: 1
+    
+unapproved:
+  id: 3
+  creator_id: 2
+  period_id: 3
+  phylum_id: 9
+  kingdom_id: 3
+  class_classification: Big
+  environment_id: 18
+  motility_id: 20
+  approved: false
+  height: 1003.0
+  width: 567.0
+  length: 294.5
+  formula_id: 1 
+ 

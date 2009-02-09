@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>condition_from_association_constraint (ActiveScaffold::Constraints)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/constraints.rb, line 82</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">condition_from_association_constraint</span>(<span class="ruby-identifier">association</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-comment cmt"># when the reverse association is a :belongs_to, the id for the associated object only exists as</span>
+      <span class="ruby-comment cmt"># the primary_key on the other table. so for :has_one and :has_many (when the reverse is :belongs_to),</span>
+      <span class="ruby-comment cmt"># we have to use the other model's primary_key.</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># please see the relevant tests for concrete examples.</span>
+      <span class="ruby-identifier">field</span> = <span class="ruby-keyword kw">if</span> [<span class="ruby-identifier">:has_one</span>, <span class="ruby-identifier">:has_many</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">association</span>.<span class="ruby-identifier">macro</span>)
+        <span class="ruby-identifier">association</span>.<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">primary_key</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">association</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:association_foreign_key</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">association</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:foreign_key</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">association</span>.<span class="ruby-identifier">association_foreign_key</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">association</span>.<span class="ruby-identifier">macro</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:has_and_belongs_to_many</span>
+        <span class="ruby-identifier">association</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:join_table</span>]
+
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:belongs_to</span>
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">table_name</span>
+
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:has_many</span>
+        <span class="ruby-identifier">association</span>.<span class="ruby-identifier">table_name</span>
+
+        <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">association</span>.<span class="ruby-identifier">table_name</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">condition</span> = <span class="ruby-identifier">constraint_condition_for</span>(<span class="ruby-node">&quot;#{table}.#{field}&quot;</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">association</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:polymorphic</span>]
+        <span class="ruby-identifier">condition</span> = <span class="ruby-identifier">merge_conditions</span>(
+          <span class="ruby-identifier">condition</span>,
+          <span class="ruby-identifier">constraint_condition_for</span>(<span class="ruby-node">&quot;#{table}.#{association.name}_type&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:parent_model</span>].<span class="ruby-identifier">to_s</span>)
+        )
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">condition</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

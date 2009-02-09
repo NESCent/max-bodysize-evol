@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>initialize_with_calendar_date_select (ActiveScaffold::Config::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/bridges/calendar_date_select/lib/as_cds_bridge.rb, line 4</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_with_calendar_date_select</span>(<span class="ruby-identifier">model_id</span>)
+      <span class="ruby-identifier">initialize_without_calendar_date_select</span>(<span class="ruby-identifier">model_id</span>)
+      
+      <span class="ruby-identifier">calendar_date_select_fields</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword kw">if</span> [<span class="ruby-identifier">:date</span>, <span class="ruby-identifier">:datetime</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">type</span>) }.<span class="ruby-identifier">compact</span>
+      <span class="ruby-comment cmt"># check to see if file column was used on the model</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">calendar_date_select_fields</span>.<span class="ruby-identifier">empty?</span>
+      
+      <span class="ruby-comment cmt"># automatically set the forum_ui to a file column</span>
+      <span class="ruby-identifier">calendar_date_select_fields</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">field</span>].<span class="ruby-identifier">form_ui</span> = <span class="ruby-identifier">:calendar_date_select</span>
+      }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

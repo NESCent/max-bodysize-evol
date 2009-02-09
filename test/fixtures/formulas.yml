@@ -1,0 +1,89 @@
+# == Schema Information
+# Schema version: 15
+#
+# Table name: formulas
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  formula    :string(255)
+#  shared     :boolean         not null
+#  creator_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+
+## Formulae for testing
+box:
+  id: 10
+  name: Cubic Volume
+  formula: H*W*L
+  shared: true
+  
+box_bad_dot:
+  id: 15
+  name: Cubic Volume
+  formula: H*W*L*.2
+  shared: true
+  
+box_fp:
+  id: 20
+  name: Cubic Volume Floating Point Constant
+  formula: H*W*L*0.10
+  shared: true
+
+area:
+  id: 30
+  name: Area
+  formula: H*L
+  shared: true
+
+unshared_formula:
+  id: 40
+  name: Custom Volume
+  formula: 0.25 * H + 3.0 * W *L
+  shared: false
+
+
+## Real formulae
+Sphere:
+  id: 1
+  name: Sphere
+  formula: 4.189 * (W * 0.5)^3
+  shared: true
+
+Cylinder:
+  id: 2
+  name: Cylinder
+  formula: 3.142 * (W * 0.5)^2 * H
+  shared: true
+
+Cone:
+  id: 3
+  name: Cone
+  formula: 1.047 * (W * 0.5)^2 * H
+  shared: true
+
+EightCylinder:
+  id: 4
+  name: 8 cylinders
+  formula: 0.0
+  shared: true
+
+Ellipsoid:
+  id: 5
+  name: 3D Ellipsoid
+  formula: 0.0
+  shared: true
+
+Rectangular_Prism:
+  id: 6
+  name: Rectangular Prism
+  formula: H*W*L
+  shared: true
+
+3D_Ellipsoid:
+  id: 7
+  name: 3D Ellipsoid
+  formula: 1.3333*3.1415*((L*0.5)*(W*0.5)*(H*0.5))
+  shared: true

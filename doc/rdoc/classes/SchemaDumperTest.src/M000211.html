@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_union (SchemaDumperTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/rails_sql_views/test/schema_dumper_test.rb, line 15</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_union</span>
+    <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">:first_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Joe'</span>, <span class="ruby-identifier">:last_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'User'</span>, <span class="ruby-identifier">:ssn</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'123456789'</span>)
+    <span class="ruby-constant">Person2</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">:first_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Jane'</span>, <span class="ruby-identifier">:last_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Doe'</span>, <span class="ruby-identifier">:ssn</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'222334444'</span>)
+    <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">create_view</span>(<span class="ruby-identifier">:v_profile</span>, <span class="ruby-value str">&quot;(select * from people) UNION (select * from people2)&quot;</span>, <span class="ruby-identifier">:force</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:first_name</span>
+      <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:last_name</span>
+      <span class="ruby-identifier">v</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:ssn</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">assert_dump_and_load_succeed</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+#profile_picture {
+	float: left;
+}
+
+#profile_picture img {
+	max-width: 400px;
+	max-height: 600px;
+}
+
+#profile_description {
+	float: left;
+}
+
+#user_records {
+	clear: both;
+}

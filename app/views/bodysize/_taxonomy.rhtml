@@ -1,0 +1,12 @@
+<fieldset id="taxonomy">
+  <h2>Taxonomy</h2>
+    <ul class='fields'>
+      <li><label>Kingdom</label><%= indicate_when_missing(bodysize.kingdom) %></li>
+      <li><label>Phylum</label><%= indicate_when_missing(bodysize.phylum) %></li>
+      <li><label>Class</label><%= indicate_when_missing(bodysize.class_classification) %></li>
+      <li><label>Order</label><%=  indicate_when_missing(bodysize.order_classification) %></li>
+      <li><label>Family</label><%= indicate_when_missing(bodysize.family) %></li>
+      <li><label>Genus</label><%=  indicate_when_missing(bodysize.genus) %></li>
+      <li><label>Species</label><%= indicate_when_missing(bodysize.species) %></li>
+    </ul>
+</fieldset>

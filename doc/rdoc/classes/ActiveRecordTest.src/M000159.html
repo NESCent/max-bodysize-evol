@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_to_label (ActiveRecordTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/extensions/active_record_test.rb, line 9</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_to_label</span>
+    <span class="ruby-comment cmt"># without anything defined, it'll use the to_s method (e.g. #&lt;ModelStub:0xb7379300&gt;)</span>
+    <span class="ruby-identifier">assert_match</span> <span class="ruby-regexp re">/^#&lt;[a-z]+:0x[0-9a-f]+&gt;$/i</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">to_label</span>
+
+    <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@record</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+        <span class="ruby-value str">'to_s'</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'to_s'</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">to_label</span>
+
+    <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@record</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title</span>
+        <span class="ruby-value str">'title'</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'title'</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">to_label</span>
+
+    <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@record</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">label</span>
+        <span class="ruby-value str">'label'</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'label'</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">to_label</span>
+
+    <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@record</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
+        <span class="ruby-value str">'name'</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'name'</span>, <span class="ruby-ivar">@record</span>.<span class="ruby-identifier">to_label</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

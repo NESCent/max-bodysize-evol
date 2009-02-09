@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>remove_comment (BodysizeController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/bodysize_controller.rb, line 589</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_comment</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">authorize_admin</span>
+    
+    <span class="ruby-identifier">comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">comment</span>
+      <span class="ruby-identifier">bodysize</span> = <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">bodysize</span>
+      <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">destroy</span>
+      
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;comments&quot;</span>, <span class="ruby-identifier">:locals</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:bodysize</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bodysize</span> }  
+      <span class="ruby-keyword kw">return</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;The selected comment could not be found&quot;</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

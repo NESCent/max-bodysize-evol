@@ -1,0 +1,13 @@
+ <fieldset id="preservation">
+  <h2>Preservation</h2>
+  <ul class='fields'>
+    <li><label>Lithology</label><%= indicate_when_missing(bodysize.lithology) %></li>
+    <li><label>Preservation Mode</label><%= indicate_when_missing(bodysize.preservation_mode) %></li>
+    <li><label>Location</label><%= indicate_when_missing(bodysize.location) %></li>
+    <li><label>Formation</label><%= indicate_when_missing(bodysize.formation_location) %></li>
+    <li><label>Member</label><%= indicate_when_missing(bodysize.member) %></li>
+    <li><label>Bed</label><%= indicate_when_missing(bodysize.bed) %></li>
+    <li><label>Local Environment</label><%= indicate_when_missing(bodysize.local_environment) %></li>
+    <li><label>Regional Environment</label><%= indicate_when_missing(bodysize.regional_environment) %></li>
+  </ul>
+</fieldset>

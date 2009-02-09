@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_fields_to_include_option (ExportTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/unit/import_export_test.rb, line 164</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_fields_to_include_option</span>()
+        <span class="ruby-identifier">fields</span> = [<span class="ruby-value str">'kingdom'</span>, <span class="ruby-value str">'class_classification'</span>, <span class="ruby-identifier">:notes</span>]
+        <span class="ruby-identifier">export</span> = <span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">Export</span><span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@ar_collection</span>, <span class="ruby-identifier">:fields_to_include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">fields</span>)
+        <span class="ruby-identifier">export</span>.<span class="ruby-identifier">execute</span>()
+        <span class="ruby-identifier">row_length</span> = <span class="ruby-identifier">export</span>.<span class="ruby-identifier">header</span>.<span class="ruby-identifier">length</span>()
+
+        <span class="ruby-comment cmt"># Parse the csv_string.</span>
+        <span class="ruby-comment cmt"># Each row should have exactly as many elements as the header.</span>
+        <span class="ruby-constant">FasterCSV</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">export</span>.<span class="ruby-identifier">csv_string</span>, <span class="ruby-identifier">:headers</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">row_length</span>, <span class="ruby-identifier">row</span>.<span class="ruby-identifier">length</span>)
+            <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">fields</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">row</span>.<span class="ruby-identifier">length</span>)
+        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

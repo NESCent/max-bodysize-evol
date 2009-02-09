@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_page (ActiveScaffold::Finder)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/finder.rb, line 79</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_page</span>(<span class="ruby-identifier">options</span> = {})
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span> <span class="ruby-identifier">:sorting</span>, <span class="ruby-identifier">:per_page</span>, <span class="ruby-identifier">:page</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_page</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">999999999</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:page</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">1</span>
+
+      <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>
+
+      <span class="ruby-comment cmt"># create a general-use options array that's compatible with Rails finders</span>
+      <span class="ruby-identifier">finder_options</span> = { <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">build_order_clause</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:sorting</span>]),
+                         <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">all_conditions</span>,
+                         <span class="ruby-identifier">:joins</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">joins_for_collection</span>,
+                         <span class="ruby-identifier">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">active_scaffold_joins</span>}
+
+      <span class="ruby-comment cmt"># NOTE: we must use :include in the count query, because some conditions may reference other tables</span>
+      <span class="ruby-identifier">count</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">finder_options</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">:order</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">k</span>})
+
+      <span class="ruby-comment cmt"># we build the paginator differently for method- and sql-based sorting</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:sorting</span>] <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:sorting</span>].<span class="ruby-identifier">sorts_by_method?</span>
+        <span class="ruby-identifier">pager</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Paginator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">count</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_page</span>]) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">offset</span>, <span class="ruby-identifier">per_page</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">sorted_collection</span> = <span class="ruby-identifier">sort_collection_by_column</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">finder_options</span>), <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>[<span class="ruby-identifier">:sorting</span>].<span class="ruby-identifier">first</span>)
+          <span class="ruby-identifier">sorted_collection</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-identifier">offset</span>, <span class="ruby-identifier">per_page</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">pager</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Paginator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">count</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:per_page</span>]) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">offset</span>, <span class="ruby-identifier">per_page</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">finder_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">per_page</span>))
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">pager</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:page</span>])
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

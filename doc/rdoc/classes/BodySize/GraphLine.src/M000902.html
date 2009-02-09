@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>scale_line (BodySize::GraphLine)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/body_size/graph.rb, line 361</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scale_line</span>(<span class="ruby-identifier">max_x_value</span>, <span class="ruby-identifier">max_y_value</span>, <span class="ruby-identifier">scale_size</span> = <span class="ruby-value">1000.0</span>)
+      <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">point</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">temp_x</span> = <span class="ruby-identifier">point</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">temp_y</span> = <span class="ruby-identifier">point</span>[<span class="ruby-value">1</span>]
+        
+        <span class="ruby-comment cmt"># puts &quot; #{scale_size.to_f} - ((#{point[0].to_f} * #{scale_size.to_f}) / #{max_x_value.to_f}&quot;</span>
+        <span class="ruby-identifier">point</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">scale_size</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> ((<span class="ruby-identifier">point</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">scale_size</span>.<span class="ruby-identifier">to_f</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">max_x_value</span>.<span class="ruby-identifier">to_f</span>)
+        <span class="ruby-identifier">point</span>[<span class="ruby-value">1</span>] = (<span class="ruby-identifier">point</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">scale_size</span>.<span class="ruby-identifier">to_f</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">max_y_value</span>.<span class="ruby-identifier">to_f</span>
+        
+        <span class="ruby-comment cmt"># puts &quot;Scaling #{temp_x}, #{temp_y} to #{point[0]}, #{point[1]}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

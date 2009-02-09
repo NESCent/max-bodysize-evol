@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>do_list (ActiveScaffold::Actions::List)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/actions/list.rb, line 48</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_list</span>
+      <span class="ruby-identifier">includes_for_list_columns</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">includes</span> }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">compact</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">includes_for_list_columns</span>
+
+      <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:sorting</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">sorting</span>,}
+      <span class="ruby-identifier">paginate</span> = (<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:format</span>].<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">?</span> (<span class="ruby-identifier">accepts?</span> <span class="ruby-identifier">:html</span>, <span class="ruby-identifier">:js</span>) <span class="ruby-operator">:</span> [<span class="ruby-identifier">:html</span>, <span class="ruby-identifier">:js</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:format</span>])
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">paginate</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>({
+          <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">per_page</span>,
+          <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">page</span>
+        })
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">page</span> = <span class="ruby-identifier">find_page</span>(<span class="ruby-identifier">options</span>);
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">items</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">page</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">pager</span>.<span class="ruby-identifier">first</span>
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">page</span> = <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@page</span>, <span class="ruby-ivar">@records</span> = <span class="ruby-identifier">page</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">items</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

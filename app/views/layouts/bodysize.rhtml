@@ -1,0 +1,8 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'layouts/bodysize/layout' %>
+  <%= stylesheet_link_tag 'layouts/bodysize/skin' %>
+<% end %>
+
+<%= render :partial => '/layouts/before_layout' %>
+<%= yield %>
+<%= render :partial => '/layouts/after_layout' %>

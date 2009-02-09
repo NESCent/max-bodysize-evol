@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_column (ActiveScaffold::DataStructures::Sorting)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/sorting.rb, line 77</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_column</span>(<span class="ruby-identifier">name_or_column</span>)
+      <span class="ruby-comment cmt"># it's a column</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">name_or_column</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name_or_column</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>
+      <span class="ruby-comment cmt"># it's a name</span>
+      <span class="ruby-identifier">name_or_column</span> = <span class="ruby-identifier">name_or_column</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">last</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name_or_column</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">'.'</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@columns</span>[<span class="ruby-identifier">name_or_column</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

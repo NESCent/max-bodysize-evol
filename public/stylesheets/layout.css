@@ -1,0 +1,155 @@
+/* Application Layout */
+
+fieldset.wide {
+  float: none;
+  clear: both;
+  width: 100%;
+}
+
+fieldset.narrow {
+  float: none;
+  clear: both;
+  width: 270px;
+}
+
+div.column {
+  float: left;
+  width: 30em;
+  margin: 0;
+}
+
+div#right_column {
+  margin-left: 2em;
+}
+
+fieldset {
+  width: 30em;
+  float: left;
+  margin: 0.5em 0;
+}
+
+.center_content {
+  clear:both;
+  display:block;
+  width: 822px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.buttons {
+  clear: both;
+  width: 100%;
+  text-align: right;
+}
+
+dt {
+  clear: both;
+  float:left;
+}
+
+dd {
+  float: left;
+}
+
+
+fieldset h3 {
+  clear: both;
+}
+
+.clear_both {
+  clear: both;
+}
+
+
+/* Menu */
+#top_menu ul {
+  position: relative;
+}
+
+#top_menu ul li {
+  position: relative;
+  display: inline;
+  float: left;
+}
+
+
+#top_menu ul ul {
+  display: none;
+  position: absolute;
+  top: 25px;
+  left: 0; 
+  width: 14.2em;
+  z-index: 100;
+	padding-bottom:2px;
+	background-color: #444;
+}
+
+
+#top_menu li a, #top_menu li span {
+	padding-top: 0.5em;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+}
+
+#top_menu ul li ul a, #top_menu ul li ul span {
+}
+
+
+#top_menu ul ul li a, #top_menu ul ul span {
+  width: 12.6em;
+}
+
+#top_menu ul ul li {
+  width: 13.8em;
+  display: block !important;
+  float:left;
+  left:0px;
+}
+
+ul.fields {
+	padding-left: 0;
+	margin-left: 0.2em;
+	list-style-type: none;
+}
+
+ul.fields li {
+	min-height: 2.0em;
+}
+
+ul.fields label, table label {
+	font-weight: bold;
+	padding-right: 1em;
+	min-width: 130px;
+	display: block;
+	float: left;
+}
+
+* html label, * html table label {
+	width: 140px;
+}
+
+* html label.wide {
+	width: 100%;
+}
+
+#top_menu ul li:hover ul,
+ul ul li:hover ul,
+ul ul ul li:hover ul,
+ul li.iehover ul,
+ul ul li.iehover ul,
+ul ul ul li.iehover ul {
+  display: block !important;
+}
+
+
+#contact_link {
+	float: right !important;
+	padding-top: 2px !important;
+	height: 23px !important;
+	font-size: 1em;
+}
+#contact_link img {
+	vertical-align: middle;
+	margin-left: 3px;
+}

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold::Actions::List</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::Actions::List</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/actions/list_rb.html">
+                vendor/plugins/active_scaffold/lib/actions/list.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000735">do_list</a>&nbsp;&nbsp;
+      <a href="#M000729">included</a>&nbsp;&nbsp;
+      <a href="#M000730">index</a>&nbsp;&nbsp;
+      <a href="#M000734">list</a>&nbsp;&nbsp;
+      <a href="#M000736">list_authorized?</a>&nbsp;&nbsp;
+      <a href="#M000733">row</a>&nbsp;&nbsp;
+      <a href="#M000731">table</a>&nbsp;&nbsp;
+      <a href="#M000732">update_table</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000729" class="method-detail">
+        <a name="M000729"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000729.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000729.html');return false;">
+          <span class="method-name">included</span><span class="method-args">(base)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000730" class="method-detail">
+        <a name="M000730"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000730.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000730.html');return false;">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000734" class="method-detail">
+        <a name="M000734"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000734.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000734.html');return false;">
+          <span class="method-name">list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000733" class="method-detail">
+        <a name="M000733"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000733.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000733.html');return false;">
+          <span class="method-name">row</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+get just a single <a href="List.html#M000733">row</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000731" class="method-detail">
+        <a name="M000731"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000731.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000731.html');return false;">
+          <span class="method-name">table</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000732" class="method-detail">
+        <a name="M000732"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000732.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000732.html');return false;">
+          <span class="method-name">update_table</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This is called when changing pages, sorts and search
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000735" class="method-detail">
+        <a name="M000735"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000735.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000735.html');return false;">
+          <span class="method-name">do_list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The actual algorithm to prepare for the <a
+href="List.html#M000734">list</a> view
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000736" class="method-detail">
+        <a name="M000736"></a>
+
+        <div class="method-heading">
+          <a href="List.src/M000736.html" target="Code" class="method-signature"
+            onclick="popupCode('List.src/M000736.html');return false;">
+          <span class="method-name">list_authorized?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The default security delegates to <a
+href="../../ActiveRecordPermissions.html">ActiveRecordPermissions</a>. You
+may override the method to customize.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

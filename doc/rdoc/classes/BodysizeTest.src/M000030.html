@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_create_new (BodysizeTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/unit/bodysize_test.rb, line 21</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_create_new</span>
+    <span class="ruby-identifier">bodysize</span> = <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">create</span>(
+      <span class="ruby-identifier">:creator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">users</span>(<span class="ruby-identifier">:standarduser</span>),
+      <span class="ruby-identifier">:period</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">periods</span>(<span class="ruby-identifier">:Neogene</span>),
+      <span class="ruby-identifier">:kingdom</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">:Plantae</span>),
+      <span class="ruby-identifier">:phylum</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">:Equisetophyta</span>), 
+      <span class="ruby-identifier">:environment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">:Env_Marine</span>),
+      <span class="ruby-identifier">:motility</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">:Motility_S</span>),
+      <span class="ruby-identifier">:feeding</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">properties</span>(<span class="ruby-identifier">:Feeding_Hc</span>),
+      <span class="ruby-identifier">:class_classification</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Happy&quot;</span>,
+      <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3.2</span>,
+      <span class="ruby-identifier">:height</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4.6</span>,
+      <span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">7.3</span>,
+      <span class="ruby-identifier">:mass</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">22.11</span>,
+      <span class="ruby-identifier">:formula</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">formulas</span>(<span class="ruby-identifier">:box</span>),
+      <span class="ruby-identifier">:epoch</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Long ago&quot;</span>,
+      <span class="ruby-identifier">:stage</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Three&quot;</span>,
+      <span class="ruby-identifier">:expert_contacted</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Mary Lively&quot;</span>, 
+      <span class="ruby-identifier">:literature_citation</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;A book&quot;</span>,
+      <span class="ruby-identifier">:other_data_source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;The internet&quot;</span>,
+      <span class="ruby-identifier">:confidence_comment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Very confident&quot;</span>,
+      <span class="ruby-identifier">:photo_available</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;No&quot;</span>,
+      <span class="ruby-identifier">:compiler</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Steve Lively&quot;</span>,
+      <span class="ruby-identifier">:first_description_literature_source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;An old book&quot;</span>, 
+      <span class="ruby-identifier">:confidence_score</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">9</span>,
+      <span class="ruby-identifier">:lithology</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Limestone&quot;</span>,
+      <span class="ruby-identifier">:preservation_mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Mummy&quot;</span>,
+      <span class="ruby-identifier">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Egypt&quot;</span>,
+      <span class="ruby-identifier">:formation_location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Somewhere&quot;</span>, 
+      <span class="ruby-identifier">:member</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Something&quot;</span>,
+      <span class="ruby-identifier">:bed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Yes&quot;</span>,
+      <span class="ruby-identifier">:local_environment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Hot&quot;</span>, 
+      <span class="ruby-identifier">:regional_environment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Humid&quot;</span>,
+      <span class="ruby-identifier">:notes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;This is a test&quot;</span>
+     )
+    <span class="ruby-identifier">assert</span> <span class="ruby-identifier">bodysize</span>.<span class="ruby-identifier">valid?</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-identifier">bodysize</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value str">&quot;Testy McGee&quot;</span>, <span class="ruby-identifier">bodysize</span>.<span class="ruby-identifier">creator</span>.<span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value str">&quot;H*W*L&quot;</span>, <span class="ruby-identifier">bodysize</span>.<span class="ruby-identifier">formula</span>.<span class="ruby-identifier">formula</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

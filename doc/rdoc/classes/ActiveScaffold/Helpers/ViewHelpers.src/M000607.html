@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>params_for (ActiveScaffold::Helpers::ViewHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 96</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">params_for</span>(<span class="ruby-identifier">options</span> = {})
+        <span class="ruby-comment cmt"># :adapter and :position are one-use rendering arguments. they should not propagate.</span>
+        <span class="ruby-comment cmt"># :sort, :sort_direction, and :page are arguments that stored in the session. they need not propagate.</span>
+        <span class="ruby-comment cmt"># and wow. no we don't want to propagate :record.</span>
+        <span class="ruby-comment cmt"># :commit is a special rails variable for form buttons</span>
+        <span class="ruby-identifier">blacklist</span> = [<span class="ruby-identifier">:adapter</span>, <span class="ruby-identifier">:position</span>, <span class="ruby-identifier">:sort</span>, <span class="ruby-identifier">:sort_direction</span>, <span class="ruby-identifier">:page</span>, <span class="ruby-identifier">:record</span>, <span class="ruby-identifier">:commit</span>, <span class="ruby-identifier">:_method</span>]
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@params_for</span>
+          <span class="ruby-ivar">@params_for</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">clone</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">blacklist</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span> }
+          <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>] = <span class="ruby-value str">'/'</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>].<span class="ruby-identifier">first</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'/'</span> <span class="ruby-comment cmt"># for namespaced controllers</span>
+          <span class="ruby-ivar">@params_for</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@params_for</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

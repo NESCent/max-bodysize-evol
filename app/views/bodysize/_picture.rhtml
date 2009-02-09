@@ -1,0 +1,11 @@
+<fieldset id="picture">
+  <h2>Picture</h2>
+  
+  <div id="image_container">
+    <% if !bodysize.picture_filename.blank? %>
+      <%= "<img class='thumbnail' src='../../#{bodysize.picture_path}' alt='#{h(bodysize)} - Picture' />" %>
+    <% end %> 
+  </div>
+
+ </fieldset>
+      

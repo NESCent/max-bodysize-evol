@@ -1,0 +1,20 @@
+<fieldset id="size">
+  <h2>Size</h2>
+  <ul class='fields'>
+    <li><label>Length (mm)</label><%= measurement_to_s(bodysize.length) %></li>
+    <li><label>Width (mm)</label><%= measurement_to_s(bodysize.width) %></li>
+    <li><label>Height (mm)</label><%= measurement_to_s(bodysize.height) %></li>
+    <li><label>Mass (kg)</label><%= measurement_to_s(bodysize.mass) %></li>
+    <h3>Volume</h3>
+    <table>
+			<tr>
+				<td><label>Formula</label></td><td><%= h(bodysize.formula.to_label) %></td>
+			</tr>
+			<tr>
+				<td><label>Biovolume (mm<sup>3</sup>)</label></td><td><%= measurement_to_s(bodysize.biovolume) %></td>
+			</tr>
+			<tr>
+				<td><label>Log10 Biovolume</label></td><td><%= measurement_to_s(bodysize.log10_biovolume) %></td>
+			</tr>
+		</table>
+</fieldset>

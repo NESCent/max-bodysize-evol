@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_add_and_find (ActionLinksTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/data_structures/action_links_test.rb, line 8</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_add_and_find</span>
+    <span class="ruby-comment cmt"># test adding with a shortcut</span>
+    <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">add</span> <span class="ruby-value str">'foo/bar'</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">1</span>, <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">find_all</span>{<span class="ruby-keyword kw">true</span>}.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'foo/bar'</span>, <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">find_all</span>{<span class="ruby-keyword kw">true</span>}[<span class="ruby-value">0</span>].<span class="ruby-identifier">action</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'foo/bar'</span>, <span class="ruby-ivar">@links</span>[<span class="ruby-value str">'foo/bar'</span>].<span class="ruby-identifier">action</span>
+
+    <span class="ruby-comment cmt"># test adding an ActionLink object directly</span>
+    <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">add</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionLink</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'hello/world'</span>)
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">find_all</span>{<span class="ruby-keyword kw">true</span>}.<span class="ruby-identifier">size</span>
+
+    <span class="ruby-comment cmt"># test the &lt;&lt; alias</span>
+    <span class="ruby-ivar">@links</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'a/b'</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">3</span>, <span class="ruby-ivar">@links</span>.<span class="ruby-identifier">find_all</span>{<span class="ruby-keyword kw">true</span>}.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

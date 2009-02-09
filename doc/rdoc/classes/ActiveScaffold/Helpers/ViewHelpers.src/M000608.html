@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>link_to_visibility_toggle (ActiveScaffold::Helpers::ViewHelpers)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 113</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">link_to_visibility_toggle</span>(<span class="ruby-identifier">options</span> = {})
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:of</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'$(this.parentNode).next()'</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>] = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>].<span class="ruby-identifier">nil?</span>
+
+        <span class="ruby-identifier">link_text</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>] <span class="ruby-operator">?</span> <span class="ruby-value str">'hide'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'show'</span>
+        <span class="ruby-identifier">link_to_function</span> <span class="ruby-identifier">as_</span>(<span class="ruby-identifier">link_text</span>), <span class="ruby-node">&quot;e = #{options[:of]}; e.toggle(); this.innerHTML = (e.style.display == 'none') ? '#{as_('show')}' : '#{as_('hide')}'&quot;</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'visibility-toggle'</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

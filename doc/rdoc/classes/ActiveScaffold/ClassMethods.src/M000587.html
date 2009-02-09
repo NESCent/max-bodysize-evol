@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>active_scaffold (ActiveScaffold::ClassMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/active_scaffold.rb, line 42</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold</span>(<span class="ruby-identifier">model_id</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-comment cmt"># initialize bridges here</span>
+      <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Bridge</span>.<span class="ruby-identifier">run_all</span>
+
+      <span class="ruby-comment cmt"># converts Foo::BarController to 'bar' and FooBarsController to 'foo_bar' and AddressController to 'address'</span>
+      <span class="ruby-identifier">model_id</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/Controller$/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">pluralize</span>.<span class="ruby-identifier">singularize</span>.<span class="ruby-identifier">underscore</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">model_id</span>
+
+      <span class="ruby-comment cmt"># run the configuration</span>
+      <span class="ruby-ivar">@active_scaffold_config</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">model_id</span>)
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">configure</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">_load_action_columns</span>
+
+      <span class="ruby-comment cmt"># defines the attribute read methods on the model, so record.send() doesn't find protected/private methods instead</span>
+      <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:generated_methods?</span>
+        <span class="ruby-comment cmt"># edge rails (2.0)</span>
+        <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">define_attribute_methods</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">generated_methods?</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt"># stable rails (1.2.3)</span>
+        <span class="ruby-comment cmt"># NOTE define_read_methods is an *instance* method even though it adds methods to the *class*.</span>
+        <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:define_read_methods</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">read_methods</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">generate_read_methods</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># set up the generic_view_paths (Rails 2.x)</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">method_defined?</span> <span class="ruby-identifier">:generic_view_paths</span>
+        <span class="ruby-identifier">frontends_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RAILS_ROOT</span>, <span class="ruby-value str">'vendor'</span>, <span class="ruby-value str">'plugins'</span>, <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">plugin_directory</span>, <span class="ruby-value str">'frontends'</span>)
+
+        <span class="ruby-identifier">paths</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">inherited_view_paths</span>.<span class="ruby-identifier">clone</span> 
+        <span class="ruby-identifier">paths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RAILS_ROOT</span>, <span class="ruby-value str">'app'</span>, <span class="ruby-value str">'views'</span>, <span class="ruby-value str">'active_scaffold_overrides'</span>)
+        <span class="ruby-identifier">paths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">frontends_path</span>, <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">frontend</span>, <span class="ruby-value str">'views'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">frontend</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:default</span>
+        <span class="ruby-identifier">paths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">frontends_path</span>, <span class="ruby-value str">'default'</span>, <span class="ruby-value str">'views'</span>)
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">generic_view_paths</span> = <span class="ruby-identifier">paths</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># include the rest of the code into the controller: the action core and the included actions</span>
+      <span class="ruby-identifier">module_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Finder</span>
+        <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Constraints</span>
+        <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">AttributeParams</span>
+        <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Actions</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>
+        <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">actions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">name</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span>
+          <span class="ruby-identifier">include</span> <span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;ActiveScaffold::Actions::#{name}&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Actions</span>.<span class="ruby-identifier">const_defined?</span> <span class="ruby-identifier">name</span>
+
+          <span class="ruby-comment cmt"># sneak the action links from the actions into the main set</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">mod</span>).<span class="ruby-identifier">link</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+            <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">action_links</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

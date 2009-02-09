@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_constraint_conditions_for_normal_attributes (ConstraintsTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/misc/constraints_test.rb, line 160</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_constraint_conditions_for_normal_attributes</span>
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_config</span> = <span class="ruby-identifier">config_for</span>(<span class="ruby-value str">'user'</span>)
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-value str">'foo'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>}, [<span class="ruby-value str">'users.foo = ?'</span>, <span class="ruby-value str">'bar'</span>], <span class="ruby-value str">'normal column-based constraint'</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

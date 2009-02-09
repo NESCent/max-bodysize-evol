@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>add (ActiveScaffold::DataStructures::Columns)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/data_structures/columns.rb, line 29</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-comment cmt"># allow [] as a param</span>
+      <span class="ruby-identifier">args</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_sym</span> }
+
+      <span class="ruby-comment cmt"># make the columns inheritable</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">_inheritable</span> = <span class="ruby-identifier">_inheritable</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>)
+      <span class="ruby-comment cmt"># then add columns to @set (unless they already exist)</span>
+      <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@set</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">DataStructures</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-ivar">@active_record_class</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">a</span>) }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

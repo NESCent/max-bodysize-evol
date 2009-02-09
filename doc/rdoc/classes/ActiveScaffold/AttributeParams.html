@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold::AttributeParams</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::AttributeParams</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/active_scaffold/lib/attribute_params_rb.html">
+                vendor/plugins/active_scaffold/lib/attribute_params.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Provides support for param hashes assumed to be model attributes. Support
+is primarily needed for creating/editing associated records using a nested
+hash structure.
+</p>
+<p>
+Paradigm Params Hash (should write unit tests on this):
+</p>
+<pre>
+  params[:record] = {
+    # a simple record attribute
+    'name' =&gt; 'John',
+    # a plural association hash
+    'roles' =&gt; {
+      # associate with an existing role
+      '5' =&gt; {'id' =&gt; 5}
+      # associate with an existing role and edit it
+      '6' =&gt; {'id' =&gt; 6, 'name' =&gt; 'designer'}
+      # create and associate a new role
+      '124521' =&gt; {'name' =&gt; 'marketer'}
+    }
+    # a singular association hash
+    'location' =&gt; {'id' =&gt; 12, 'city' =&gt; 'New York'}
+  }
+</pre>
+<p>
+Simpler association structures are also supported, like:
+</p>
+<pre>
+  params[:record] = {
+    # a simple record attribute
+    'name' =&gt; 'John',
+    # a plural association ... all ids refer to existing records
+    'roles' =&gt; ['5', '6'],
+    # a singular association ... all ids refer to existing records
+    'location' =&gt; '12'
+</pre>
+<p>
+}
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000577">attributes_hash_is_empty?</a>&nbsp;&nbsp;
+      <a href="#M000576">find_or_create_for_params</a>&nbsp;&nbsp;
+      <a href="#M000575">update_record_from_params</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000577" class="method-detail">
+        <a name="M000577"></a>
+
+        <div class="method-heading">
+          <a href="AttributeParams.src/M000577.html" target="Code" class="method-signature"
+            onclick="popupCode('AttributeParams.src/M000577.html');return false;">
+          <span class="method-name">attributes_hash_is_empty?</span><span class="method-args">(hash, klass)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determines whether the given attributes hash is &quot;empty&quot;. This
+isn&#8216;t a literal emptiness - it&#8216;s an attempt to discern whether
+the user intended it to be empty or not.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000576" class="method-detail">
+        <a name="M000576"></a>
+
+        <div class="method-heading">
+          <a href="AttributeParams.src/M000576.html" target="Code" class="method-signature"
+            onclick="popupCode('AttributeParams.src/M000576.html');return false;">
+          <span class="method-name">find_or_create_for_params</span><span class="method-args">(params, klass, current)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Attempts to create or find an instance of klass (which must be an <a
+href="../ActiveRecord.html">ActiveRecord</a> object) from the request
+parameters given. If params[:id] exists it will attempt to find an existing
+object otherwise it will build a new one.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000575" class="method-detail">
+        <a name="M000575"></a>
+
+        <div class="method-heading">
+          <a href="AttributeParams.src/M000575.html" target="Code" class="method-signature"
+            onclick="popupCode('AttributeParams.src/M000575.html');return false;">
+          <span class="method-name">update_record_from_params</span><span class="method-args">(parent_record, columns, attributes)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Takes attributes (as from params[:record]) and applies them to the
+parent_record. Also looks for association attributes and attempts to
+instantiate them as associated objects.
+</p>
+<p>
+This is a secure way to apply params to a record, because it&#8216;s based
+on a loop over the columns set. The columns set will not yield unauthorized
+columns, and it will not yield unregistered columns.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_view (RailsSqlViews::ConnectionAdapters::SchemaStatements)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/rails_sql_views/lib/rails_sql_views/connection_adapters/abstract/schema_statements.rb, line 9</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_view</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">select_query</span>, <span class="ruby-identifier">options</span>={})
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">supports_views?</span>
+          <span class="ruby-identifier">view_definition</span> = <span class="ruby-constant">ViewDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">select_query</span>)
+
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">view_definition</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>]
+            <span class="ruby-identifier">drop_view</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">create_sql</span> = <span class="ruby-value str">&quot;CREATE VIEW &quot;</span>
+          <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{name} (&quot;</span>
+          <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">view_definition</span>.<span class="ruby-identifier">to_sql</span>
+          <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;) AS #{view_definition.select_query}&quot;</span>
+          <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; WITH #{options[:check_option]} CHECK OPTION&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:check_option</span>]
+          <span class="ruby-identifier">execute</span> <span class="ruby-identifier">create_sql</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

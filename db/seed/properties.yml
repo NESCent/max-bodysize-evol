@@ -1,0 +1,139 @@
+Animaila:
+  id: 1
+  type: Kingdom
+  name: Animalia
+
+Plantae:
+  id: 2
+  type: Kingdom
+  name: Plantae
+
+Protoctista:
+  id: 3
+  type: Kingdom
+  name: Protoctista
+
+Monera:
+  id: 4
+  type: Kingdom
+  name: Monera
+
+Uncertain(?):
+  id: 5
+  type: Kingdom
+  name: Uncertain
+ 
+Arthropoda:
+  id: 6
+  type: Phylum
+  name: Arthropoda
+  
+Chordata:
+  id: 7
+  type: Phylum
+  name: Chordata
+  
+Cycadophyta:
+  id: 8
+  type: Phylum
+  name: Cycadophyta
+  
+Equisetophyta:
+  id: 9
+  type: Phylum
+  name: Equisetophyta
+  
+Hemichordata:
+  id: 10
+  type: Phylum
+  name: Hemichordata
+  
+Lycopodiophyta:
+  id: 11
+  type: Phylum
+  name: Lycopodiophyta
+
+Mollusca:
+  id: 12
+  type: Phylum
+  name: Mollusca
+  
+Pinophyta:
+  id: 13
+  type: Phylum
+  name: Pinophtya
+  
+Porifera:
+  id: 14
+  type: Phylum
+  name: Porifera
+  
+Pteridophyta:
+  id: 15
+  type: Phylum
+  name: Pteridophyta
+  
+Phylum_Sarcomastigophora:
+  id: 16
+  type: Phylum
+  name: Sarcomastigophora
+  
+Env_Marine:
+  id: 17
+  type: Environment
+  name: Marine
+  
+Env_Terrestrial:
+  id: 18
+  type: Environment
+  name: Terrestrial
+
+Motility_S:
+  id: 19
+  type: Motility
+  name: S
+  
+Motility_M:
+  id: 20
+  type: Motility
+  name: M
+
+Feeding_A:
+  id: 21
+  type: Feeding
+  name: A
+
+Feeding_Hc:
+  id: 22
+  type: Feeding
+  name: Hc
+  
+Feeding_Hm:
+  id: 23
+  type: Feeding
+  name: Hm
+
+School_Level_Elementary:
+  id: 24
+  type: SchoolLevel
+  name: Elementary
+  
+School_Level_Middle:
+  id: 25
+  type: SchoolLevel
+  name: Middle
+  
+School_Level_High:
+  id: 26
+  type: SchoolLevel
+  name: High
+  
+School_Level_College:
+  id: 27
+  type: SchoolLevel
+  name: College
+  
+School_Level_Graduate:
+  id: 28
+  type: SchoolLevel
+  name: Graduate

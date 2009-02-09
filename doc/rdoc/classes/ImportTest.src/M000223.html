@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_execute_bad_data (ImportTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/unit/import_export_test.rb, line 62</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_execute_bad_data</span>()
+        <span class="ruby-identifier">import</span> = <span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">Import</span><span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@bad_csv_data</span>, <span class="ruby-identifier">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>,
+                   <span class="ruby-identifier">:header_source_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{RAILS_ROOT}/test/data/bodysize_header.csv&quot;</span>)
+                   
+        <span class="ruby-identifier">assert_raises</span>(<span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">ImportError</span>) <span class="ruby-keyword kw">do</span>
+            <span class="ruby-comment cmt"># Wrapping in a begin/rescue so that e can be captured and tested</span>
+            <span class="ruby-comment cmt"># later.  It is set to an instance variable in order to persist</span>
+            <span class="ruby-comment cmt"># beyond this assertion.</span>
+            <span class="ruby-keyword kw">begin</span>
+                <span class="ruby-identifier">import</span>.<span class="ruby-identifier">execute</span>()
+            <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">BodySize</span><span class="ruby-operator">::</span><span class="ruby-constant">ImportError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@e</span>
+                <span class="ruby-identifier">raise</span>
+            <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword kw">false</span>, <span class="ruby-ivar">@e</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">blank?</span>())
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">import</span>.<span class="ruby-identifier">insert_count</span>, <span class="ruby-value str">&quot;Database count does not match insert_count.&quot;</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">Bodysize</span>.<span class="ruby-identifier">count</span>(), <span class="ruby-value str">&quot;Incorrect database count.&quot;</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

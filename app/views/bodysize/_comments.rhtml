@@ -1,0 +1,15 @@
+<fieldset id="comments">
+  <h2>Comments</h2>
+	<% if bodysize.public_comments %>
+		<%= render :partial => "comment", :collection => bodysize.public_comments %>
+	<% end %>
+	
+	<div class='comment'>
+		<h3>Add Your Own Comment</h3>
+		<% form_remote_tag	:url => { :action => :add_comment, :id => bodysize.id },
+		 										:update => { :success => "publiccomment-container", :failure => "publiccomment-container" } do %>
+			<%= text_area_tag "comment" %>
+			<%= submit_tag "Add" %>
+		<% end %>
+	</div>
+</fieldset>

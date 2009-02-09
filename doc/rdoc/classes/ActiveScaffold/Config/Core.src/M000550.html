@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>configure_file_column_field (ActiveScaffold::Config::Core)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/bridges/file_column/lib/as_file_column_bridge.rb, line 31</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure_file_column_field</span>(<span class="ruby-identifier">field</span>)
+      <span class="ruby-comment cmt"># set list_ui first because it gets its default value from form_ui</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">field</span>].<span class="ruby-identifier">list_ui</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">field_has_image_version?</span>(<span class="ruby-identifier">field</span>, <span class="ruby-value str">&quot;thumb&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">:thumbnail</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:download_link_with_filename</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">field</span>].<span class="ruby-identifier">form_ui</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">:file_column</span>
+      
+      <span class="ruby-comment cmt"># these 2 parameters are necessary helper attributes for the file column that must be allowed to be set to the model by active scaffold.</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">field</span>].<span class="ruby-identifier">params</span>.<span class="ruby-identifier">add</span> <span class="ruby-node">&quot;#{field}_temp&quot;</span>, <span class="ruby-node">&quot;delete_#{field}&quot;</span>
+      
+      <span class="ruby-comment cmt"># set null to false so active_scaffold wont set it to null</span>
+      <span class="ruby-comment cmt"># delete_file_column will take care of deleting a file or not.</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">field</span>.<span class="ruby-identifier">to_s</span>].<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-value str">&quot;@null&quot;</span>, <span class="ruby-keyword kw">false</span>)
+      
+    <span class="ruby-keyword kw">rescue</span>
+      <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

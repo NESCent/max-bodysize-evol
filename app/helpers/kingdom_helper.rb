@@ -1,0 +1,2 @@
+module KingdomHelper
+end

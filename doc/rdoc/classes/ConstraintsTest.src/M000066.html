@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_constraint_conditions_for_default_associations (ConstraintsTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/test/misc/constraints_test.rb, line 101</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_constraint_conditions_for_default_associations</span>
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_config</span> = <span class="ruby-identifier">config_for</span>(<span class="ruby-value str">'user'</span>)
+    <span class="ruby-comment cmt"># has_one (vs belongs_to)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:subscription</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>}, [<span class="ruby-value str">'subscriptions.id = ?'</span>, <span class="ruby-value">5</span>], <span class="ruby-value str">'find the user with subscription #5'</span>)
+    <span class="ruby-comment cmt"># habtm (vs habtm)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:roles</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>}, [<span class="ruby-value str">'roles_users.role_id = ?'</span>, <span class="ruby-value">4</span>], <span class="ruby-value str">'find all users with role #4'</span>)
+    <span class="ruby-comment cmt"># has_one (vs polymorphic)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">11</span>}, [<span class="ruby-value str">'addresses.id = ?'</span>, <span class="ruby-value">11</span>], <span class="ruby-value str">'find the user with address #11'</span>)
+    <span class="ruby-comment cmt"># reverse of a has_many :through</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:subscription</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:service</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>}}, [<span class="ruby-value str">'services.id = ?'</span>, <span class="ruby-value">5</span>], <span class="ruby-value str">'find all users subscribed to service #5'</span>)
+    <span class="ruby-identifier">assert</span>(<span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_joins</span>.<span class="ruby-identifier">include?</span>({<span class="ruby-identifier">:subscription</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:service</span>}), <span class="ruby-value str">'multi-level association include'</span>)
+
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_config</span> = <span class="ruby-identifier">config_for</span>(<span class="ruby-value str">'subscription'</span>)
+    <span class="ruby-comment cmt"># belongs_to (vs has_one)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>}, [<span class="ruby-value str">'subscriptions.user_id = ?'</span>, <span class="ruby-value">2</span>], <span class="ruby-value str">'find the subscription for user #2'</span>)
+    <span class="ruby-comment cmt"># belongs_to (vs has_many)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:service</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>}, [<span class="ruby-value str">'subscriptions.service_id = ?'</span>, <span class="ruby-value">1</span>], <span class="ruby-value str">'find all subscriptions for service #1'</span>)
+
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_config</span> = <span class="ruby-identifier">config_for</span>(<span class="ruby-value str">'service'</span>)
+    <span class="ruby-comment cmt"># has_many (vs belongs_to)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:subscriptions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>}, [<span class="ruby-value str">'subscriptions.id = ?'</span>, <span class="ruby-value">10</span>], <span class="ruby-value str">'find the service with subscription #10'</span>)
+    <span class="ruby-comment cmt"># has_many :through (through has_many)</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:users</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">7</span>}, [<span class="ruby-value str">'users.id = ?'</span>, <span class="ruby-value">7</span>], <span class="ruby-value str">'find the service with user #7'</span>)
+
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">active_scaffold_config</span> = <span class="ruby-identifier">config_for</span>(<span class="ruby-value str">'address'</span>)
+    <span class="ruby-comment cmt"># belongs_to :polymorphic =&gt; true</span>
+    <span class="ruby-ivar">@test_object</span>.<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:parent_model</span>] = <span class="ruby-value str">'User'</span>
+    <span class="ruby-identifier">assert_constraint_condition</span>({<span class="ruby-identifier">:addressable</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">14</span>}, [<span class="ruby-value str">'addresses.addressable_id = ?'</span>, <span class="ruby-value">14</span>, <span class="ruby-value str">'addresses.addressable_type = ?'</span>, <span class="ruby-value str">'User'</span>], <span class="ruby-value str">'find all addresses for user #14'</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
