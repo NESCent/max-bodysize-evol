@@ -10,6 +10,11 @@
 	<fieldset class="narrow">
     
     <h2>Log In</h2>
+     <tr> 
+          <td colspan="2" class='form_label'>Please log in if you want to  add data or comments. 		
+      </td>
+        </tr>
+
    <% form_tag 'login/login' do %>
       <table>
         <tr>
@@ -39,11 +44,7 @@
             <%= link_to("I am a new user and want to register.",:controller => 'register', :action => 'index') %>
           </td>
         </tr>
-        <tr> 
-          <td colspan="2" class='form_label'>Login is not required to search or download material from the website.
-			
-      </td>
-        </tr>
+       
       </table>
     <% end %>
   </fieldset>
