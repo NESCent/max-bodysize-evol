@@ -9,14 +9,15 @@
 
 	<fieldset class="narrow">
     
-    <h2>Log In</h2>
-     <tr> 
+    <h2>Please Log In</h2>
+    <% form_tag 'login/login' do %>
+       
+      <table>
+      <tr> 
           <td colspan="2" class='form_label'>Please log in if you want to add data or comments. 		
       </td>
         </tr>
-
-   <% form_tag 'login/login' do %>
-      <table>
+      
         <tr>
           <td>Email Address</td><td><%= text_field_tag :email_address, params[:email_address] %>
           </td>
