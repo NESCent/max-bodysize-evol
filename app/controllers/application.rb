@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   # * If the user is authorized, true
   # * If the user is not authorized, issues a redirect and returns false
   def authorize # :doc:
-    unless is_authorized || (controller_name=='bodysize' && (action_name=='list' || action_name=='index' || action_name=='view' || action_name=='home'|| action_name=='about'))
+    unless is_authorized || (controller_name=='bodysize' && (action_name=='list' || action_name=='export' || action_name=='index' || action_name=='view' || action_name=='home'|| action_name=='about'))
       logger.debug("No user found")
       session[:original_uri] = request.request_uri if session[:original_uri].blank?      
       flash[:notice] = 'Please log in'
