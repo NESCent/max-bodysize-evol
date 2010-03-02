@@ -40,19 +40,24 @@ Required Gems:
   - logging version 0.9.1
   - postgres-pr version 0.4.0
   - gchartrb 0.8 -- REMOVED (gem is no longer needed, see note below)
-	- fastercsv 1.4.0
-	- mislav-will_paginate (2.3.6) -- Installation instructions below
+  - fastercsv 1.4.0
+  - mislav-will_paginate (2.3.6) -- Installation instructions below
 
-
-Installing mislav-will_paginate:
+  Installing mislav-will_paginate:
 	1. First add github to the list of gem sources
 		gem sources -a http://gems.github.com
 	
 	2. Then install the gem
 		sudo gem install mislav-will_paginate
 
+  - reCAPTCHA for Rails. more help information can be found at: http://ambethia.com/recaptcha/rdoc/index.html 
+  Install reCAPTCHA for rails: 
+  1. config.gem "ambethia-recaptcha", :lib => "recaptcha/rails", :source => "http://gems.github.com", OR
+  2. script/plugin install git://github.com/ambethia/recaptcha.git 
+
 
 NOTE: The gchartrb gem is no longer required. Changes were needed to the gem, so the library has been modified an incorporated directly into the project in bodysize/lib/
+
 
 
 Released under the MIT license (included)
