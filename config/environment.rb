@@ -1,5 +1,9 @@
 # Be sure to restart your server when you modify this file
 
+# recapctha keys
+ENV['RECAPTCHA_PUBLIC_KEY']  = '6Lc-jgsAAAAAABY6ISjEe1nhK1V-rbt4zqTk-pFv'
+ENV['RECAPTCHA_PRIVATE_KEY'] = '6Lc-jgsAAAAAAHs-P6ccwRLQw7tJz3vR5FQS1X_h'
+  
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
