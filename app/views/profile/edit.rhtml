@@ -60,9 +60,13 @@
 	  	</li>
     </ul>
   </fieldset>
+  
   <% if @user.id %>
   <% else %>
+     <fieldset id='recaptcha'>
+        <h2>reCaptcha Code (required)</h2>
 		<%= recaptcha_tags %>
+	 </fieldset>
 	<% end %>
  
   <div class='buttons'>
