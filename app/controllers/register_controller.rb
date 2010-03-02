@@ -38,7 +38,7 @@ class RegisterController < LoginController
     @user = StandardUser.new
     @school_levels = SchoolLevel.options
     if request.post?
-      if(verify_recaptcha(@post) && @user.update_attributes(params[:user]))
+      if( @user.update_attributes(params[:user]))
         login_user_by_id(@user.id)
         AuditLog.create(:user_id => @user.id, :action => "Registered a new account")
         redirect_to :action => :introduction
