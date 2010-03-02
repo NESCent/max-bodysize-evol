@@ -60,7 +60,11 @@
 	  	</li>
     </ul>
   </fieldset>
-
+  <% if @user.id %>
+  <% else %>
+		<%= recaptcha_tags %>
+	<% end %>
+ 
   <div class='buttons'>
     <%= submit_tag 'Save Changes' %>
   </div>
