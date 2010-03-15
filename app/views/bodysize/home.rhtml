@@ -70,10 +70,22 @@
 	</fieldset>
 	
 	<% end %>
-	
-  
-  
-
+	<fieldset  class="narrow">
+		<h2>Educational Video</h2>
+      <script type="text/javascript">
+        var so = new SWFObject('http://nescent.org/media/player/player.swf','mpl','480','289','8');
+		so.addParam('allowscriptaccess','always');
+		so.addParam('allownetworking','all');
+        so.addParam('allowfullscreen','true');
+        so.addVariable('file', 'http://nescent.org/media/podcasts/chemistry_podcast.flv');
+        so.addVariable('image', 'http://nescent.org/media/podcasts/chemistry_podcast.jpg');
+        so.addVariable('plugins', 'gapro-1,viral-1');
+        so.addVariable('gapro.accountid', 'UA-396493-1');
+        so.addVariable('viral.onpause', 'false');
+        so.write('chemistry_podcast');
+  </script>
+      
+    </fieldset>
 	</td>
 	</tr>
 	</table>
